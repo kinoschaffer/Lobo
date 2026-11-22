@@ -4,7 +4,6 @@ window.QH_DATA = {
   situaciones: window.QH_SITUACIONES,
 
   prendas: [
-    "Canta el estribillo de una canción con voz de ópera.",
     "Imita a alguien del grupo hasta que adivinen quién es.",
     "Cuenta un chiste. Si nadie se ríe, cuenta otro.",
     "Haz tu mejor risa de villano durante 10 segundos.",
@@ -14,7 +13,7 @@ window.QH_DATA = {
     "Cuenta la anécdota más vergonzosa que te animes.",
     "Recita un poema improvisado sobre la comida que más te gusta.",
     "Imita a un animal y que el resto adivine cuál es.",
-    "Haz 10 sentadillas mientras cantas la canción que elija el grupo.",
+    "Haz 10 sentadillas contando en voz alta.",
     "Da una vuelta a la mesa caminando como modelo de pasarela.",
     "Narra los próximos 20 segundos como si fueras locutor de fútbol.",
     "Di un trabalenguas: «Tres tristes tigres tragaban trigo en un trigal».",
@@ -25,7 +24,6 @@ window.QH_DATA = {
     "Cuenta del 10 al 1 en otro idioma (o inventado).",
     "Haz la mímica de una película y que la adivinen.",
     "Haz 10 saltos de tijera contando en voz alta en otro idioma (o inventado).",
-    "Canta una canción cambiando todas las vocales por «i».",
     "Imita la risa de tres personas del grupo.",
     "Haz de presentador de noticias y anuncia lo que pasó en esta ronda.",
     "Di 5 palabras que rimen con «tomate» en 15 segundos.",
