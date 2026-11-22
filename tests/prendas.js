@@ -16,6 +16,7 @@ const URL = process.env.URL || 'http://localhost:8765/';
   const seen = []; let changeOk = true;
   for (let r = 0; r < 25; r++) {
     await pg.click('text=¡A votar!');
+    if (await pg.$('text=Antes de votar')) await pg.click('[data-act=go]'); // alguien tiene un Anulador
     await pg.click('.vcard:has-text("Ana") [data-act=up]');
     await pg.click('text=Ver resultado'); await pg.waitForTimeout(1400); await pg.click('#verdict .btn');
     await pg.click('text=Aceptar la prenda');
