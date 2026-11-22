@@ -24,7 +24,26 @@ $app.addEventListener("click", e => {
   const b = e.target.closest("[data-act]");
   if (b && !b.disabled && actions[b.dataset.act]) { tick(); actions[b.dataset.act](b.dataset.arg, b); }
 });
-function render(html, acts = {}) { clearTimers(); actions = acts; $app.innerHTML = `<main class="screen ${acts._cls || ""}">${html}</main>`; window.scrollTo(0, 0); }
+function render(html, acts = {}) { clearTimers(); actions = acts; $app.innerHTML = `<main class="screen ${acts._cls || ""}"><div id="activebar"></div>${html}</main>`; window.scrollTo(0, 0); drawActive(); }
+
+// ---------- prendas activas (duran toda una ronda) ----------
+const activeNow = () => (G && G.activeP || []).filter(a => a.round === G.round && P(a.pid));
+function drawActive() {
+  const el = document.getElementById("activebar"); if (!el) return;
+  const list = activeNow();
+  el.className = list.length ? "activebar" : "";
+  el.innerHTML = list.map(a => { const p = P(a.pid); return `<div class="act">${avatar(p)}<span><small>Prenda activa</small><b>${esc(p.name)}:</b> ${esc(a.t)}</span><button data-broke="${a.k}">¡La rompió!</button></div>`; }).join("");
+}
+$app.addEventListener("click", e => {
+  const b = e.target.closest("[data-broke]"); if (!b) return;
+  e.stopPropagation();
+  const a = G.activeP.find(x => x.k === b.dataset.broke); if (!a) return;
+  const p = P(a.pid); G.activeP = G.activeP.filter(x => x !== a);
+  p.coal++; const max = G.settings.maxCoal; const out = max && p.coal >= max && !p.out; if (out) p.out = true;
+  saveGame(); beep(180, 0.5, "sawtooth");
+  toast(`¡Tomatazo para ${p.name}! Rompió la prenda.${out ? " Queda fuera." : ""}`);
+  drawActive();
+}, true);
 
 // ---------- sonido ----------
 let actx;
@@ -89,6 +108,7 @@ function rules() {
       <div class="opt"><h3>4. Empate = duelo</h3><p class="muted">Los empatados se enfrentan en un minijuego. El que pierde es el acusado. Si el duelo es de dos, el ganador se lleva una carta trampa.</p></div>
       <div class="opt"><h3>5. El acusado</h3><p class="muted">Puede usar cartas trampa, aceptar la prenda (y un tomatazo) o arriesgarse a defenderse.</p></div>
       <div class="opt"><h3>6. La defensa</h3><p class="muted">20 segundos para convencer al grupo. Después, levantan la mano los que le creen. Más de la mitad: se salva. Menos de un tercio: prenda y 2 tomatazos. En el medio: prenda y tomatazo.</p></div>
+      <div class="opt"><h3>Prendas de ronda</h3><p class="muted">Algunas prendas duran toda la ronda siguiente y quedan a la vista arriba de la pantalla. Si alguien la rompe, tocan «¡La rompió!» y recibe un tomatazo. Si no cumple una prenda, también recibe un tomatazo.</p></div>
       <div class="opt"><h3>7. Tomatazos</h3><p class="muted">Con ${settings.maxCoal || "muchos"} tomatazos quedas fuera, pero sigues votando. Gana quien termine con menos.</p></div>
       <div class="opt"><h3>Golpe de suerte</h3><p class="muted">Al final de algunas rondas, alguien que no recibió votos gana una carta trampa o un presentimiento extra.</p></div>
     </div>
@@ -188,7 +208,8 @@ function drawSituation() {
 function nextRound() {
   const S = G.settings;
   if ((S.maxCoal && active().length <= 2) || (S.rounds && G.round >= S.rounds)) return finalScreen();
-  G.round++; G.cur = drawSituation(); G.cur.votes = {}; G.cur.hunch = {}; saveGame();
+  G.round++; G.cur = drawSituation(); G.cur.votes = {}; G.cur.hunch = {};
+  G.activeP = (G.activeP || []).filter(a => a.round >= G.round); saveGame();
   showRound();
 }
 function showRound() {
@@ -253,10 +274,12 @@ function secretVote(i, order) {
 function ballot(voter, done) {
   const cands = active().filter(p => p.id !== voter.id);
   const canHunch = !voter.out && voter.hunch > 0;
+  const double = activeNow().some(a => a.pid === voter.id && a.voto2);
   let sel = null, hunch = false;
   render(`
     <p class="eyebrow">${esc(voter.name)} vota</p>
     <div class="question" style="font-size:1.4rem">${esc(G.cur.pregunta)}</div>
+    ${double ? `<p class="small" style="color:var(--gold)">Tu voto vale doble. Dilo en voz alta antes de votar.</p>` : ""}
     <div class="vgrid">${cands.map(p => `<button class="vcard" data-act="sel" data-arg="${p.id}" aria-pressed="false">${avatar(p)}<span>${esc(p.name)}</span></button>`).join("")}</div>
     ${canHunch ? `<button class="hunch" data-act="hunch" aria-pressed="false"><img src="img/carta_presentimiento.webp" alt=""><span><b>Usar presentimiento</b>Creo que me van a votar a mí. Te ${voter.hunch > 1 ? `quedan ${voter.hunch}` : "queda 1"}.</span></button>` : ""}
     <div class="grow"></div>
@@ -265,7 +288,7 @@ function ballot(voter, done) {
     sel: (id, el) => { sel = id; document.querySelectorAll(".vcard").forEach(b => b.setAttribute("aria-pressed", b === el)); const ok = document.getElementById("ok"); ok.disabled = false; ok.textContent = "Votar a " + P(id).name; },
     hunch: (_, el) => { hunch = !hunch; el.setAttribute("aria-pressed", hunch); if (hunch) mystic(); },
     ok: () => {
-      G.cur.votes[sel] = (G.cur.votes[sel] || 0) + 1;
+      G.cur.votes[sel] = (G.cur.votes[sel] || 0) + (double ? 2 : 1);
       if (hunch) { G.cur.hunch[voter.id] = true; voter.hunch--; }
       render(`<div class="grow"></div><div class="banner"><h1 class="pop">¡Voto secreto!</h1><p class="muted">${hunch ? "Tu presentimiento quedó guardado. " : ""}Tapa la pantalla y pasa el celular.</p></div><div class="grow"></div><button class="btn" data-act="n">Siguiente</button>`, { n: done });
     }
@@ -519,17 +542,33 @@ function useCard(p, t) {
 
 // ---------- prendas y tomatazos ----------
 function punish(id, hits) {
-  const p = P(id); const prenda = pick(D.prendas);
+  const p = P(id);
+  const ronda = Math.random() < 0.4;
+  const pr = ronda ? pick(D.prendasRonda) : { t: pick(D.prendas) };
+  const fail = hits + 1;
+  const tom = n => n === 1 ? "un tomatazo" : `${n} tomatazos`;
   render(`
     <div class="banner">${avatar(p, "lg")}<h2>${esc(p.name)}, te toca:</h2></div>
-    <div class="prenda pop">${esc(prenda)}</div>
-    <p class="small muted" style="text-align:center">${hits === 2 ? "Al terminar la prenda recibes 2 tomatazos." : hits ? "Al terminar la prenda recibes un tomatazo." : "Esta prenda no da tomatazo."}</p>
+    ${ronda ? `<p class="eyebrow" style="text-align:center">Prenda de ronda: se cumple durante toda la próxima ronda</p>` : ""}
+    <div class="prenda pop">${esc(pr.t)}</div>
+    <div class="rules-mini">
+      <span>${ronda ? "Si la aceptas" : "Si la cumples"}: <b>${hits ? tom(hits) : "sin tomatazo"}</b></span>
+      <span>${ronda ? "Si no la aceptas" : "Si no la cumples"}: <b>${tom(fail)}</b></span>
+      ${ronda ? `<span>Si la rompes durante la ronda: <b>+1 tomatazo</b></span>` : ""}
+    </div>
     <div class="grow"></div>
     <button class="btn gold" data-act="other">Otra prenda</button>
-    <button class="btn" data-act="done">¡Hecho!</button>
-  `, { other: () => punish(id, hits), done: () => hits ? giveTomato(p, hits) : afterRound() });
+    <div class="row"><button class="btn ghost" data-act="fail">No la ${ronda ? "acepta" : "cumplió"}</button><button class="btn" data-act="done">${ronda ? "¡Acepto!" : "¡Hecho!"}</button></div>
+  `, {
+    other: () => punish(id, hits),
+    fail: () => giveTomato(p, fail, `${p.name} no ${ronda ? "aceptó" : "cumplió"} la prenda`),
+    done: () => {
+      if (ronda) { G.activeP = G.activeP || []; G.activeP.push({ k: uid(), pid: p.id, t: pr.t, voto2: !!pr.voto2, round: G.round + 1 }); saveGame(); }
+      hits ? giveTomato(p, hits) : afterRound();
+    }
+  });
 }
-function giveTomato(p, hits = 1) {
+function giveTomato(p, hits = 1, why = "") {
   p.coal += hits;
   const max = G.settings.maxCoal;
   const out = max && p.coal >= max && !p.out;
@@ -538,7 +577,7 @@ function giveTomato(p, hits = 1) {
   render(`
     <div class="grow"></div>
     <div class="banner"><img class="pop splat" src="img/tomate.webp" alt="Tomatazo">
-    <h2>¡${hits > 1 ? hits + " tomatazos" : "Tomatazo"} para ${esc(p.name)}!</h2>${tomatoes(p)}
+    <h2>¡${hits > 1 ? hits + " tomatazos" : "Tomatazo"} para ${esc(p.name)}!</h2>${why ? `<p class="muted">${esc(why)}.</p>` : ""}${tomatoes(p)}
     ${out ? `<p class="prenda">¡${esc(p.name)} queda fuera de la partida! Pero sigue votando.</p>` : max ? `<p class="muted">Con ${max} tomatazos quedas fuera.</p>` : ""}</div>
     <div class="grow"></div>
     <button class="btn" data-act="ok">Siguiente ronda</button>
