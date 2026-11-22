@@ -104,7 +104,7 @@ function home() {
     <div class="row"><button class="btn ghost" data-act="players">Jugadores (${players.length})</button><button class="btn ghost" data-act="rules">Cómo se juega</button></div>
     ${players.length < 3 ? `<p class="small muted" style="text-align:center">Agrega al menos 3 jugadores para empezar.</p>` : ""}
   `, {
-    resume: () => { G = load(KEY_GAME, null); keepAwake(); nextRound(); },
+    resume: () => { G = load(KEY_GAME, null); G.players.forEach(p => p.cards = p.cards.filter(t => D.trampas[t])); keepAwake(); nextRound(); },
     setup, players: () => playersScreen(home), rules
   });
 }
@@ -729,14 +729,14 @@ function chooseRival(p, free) {
 }
 function canUse(t, p) {
   if (t === "robo") return G.players.some(o => o.id !== p.id && o.cards.length);
-  if (t === "rebote" || t === "duelo" || t === "papa") return active().length > 1;
+  if (t === "rebote" || t === "papa") return active().length > 1;
   return true;
 }
 const spend = (p, t) => p.cards.splice(p.cards.indexOf(t), 1);
 function chooseOther(p, t, filter, then) {
   const list = G.players.filter(o => o.id !== p.id && filter(o));
   render(`
-    <p class="eyebrow">${esc(D.trampas[t].nombre)}</p><h2>${t === "robo" ? "¿A quién le robas?" : t === "duelo" ? "¿A quién retas?" : "¿A quién le pasas la prenda?"}</h2>
+    <p class="eyebrow">${esc(D.trampas[t].nombre)}</p><h2>${t === "robo" ? "¿A quién le robas?" : "¿A quién le pasas la prenda?"}</h2>
     <div class="vgrid">${list.map(o => `<button class="vcard" data-act="ch" data-arg="${o.id}">${avatar(o)}<span>${esc(o.name)}</span></button>`).join("")}</div>
     <div class="grow"></div><button class="btn ghost" data-act="back">Mejor no usarla</button>
   `, { ch: id => then(P(id)), back: () => showAccused(p) });
@@ -749,7 +749,6 @@ function useCard(p, t) {
     const target = s && !s.out && s.id !== p.id ? s : pick(active().filter(o => o.id !== p.id));
     spend(p, t); return reveal(`¡Vuela hacia ${esc(target.name)}!`, () => punish(target.id, 1));
   }
-  if (t === "duelo") return chooseOther(p, t, o => !o.out, rival => { spend(p, t); saveGame(); duel([p.id, rival.id], { giveCard: false, onLoser: id => punish(id, 1) }); });
   if (t === "papa") return chooseOther(p, t, o => !o.out, v => { spend(p, t); reveal(`${esc(p.name)} se salva y le pasa la papa caliente a ${esc(v.name)}`, () => punish(v.id, 0)); });
   if (t === "robo") return chooseOther(p, t, o => o.cards.length > 0, v => {
     const s = pick(v.cards); v.cards.splice(v.cards.indexOf(s), 1); spend(p, t); p.cards.push(s); saveGame(); fanfare();

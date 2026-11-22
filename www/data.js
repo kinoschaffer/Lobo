@@ -54,7 +54,6 @@ window.QH_DATA = {
   trampas: {
     escudo: { nombre: "Escudo", img: "carta_escudo", texto: "Te salvas: ni prenda ni tomatazo." },
     rebote: { nombre: "Bumerán", img: "carta_rebote", texto: "La prenda y el tomatazo vuelan al segundo más votado." },
-    duelo:  { nombre: "Duelo de Almohadas", img: "carta_duelo", texto: "Retas a quien quieras a un duelo. Si ganas, le toca a él." },
     papa:   { nombre: "Papa Caliente", img: "carta_papa", texto: "Te salvas y eliges a quién le toca la prenda (sin tomatazo)." },
     robo:   { nombre: "Mano Traviesa", img: "carta_robo", texto: "Le robas una carta a otro jugador." }
   },
