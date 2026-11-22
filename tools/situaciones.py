@@ -82,15 +82,36 @@ S = [
  ("ninja", "Hay un ninja escondido en la casa", ["¿Quién sería el ninja?", "¿Quién lo descubriría primero?", "¿Quién se haría su aprendiz?"], "A ninja hiding on the ceiling of a family living room, a dog looking up at him, family members not noticing, one kid smiling up"),
 ]
 
+def preguntas():
+    """Une las 20 preguntas por situación de tools/preguntas/p*.py."""
+    import importlib.util, glob
+    root = os.path.dirname(os.path.abspath(__file__))
+    P = {}
+    for f in sorted(glob.glob(os.path.join(root, "preguntas", "p*.py"))):
+        spec = importlib.util.spec_from_file_location(os.path.basename(f)[:-3], f)
+        m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m); P.update(m.P)
+    fixes = {"se peleará": "se pelearía", "se trepara": "se treparía", "no se dio cuenta": "no se daría cuenta"}
+    for k, qs in P.items():
+        out = []
+        for q in qs:
+            for a, b in fixes.items(): q = q.replace(a, b)
+            if q not in out: out.append(q)
+        P[k] = out
+    return P
+
 def main():
     root = os.path.dirname(os.path.abspath(__file__))
-    data = [{"id": i, "titulo": t, "preguntas": q} for i, t, q, _ in S]
+    P = preguntas()
+    faltan = [i for i, *_ in S if len(P.get(i, [])) < 20]
+    if faltan: raise SystemExit("Situaciones con menos de 20 preguntas: " + ", ".join(f"{i} ({len(P.get(i, []))})" for i in faltan))
+    data = [{"id": i, "titulo": t, "preguntas": P[i]} for i, t, q, _ in S]
     with open(os.path.join(root, "..", "www", "data_situaciones.js"), "w") as f:
         f.write("// Generado por tools/situaciones.py\nwindow.QH_SITUACIONES = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n")
-    with open(os.path.join(root, "prompts.tsv"), "w") as f:
+    if os.environ.get("PROMPTS"):
+      with open(os.path.join(root, "prompts.tsv"), "w") as f:
         for i, _, _, p in S:
             if p: f.write(f"{i}\t4:3\t{p}, {STYLE}\n")
-    print(len(S), "situaciones;", sum(1 for x in S if x[3]), "con prompt")
+    print(len(S), "situaciones,", sum(len(d["preguntas"]) for d in data), "preguntas")
 
 if __name__ == "__main__":
     main()

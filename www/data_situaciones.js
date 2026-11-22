@@ -6,7 +6,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién se escondería primero?",
    "¿Quién intentaría domarlo?",
-   "¿Quién le sacaría una foto antes de huir?"
+   "¿Quién le sacaría una foto antes de huir?",
+   "¿Quién saldría corriendo sin mirar atrás?",
+   "¿Quién trataría de razonar con el dragón?",
+   "¿Quién le ofrecería su plato de comida?",
+   "¿Quién intentaría montarlo?",
+   "¿Quién se quedaría comiendo como si nada?",
+   "¿Quién gritaría más fuerte?",
+   "¿Quién lo querría adoptar como mascota?",
+   "¿Quién le echaría la culpa a otro?",
+   "¿Quién se desmayaría?",
+   "¿Quién lo enfrentaría con una sartén?",
+   "¿Quién lo subiría a las redes en vivo?",
+   "¿Quién le pondría nombre?",
+   "¿Quién usaría su fuego para terminar de cocinar?",
+   "¿Quién se escondería en la heladera?",
+   "¿Quién negociaría para que se vaya?",
+   "¿Quién saldría a contárselo a los vecinos?",
+   "¿Quién diría que es un disfraz?"
   ]
  },
  {
@@ -15,7 +32,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién gritaría primero?",
    "¿Quién aprovecharía para comerse el postre?",
-   "¿Quién se quedaría dormido en la oscuridad?"
+   "¿Quién se quedaría dormido en la oscuridad?",
+   "¿Quién encontraría las velas primero?",
+   "¿Quién se tropezaría con todo?",
+   "¿Quién contaría una historia de terror?",
+   "¿Quién llamaría a la compañía de luz para quejarse?",
+   "¿Quién le haría un susto a los demás?",
+   "¿Quién se pondría a cantar?",
+   "¿Quién se comería la comida de otro sin que se dé cuenta?",
+   "¿Quién usaría la linterna del celular hasta agotar la batería?",
+   "¿Quién intentaría arreglar los cables?",
+   "¿Quién se quejaría de que se le cortó la serie?",
+   "¿Quién propondría un juego en la oscuridad?",
+   "¿Quién tendría más miedo?",
+   "¿Quién se quedaría quieto sin moverse hasta que vuelva la luz?",
+   "¿Quién rompería un vaso?",
+   "¿Quién diría «yo no toqué nada»?",
+   "¿Quién aprovecharía para dormir una siesta?",
+   "¿Quién festejaría cuando vuelva la luz como si fuera un gol?"
   ]
  },
  {
@@ -24,7 +58,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién se haría viral?",
    "¿Quién se negaría hasta el final?",
-   "¿Quién bailaría peor?"
+   "¿Quién bailaría peor?",
+   "¿Quién inventaría la coreografía?",
+   "¿Quién se caería en pleno baile?",
+   "¿Quién grabaría 50 tomas hasta que salga perfecto?",
+   "¿Quién se olvidaría los pasos?",
+   "¿Quién leería todos los comentarios?",
+   "¿Quién se pondría el disfraz más ridículo?",
+   "¿Quién haría el baile sin música por vergüenza?",
+   "¿Quién se lo mostraría a todo el mundo al día siguiente?",
+   "¿Quién borraría el video de vergüenza?",
+   "¿Quién bailaría mejor de lo que todos esperan?",
+   "¿Quién haría de camarógrafo para no bailar?",
+   "¿Quién pediría hacer otro video?",
+   "¿Quién se peinaría una hora antes de grabar?",
+   "¿Quién arruinaría el video pasando por atrás?",
+   "¿Quién se emocionaría con los «me gusta»?",
+   "¿Quién se lesionaría bailando?",
+   "¿Quién terminaría bailando solo cuando todos se cansen?"
   ]
  },
  {
@@ -33,7 +84,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién saldría a perseguirlo?",
    "¿Quién lo adoptaría como mascota?",
-   "¿Quién seguiría comiendo como si nada?"
+   "¿Quién seguiría comiendo como si nada?",
+   "¿Quién se subiría a una silla del susto?",
+   "¿Quién le haría una trampa con migas?",
+   "¿Quién se volvería vegetariano en ese momento?",
+   "¿Quién lo atraparía con un balde?",
+   "¿Quién le pondría nombre?",
+   "¿Quién lo filmaría en lugar de ayudar?",
+   "¿Quién culparía al asador?",
+   "¿Quién se caería persiguiéndolo?",
+   "¿Quién intentaría hablar con el pollo?",
+   "¿Quién diría «yo sabía que estaba crudo»?",
+   "¿Quién pediría una pizza?",
+   "¿Quién se reiría sin parar?",
+   "¿Quién lo dejaría escapar a propósito?",
+   "¿Quién gritaría como si fuera un monstruo?",
+   "¿Quién se ofrecería a cocinar otra cosa?",
+   "¿Quién lo seguiría hasta la calle?",
+   "¿Quién se lo contaría a todos durante años?"
   ]
  },
  {
@@ -42,7 +110,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién fingiría que le encanta?",
    "¿Quién la usaría con orgullo?",
-   "¿Quién se la regalaría a otro?"
+   "¿Quién se la regalaría a otro?",
+   "¿Quién diría la verdad en la cara?",
+   "¿Quién la usaría solo para dormir?",
+   "¿Quién la cortaría para hacer un trapo?",
+   "¿Quién se la pondría en todas las fotos familiares?",
+   "¿Quién la devolvería al día siguiente?",
+   "¿Quién la escondería en el fondo del ropero?",
+   "¿Quién se haría una igual para combinar?",
+   "¿Quién se reiría hasta llorar al verla?",
+   "¿Quién la subiría a las redes para burlarse?",
+   "¿Quién la usaría para ir a una fiesta elegante?",
+   "¿Quién diría «es la mejor remera que me regalaron»?",
+   "¿Quién la perdería «sin querer»?",
+   "¿Quién la vendería por internet?",
+   "¿Quién tendría el mal gusto de elegirla como regalo?",
+   "¿Quién se ofendería si no te la ponés?",
+   "¿Quién se la pondría al perro?",
+   "¿Quién la usaría hasta que se rompa?"
   ]
  },
  {
@@ -51,7 +136,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién sería el líder?",
    "¿Quién duraría menos?",
-   "¿Quién se haría amigo de los monos?"
+   "¿Quién se haría amigo de los monos?",
+   "¿Quién haría fuego primero?",
+   "¿Quién se comería todas las provisiones?",
+   "¿Quién construiría la mejor cabaña?",
+   "¿Quién pescaría con las manos?",
+   "¿Quién escribiría SOS gigante en la arena?",
+   "¿Quién se quejaría todo el día?",
+   "¿Quién se quedaría a vivir ahí para siempre?",
+   "¿Quién se volvería loco y hablaría con una pelota?",
+   "¿Quién intentaría nadar hasta otra isla?",
+   "¿Quién extrañaría más el celular?",
+   "¿Quién se pelearía por el único coco?",
+   "¿Quién se tomaría todo como vacaciones?",
+   "¿Quién organizaría turnos para todo?",
+   "¿Quién se quemaría con el sol el primer día?",
+   "¿Quién comería algo raro y se enfermaría?",
+   "¿Quién sería rescatado y se olvidaría de los demás?",
+   "¿Quién se haría rey de la isla?"
   ]
  },
  {
@@ -60,7 +162,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién sería el primero en caer?",
    "¿Quién sobreviviría a todo?",
-   "¿Quién intentaría negociar con los zombis?"
+   "¿Quién intentaría negociar con los zombis?",
+   "¿Quién se convertiría en zombi y nadie lo notaría?",
+   "¿Quién juntaría todas las latas de comida?",
+   "¿Quién se escondería debajo de la cama?",
+   "¿Quién saldría a pelear con un palo de escoba?",
+   "¿Quién trataría de curar a un zombi?",
+   "¿Quién haría un plan que nadie sigue?",
+   "¿Quién se haría amigo de un zombi?",
+   "¿Quién entraría en pánico total?",
+   "¿Quién se iría solo y abandonaría al grupo?",
+   "¿Quién diría «yo sabía que esto iba a pasar»?",
+   "¿Quién seguiría con su rutina como si nada?",
+   "¿Quién se tropezaría justo cuando hay que correr?",
+   "¿Quién lideraría la resistencia?",
+   "¿Quién se perdería buscando comida?",
+   "¿Quién haría ruido en el peor momento?",
+   "¿Quién construiría el mejor refugio?",
+   "¿Quién intentaría venderles algo a los zombis?"
   ]
  },
  {
@@ -69,7 +188,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién se iría con los extraterrestres?",
    "¿Quién les ofrecería comida?",
-   "¿Quién diría «yo sabía que existían»?"
+   "¿Quién diría «yo sabía que existían»?",
+   "¿Quién saldría corriendo?",
+   "¿Quién intentaría hablarles en otro idioma?",
+   "¿Quién les sacaría fotos?",
+   "¿Quién pediría que lo lleven de paseo?",
+   "¿Quién llamaría a la policía?",
+   "¿Quién se desmayaría?",
+   "¿Quién les explicaría cómo funciona la Tierra?",
+   "¿Quién les pediría un autógrafo?",
+   "¿Quién intentaría robarse la nave?",
+   "¿Quién pensaría que es una broma?",
+   "¿Quién les enseñaría a bailar?",
+   "¿Quién se escondería en el garaje?",
+   "¿Quién les pediría trabajo en su planeta?",
+   "¿Quién les cobraría por estacionar en el patio?",
+   "¿Quién se haría famoso contando la historia?",
+   "¿Quién sería abducido sin que nadie lo extrañe?",
+   "¿Quién volvería del espacio hablando raro?"
   ]
  },
  {
@@ -78,7 +214,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién se la comería a escondidas?",
    "¿Quién la compartiría con todos?",
-   "¿Quién armaría una pelea por ella?"
+   "¿Quién armaría una pelea por ella?",
+   "¿Quién diría «no, gracias» y después la miraría con ganas?",
+   "¿Quién la cortaría en pedacitos para que alcance?",
+   "¿Quién propondría jugarla a piedra, papel o tijera?",
+   "¿Quién la escondería en la heladera para después?",
+   "¿Quién le pasaría el dedo para que nadie la quiera?",
+   "¿Quién se la comería de un bocado?",
+   "¿Quién diría que está a dieta y se la comería igual?",
+   "¿Quién le echaría la culpa al perro cuando desaparezca?",
+   "¿Quién se ofendería si no se la ofrecen?",
+   "¿Quién la subastaría al mejor postor?",
+   "¿Quién se acordaría de ella a medianoche?",
+   "¿Quién la dejaría para el más chico?",
+   "¿Quién sacaría otro postre escondido?",
+   "¿Quién negociaría lavar los platos a cambio?",
+   "¿Quién la miraría fijo hasta que se la den?",
+   "¿Quién diría «yo la vi primero»?",
+   "¿Quién la tiraría al piso sin querer?"
   ]
  },
  {
@@ -87,7 +240,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién no soltaría el micrófono?",
    "¿Quién cantaría peor?",
-   "¿Quién lloraría con una balada?"
+   "¿Quién lloraría con una balada?",
+   "¿Quién se sabría todas las letras?",
+   "¿Quién se subiría a la mesa a cantar?",
+   "¿Quién se negaría a cantar toda la noche?",
+   "¿Quién elegiría la canción más larga?",
+   "¿Quién cantaría desafinado pero con el corazón?",
+   "¿Quién bailaría mientras otros cantan?",
+   "¿Quién haría un dúo romántico?",
+   "¿Quién inventaría la letra?",
+   "¿Quién se quedaría afónico?",
+   "¿Quién cantaría una canción infantil?",
+   "¿Quién se emocionaría con su propio aplauso?",
+   "¿Quién pediría «una más» a las tres de la mañana?",
+   "¿Quién pondría la música más vieja?",
+   "¿Quién cantaría con los ojos cerrados?",
+   "¿Quién se tropezaría con el cable?",
+   "¿Quién juzgaría a todos como jurado de la tele?",
+   "¿Quién sorprendería a todos cantando bien?"
   ]
  },
  {
@@ -96,7 +266,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién intentaría montarla?",
    "¿Quién le pondría nombre?",
-   "¿Quién se subiría a una silla del susto?"
+   "¿Quién se subiría a una silla del susto?",
+   "¿Quién la querría adoptar?",
+   "¿Quién recibiría un escupitajo?",
+   "¿Quién intentaría sacarla empujando?",
+   "¿Quién le sacaría selfies?",
+   "¿Quién le daría de comer las plantas de la casa?",
+   "¿Quién la peinaría?",
+   "¿Quién llamaría a los bomberos?",
+   "¿Quién la dejaría dormir en su cama?",
+   "¿Quién se pondría a negociar con ella?",
+   "¿Quién culparía a otro de haber dejado la puerta abierta?",
+   "¿Quién le tejería un suéter con su lana?",
+   "¿Quién se escondería en su cuarto?",
+   "¿Quién la sacaría a pasear con correa?",
+   "¿Quién diría que es un alpaca para discutir?",
+   "¿Quién la llevaría a la escuela o al trabajo?",
+   "¿Quién se reiría sin parar?",
+   "¿Quién terminaría haciéndose su mejor amigo?"
   ]
  },
  {
@@ -105,7 +292,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién lo gastaría todo en un día?",
    "¿Quién lo escondería debajo del colchón?",
-   "¿Quién se lo contaría a todo el barrio?"
+   "¿Quién se lo contaría a todo el barrio?",
+   "¿Quién renunciaría al trabajo esa misma tarde?",
+   "¿Quién se compraría un auto carísimo?",
+   "¿Quién lo invertiría todo?",
+   "¿Quién perdería el billete ganador?",
+   "¿Quién se haría el humilde pero compraría un yate?",
+   "¿Quién donaría casi todo?",
+   "¿Quién se iría de viaje por el mundo?",
+   "¿Quién se pelearía por cómo repartirlo?",
+   "¿Quién se compraría una mansión con tobogán?",
+   "¿Quién no le contaría a nadie?",
+   "¿Quién pediría plata prestada a los demás igual?",
+   "¿Quién se volvería tacaño de repente?",
+   "¿Quién compraría un equipo de fútbol?",
+   "¿Quién se desmayaría al ver el número?",
+   "¿Quién llamaría a un ex para presumir?",
+   "¿Quién seguiría viviendo igual que siempre?",
+   "¿Quién se gastaría todo en comida?"
   ]
  },
  {
@@ -114,7 +318,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién viajaría a ver dinosaurios?",
    "¿Quién rompería la máquina?",
-   "¿Quién se quedaría a vivir en el pasado?"
+   "¿Quién se quedaría a vivir en el pasado?",
+   "¿Quién viajaría al futuro para ver los resultados de la lotería?",
+   "¿Quién iría a corregir un error vergonzoso?",
+   "¿Quién visitaría a sus abuelos de jóvenes?",
+   "¿Quién traería un dinosaurio de mascota?",
+   "¿Quién se perdería en otra época?",
+   "¿Quién cambiaría la historia sin querer?",
+   "¿Quién iría a conocer a un famoso del pasado?",
+   "¿Quién tendría miedo de usarla?",
+   "¿Quién la vendería?",
+   "¿Quién viajaría para evitar un examen?",
+   "¿Quién se encontraría consigo mismo y se pelearía?",
+   "¿Quién leería el manual antes de usarla?",
+   "¿Quién apretaría todos los botones?",
+   "¿Quién volvería con ropa rarísima?",
+   "¿Quién iría al futuro a ver cómo termina su serie?",
+   "¿Quién usaría la máquina para llegar a tiempo a todos lados?",
+   "¿Quién diría que es un lavarropas viejo?"
   ]
  },
  {
@@ -123,7 +344,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién gritaría más fuerte?",
    "¿Quién se haría amigo del fantasma?",
-   "¿Quién no volvería a entrar nunca?"
+   "¿Quién no volvería a entrar nunca?",
+   "¿Quién intentaría atraparlo con una aspiradora?",
+   "¿Quién le preguntaría por qué está ahí?",
+   "¿Quién le cobraría alquiler?",
+   "¿Quién diría que es el reflejo del espejo?",
+   "¿Quién se mudaría esa misma noche?",
+   "¿Quién le pediría consejos del más allá?",
+   "¿Quién lo filmaría para hacerse famoso?",
+   "¿Quién llamaría a un cura o a un brujo?",
+   "¿Quién se bañaría igual como si nada?",
+   "¿Quién saldría corriendo en toalla?",
+   "¿Quién le haría un susto al fantasma?",
+   "¿Quién creería que es otro de la familia disfrazado?",
+   "¿Quién no se daría cuenta durante una semana?",
+   "¿Quién le pondría nombre?",
+   "¿Quién le pediría que asuste a otro?",
+   "¿Quién dormiría con la luz prendida por un mes?",
+   "¿Quién le prestaría su cepillo de dientes?"
   ]
  },
  {
@@ -132,7 +370,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién se desmayaría?",
    "¿De quién contaría más secretos el perro?",
-   "¿Quién lo llevaría a la tele para hacerse famoso?"
+   "¿Quién lo llevaría a la tele para hacerse famoso?",
+   "¿Quién sería el preferido del perro?",
+   "¿Quién le pediría disculpas por todo lo que le hizo?",
+   "¿Quién intentaría convencerlo de no hablar?",
+   "¿Quién se pondría a charlar con él toda la noche?",
+   "¿Quién le preguntaría qué piensa de la familia?",
+   "¿Quién se sentiría ofendido por algo que diga?",
+   "¿Quién diría que es un truco de ventrílocuo?",
+   "¿Quién lo pondría a trabajar?",
+   "¿Quién le preguntaría dónde escondió sus medias?",
+   "¿Quién se pondría celoso del perro?",
+   "¿Quién le enseñaría malas palabras?",
+   "¿Quién lo llevaría al médico?",
+   "¿Quién le pediría consejos de amor?",
+   "¿Quién le preguntaría si los gatos hablan?",
+   "¿Quién grabaría todo para internet?",
+   "¿A quién delataría primero el perro?",
+   "¿Quién le daría el control remoto?"
   ]
  },
  {
@@ -141,7 +396,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién usaría su poder para el mal?",
    "¿Quién se haría famoso?",
-   "¿Quién tardaría una semana en darse cuenta?"
+   "¿Quién tardaría una semana en darse cuenta?",
+   "¿Quién se haría superhéroe de verdad?",
+   "¿Quién usaría la superfuerza para abrir frascos?",
+   "¿Quién volaría por todo el barrio en pijama?",
+   "¿Quién usaría la invisibilidad para espiar?",
+   "¿Quién se haría un traje ridículo?",
+   "¿Quién rompería la casa sin querer?",
+   "¿Quién usaría su poder para no hacer las tareas?",
+   "¿Quién lo contaría en las redes enseguida?",
+   "¿Quién querría devolver el poder?",
+   "¿Quién tendría el poder más inútil?",
+   "¿Quién se pelearía con otro por quién es más fuerte?",
+   "¿Quién se haría villano?",
+   "¿Quién usaría la velocidad para llegar puntual por fin?",
+   "¿Quién leería mentes y se enteraría de algo feo?",
+   "¿Quién no sabría controlarlo?",
+   "¿Quién cobraría por usar su poder?",
+   "¿Quién salvaría al gato del vecino de un árbol?"
   ]
  },
  {
@@ -150,7 +422,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién se anotaría primero?",
    "¿Quién lloraría en la despedida?",
-   "¿Quién extrañaría más la comida?"
+   "¿Quién extrañaría más la comida?",
+   "¿Quién se arrepentiría a mitad de camino?",
+   "¿Quién llevaría más valijas?",
+   "¿Quién sería el primer presidente de Marte?",
+   "¿Quién se marearía en el cohete?",
+   "¿Quién mandaría fotos todos los días?",
+   "¿Quién buscaría marcianos para hacerse amigo?",
+   "¿Quién pondría una tienda en Marte?",
+   "¿Quién se perdería en el desierto rojo?",
+   "¿Quién se quejaría del wifi?",
+   "¿Quién se llevaría la mascota a escondidas?",
+   "¿Quién plantaría la primera papa?",
+   "¿Quién se pelearía con los otros astronautas?",
+   "¿Quién no se anotaría ni loco?",
+   "¿Quién iría solo para no lavar los platos?",
+   "¿Quién se llevaría un álbum de fotos familiar?",
+   "¿Quién volvería nadando si pudiera?",
+   "¿Quién le pondría su nombre a un cráter?"
   ]
  },
  {
@@ -159,7 +448,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién armaría más drama?",
    "¿Quién ganaría el premio?",
-   "¿Quién se iría el primer día?"
+   "¿Quién se iría el primer día?",
+   "¿Quién lloraría frente a la cámara de confesiones?",
+   "¿Quién haría alianzas secretas?",
+   "¿Quién se enamoraría de otro participante?",
+   "¿Quién traicionaría a todos para ganar?",
+   "¿Quién se olvidaría de que lo están filmando?",
+   "¿Quién sería el favorito del público?",
+   "¿Quién se pelearía por la comida?",
+   "¿Quién cocinaría para todos?",
+   "¿Quién se haría famoso por una frase?",
+   "¿Quién dormiría todo el día?",
+   "¿Quién se escaparía por la ventana?",
+   "¿Quién contaría todos los secretos de la familia?",
+   "¿Quién haría de líder de la casa?",
+   "¿Quién sería expulsado por romper las reglas?",
+   "¿Quién haría trampa en las pruebas?",
+   "¿Quién saldría con un contrato para otro programa?",
+   "¿Quién se haría el santo y sería el peor?"
   ]
  },
  {
@@ -168,7 +474,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién sería el vampiro?",
    "¿Quién lo sospechaba desde siempre?",
-   "¿Quién pediría ser vampiro también?"
+   "¿Quién pediría ser vampiro también?",
+   "¿Quién le pondría ajo en la comida a escondidas?",
+   "¿Quién se iría a dormir con un collar de ajos?",
+   "¿Quién lo defendería ante todos?",
+   "¿Quién le preguntaría cómo se mantiene tan joven?",
+   "¿Quién le ofrecería jugo de tomate?",
+   "¿Quién lo usaría para que asuste a los vecinos?",
+   "¿Quién se haría el valiente y después huiría?",
+   "¿Quién llamaría a un cazavampiros?",
+   "¿Quién le cobraría por guardar el secreto?",
+   "¿Quién le preguntaría si puede volar?",
+   "¿Quién se quejaría porque no sale en las fotos?",
+   "¿Quién le cerraría todas las cortinas para ayudarlo?",
+   "¿Quién lo invitaría a salir de noche?",
+   "¿Quién se desmayaría al ver los colmillos?",
+   "¿Quién no se sorprendería para nada?",
+   "¿Quién le pediría que no muerda al perro?",
+   "¿Quién se pondría una capa para combinar?"
   ]
  },
  {
@@ -177,7 +500,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién saldría corriendo primero?",
    "¿Quién hablaría con los fantasmas?",
-   "¿Quién se dormiría igual?"
+   "¿Quién se dormiría igual?",
+   "¿Quién propondría separarse para investigar?",
+   "¿Quién se escondería detrás de los demás?",
+   "¿Quién abriría la puerta que nadie quiere abrir?",
+   "¿Quién gritaría por un ruido de nada?",
+   "¿Quién se haría el valiente y lloraría a escondidas?",
+   "¿Quién haría bromas para asustar a los otros?",
+   "¿Quién se quedaría sin batería en la linterna?",
+   "¿Quién buscaría tesoros escondidos?",
+   "¿Quién se perdería en los pasillos?",
+   "¿Quién intentaría filmar un fantasma?",
+   "¿Quién llamaría a su mamá?",
+   "¿Quién se iría a dormir al auto?",
+   "¿Quién juraría haber visto algo moverse?",
+   "¿Quién compraría la casa al día siguiente?",
+   "¿Quién bajaría al sótano solo?",
+   "¿Quién rezaría toda la noche?",
+   "¿Quién le cobraría entrada a los turistas?"
   ]
  },
  {
@@ -186,7 +526,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién se treparía a un árbol?",
    "¿Quién intentaría sacarse una selfie?",
-   "¿Quién le daría su comida?"
+   "¿Quién le daría su comida?",
+   "¿Quién se haría el muerto?",
+   "¿Quién saldría corriendo y dejaría a los demás?",
+   "¿Quién intentaría asustarlo haciendo ruido?",
+   "¿Quién se quedaría durmiendo en la carpa?",
+   "¿Quién trataría de hablarle con calma?",
+   "¿Quién gritaría «¡no me comas!»?",
+   "¿Quién culparía a otro por dejar la comida afuera?",
+   "¿Quién se escondería en la conservadora?",
+   "¿Quién lo querría abrazar?",
+   "¿Quién le tiraría un zapato?",
+   "¿Quién diría que es un perro grande?",
+   "¿Quién nunca más volvería a acampar?",
+   "¿Quién filmaría todo temblando?",
+   "¿Quién le cantaría una canción para que se vaya?",
+   "¿Quién se iría con el oso al bosque?",
+   "¿Quién lo contaría exagerando después?",
+   "¿Quién intentaría negociar con miel?"
   ]
  },
  {
@@ -195,7 +552,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién lloraría en el discurso?",
    "¿Quién contaría un secreto que no debía?",
-   "¿Quién bailaría hasta el final?"
+   "¿Quién bailaría hasta el final?",
+   "¿Quién se olvidaría el discurso en casa?",
+   "¿Quién hablaría más de sí mismo que de los novios?",
+   "¿Quién haría un chiste que nadie entiende?",
+   "¿Quién se tomaría todo el champán?",
+   "¿Quién agarraría el ramo a los empujones?",
+   "¿Quién se dormiría en la mesa?",
+   "¿Quién se pondría a cantar sin que se lo pidan?",
+   "¿Quién se llevaría los centros de mesa?",
+   "¿Quién se tropezaría en la pista?",
+   "¿Quién haría el discurso más largo?",
+   "¿Quién mencionaría al ex de alguien?",
+   "¿Quién se emocionaría más que los novios?",
+   "¿Quién llegaría tarde a la ceremonia?",
+   "¿Quién se iría antes del postre?",
+   "¿Quién organizaría el trencito?",
+   "¿Quién se pelearía con el DJ?",
+   "¿Quién terminaría bailando con la abuela de la novia?"
   ]
  },
  {
@@ -204,7 +578,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién se haría su mejor amigo?",
    "¿Quién lo rompería?",
-   "¿Quién le enseñaría a hacer travesuras?"
+   "¿Quién le enseñaría a hacer travesuras?",
+   "¿Quién le pediría que haga sus tareas?",
+   "¿Quién le tendría miedo?",
+   "¿Quién le hablaría como a una persona?",
+   "¿Quién intentaría desarmarlo para ver cómo funciona?",
+   "¿Quién le pondría nombre?",
+   "¿Quién lo vestiría con ropa?",
+   "¿Quién se pondría celoso del robot?",
+   "¿Quién le pediría que cocine todos los días?",
+   "¿Quién lo programaría para bailar?",
+   "¿Quién lo culparía de todo lo que se rompa?",
+   "¿Quién lo usaría para hacer bromas?",
+   "¿Quién no lo dejaría tocar sus cosas?",
+   "¿Quién pensaría que los va a dominar a todos?",
+   "¿Quién le pediría consejos de vida?",
+   "¿Quién lo llevaría de paseo?",
+   "¿Quién lo vendería por internet?",
+   "¿Quién lo dejaría sin batería a propósito?"
   ]
  },
  {
@@ -213,7 +604,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién se uniría a la tripulación?",
    "¿Quién convencería al capitán de soltarlos?",
-   "¿Quién se marearía?"
+   "¿Quién se marearía?",
+   "¿Quién intentaría escapar nadando?",
+   "¿Quién se haría amigo del loro?",
+   "¿Quién terminaría siendo el capitán?",
+   "¿Quién buscaría el tesoro escondido?",
+   "¿Quién lloraría pidiendo volver a casa?",
+   "¿Quién robaría el mapa?",
+   "¿Quién aprendería a hablar como pirata?",
+   "¿Quién traicionaría a la familia?",
+   "¿Quién se ofrecería a cocinar para todos?",
+   "¿Quién desafiaría al capitán a un duelo?",
+   "¿Quién se pondría un parche en el ojo enseguida?",
+   "¿Quién haría que los piratas se arrepientan de secuestrarlos?",
+   "¿Quién se escondería en un barril?",
+   "¿Quién se pondría a limpiar el barco?",
+   "¿Quién negociaría el rescate?",
+   "¿Quién organizaría un motín?",
+   "¿Quién caminaría por la tabla primero?"
   ]
  },
  {
@@ -222,7 +630,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién la rompería el primer día?",
    "¿Quién escondería chocolates?",
-   "¿Quién la cumpliría de verdad?"
+   "¿Quién la cumpliría de verdad?",
+   "¿Quién contaría todas las calorías?",
+   "¿Quién comería a escondidas a medianoche?",
+   "¿Quién se pondría de mal humor por el hambre?",
+   "¿Quién diría «hoy no cuenta»?",
+   "¿Quién haría trampa con la balanza?",
+   "¿Quién se obsesionaría con la ensalada?",
+   "¿Quién pediría delivery a escondidas?",
+   "¿Quién se comería la dieta de los demás?",
+   "¿Quién se pesaría tres veces por día?",
+   "¿Quién abandonaría y lo admitiría con orgullo?",
+   "¿Quién convencería a todos de dejarla?",
+   "¿Quién se volvería experto en nutrición?",
+   "¿Quién soñaría con pizza?",
+   "¿Quién bajaría más de peso?",
+   "¿Quién inventaría recetas raras?",
+   "¿Quién se quejaría más?",
+   "¿Quién festejaría el fin de la dieta con un banquete?"
   ]
  },
  {
@@ -231,7 +656,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién iría solo un día?",
    "¿Quién se lesionaría?",
-   "¿Quién se obsesionaría con los músculos?"
+   "¿Quién se obsesionaría con los músculos?",
+   "¿Quién se sacaría más selfies que hacer ejercicio?",
+   "¿Quién se quedaría dormido en la cinta?",
+   "¿Quién levantaría más peso?",
+   "¿Quién haría los ejercicios mal?",
+   "¿Quién se haría amigo de todos los del gimnasio?",
+   "¿Quién pagaría el año y no iría nunca?",
+   "¿Quién se compraría ropa deportiva carísima?",
+   "¿Quién se quejaría de dolor durante una semana?",
+   "¿Quién iría solo a bañarse?",
+   "¿Quién se pondría a dar consejos sin saber?",
+   "¿Quién se caería de la bicicleta fija?",
+   "¿Quién terminaría siendo entrenador?",
+   "¿Quién haría ejercicio solo cuando hay alguien mirando?",
+   "¿Quién comería una hamburguesa después de entrenar?",
+   "¿Quién gritaría al levantar pesas?",
+   "¿Quién se cansaría en el calentamiento?",
+   "¿Quién iría todos los días sin faltar?"
   ]
  },
  {
@@ -240,7 +682,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién no aguantaría ni un día?",
    "¿Quién ni lo notaría?",
-   "¿Quién le robaría el celular a otro?"
+   "¿Quién le robaría el celular a otro?",
+   "¿Quién se pondría a leer libros?",
+   "¿Quién se aburriría en una hora?",
+   "¿Quién usaría el teléfono fijo para llamar a todos?",
+   "¿Quién escondería un celular de repuesto?",
+   "¿Quién se pondría a hablar con los vecinos?",
+   "¿Quién se perdería sin el mapa?",
+   "¿Quién inventaría juegos de mesa?",
+   "¿Quién sentiría vibraciones fantasma en el bolsillo?",
+   "¿Quién descubriría que le gusta más así?",
+   "¿Quién se pondría de mal humor?",
+   "¿Quién escribiría cartas a mano?",
+   "¿Quién se dormiría temprano por primera vez?",
+   "¿Quién contaría los minutos para recuperarlo?",
+   "¿Quién usaría la computadora a escondidas?",
+   "¿Quién se volvería muy productivo?",
+   "¿Quién no sabría qué hora es?",
+   "¿Quién publicaría un video llorando al recuperarlo?"
   ]
  },
  {
@@ -249,7 +708,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién sería el chef?",
    "¿Quién se comería las ganancias?",
-   "¿Quién se pelearía con los clientes?"
+   "¿Quién se pelearía con los clientes?",
+   "¿Quién atendería las mesas con mucha onda?",
+   "¿Quién quemaría la comida?",
+   "¿Quién manejaría la caja y se equivocaría con el vuelto?",
+   "¿Quién lavaría los platos?",
+   "¿Quién inventaría el plato estrella?",
+   "¿Quién se tomaría vacaciones a la semana?",
+   "¿Quién invitaría a todos sus amigos gratis?",
+   "¿Quién haría publicidad en las redes?",
+   "¿Quién se quejaría de todo como un crítico?",
+   "¿Quién le pondría un nombre ridículo al restaurante?",
+   "¿Quién se volvería el jefe mandón?",
+   "¿Quién probaría la comida de todos los platos?",
+   "¿Quién le gritaría al cocinero?",
+   "¿Quién se dormiría en la cocina?",
+   "¿Quién se haría famoso por un postre?",
+   "¿Quién cerraría el restaurante en un mes?",
+   "¿Quién se iría a trabajar a la competencia?"
   ]
  },
  {
@@ -258,7 +734,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién se ofrecería primero?",
    "¿Quién descubriría el truco?",
-   "¿Quién desaparecería de verdad?"
+   "¿Quién desaparecería de verdad?",
+   "¿Quién se escondería para que no lo elijan?",
+   "¿Quién arruinaría el truco?",
+   "¿Quién gritaría al ver la sierra?",
+   "¿Quién querría ser asistente del mago?",
+   "¿Quién le pediría que desaparezca a otro de la familia?",
+   "¿Quién se quedaría con el conejo?",
+   "¿Quién diría «eso lo puedo hacer yo»?",
+   "¿Quién aplaudiría más fuerte?",
+   "¿Quién se asustaría con cualquier truco?",
+   "¿Quién intentaría hacer el truco en casa y rompería algo?",
+   "¿Quién le pediría que adivine su carta tres veces?",
+   "¿Quién se iría a estudiar magia?",
+   "¿Quién perdería su reloj durante el show?",
+   "¿Quién no creería en nada?",
+   "¿Quién terminaría hipnotizado?",
+   "¿Quién le preguntaría el truco al final?",
+   "¿Quién se quedaría encerrado en la caja?"
   ]
  },
  {
@@ -267,7 +760,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién sacaría la mejor nota?",
    "¿Quién se copiaría?",
-   "¿Quién inventaría una excusa para no ir?"
+   "¿Quién inventaría una excusa para no ir?",
+   "¿Quién entregaría la hoja en blanco?",
+   "¿Quién se pondría a llorar?",
+   "¿Quién usaría la calculadora del celular a escondidas?",
+   "¿Quién terminaría primero?",
+   "¿Quién le preguntaría todo al profesor?",
+   "¿Quién diría «esto no lo vimos»?",
+   "¿Quién dibujaría en el examen?",
+   "¿Quién se dormiría en la prueba?",
+   "¿Quién se pondría a discutir la nota?",
+   "¿Quién estudiaría la noche anterior sin dormir?",
+   "¿Quién sacaría peor nota que los chicos de la familia?",
+   "¿Quién le pasaría las respuestas a todos?",
+   "¿Quién se olvidaría el lápiz?",
+   "¿Quién aprobaría de pura suerte?",
+   "¿Quién pediría un recuperatorio?",
+   "¿Quién culparía al profesor?",
+   "¿Quién se haría el que sabe y no sabe nada?"
   ]
  },
  {
@@ -276,7 +786,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién organizaría todo?",
    "¿Quién se comería todas las provisiones?",
-   "¿Quién haría el muñeco de nieve más feo?"
+   "¿Quién haría el muñeco de nieve más feo?",
+   "¿Quién se quejaría del frío todo el tiempo?",
+   "¿Quién saldría a jugar en la nieve aunque sea peligroso?",
+   "¿Quién se quedaría todo el día en la cama?",
+   "¿Quién empezaría una guerra de bolas de nieve?",
+   "¿Quién se acapararía las frazadas?",
+   "¿Quién cocinaría para todos?",
+   "¿Quién se pondría cinco abrigos?",
+   "¿Quién se resbalaría primero?",
+   "¿Quién contaría historias junto al fuego?",
+   "¿Quién se pondría de mal humor por el encierro?",
+   "¿Quién intentaría salir a buscar ayuda?",
+   "¿Quién haría un iglú?",
+   "¿Quién gastaría toda la leña?",
+   "¿Quién se tomaría todo el chocolate caliente?",
+   "¿Quién propondría juegos para pasar el tiempo?",
+   "¿Quién se congelaría por salir en pantuflas?",
+   "¿Quién querría quedarse atrapado más días?"
   ]
  },
  {
@@ -285,7 +812,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién se perdería en el barco?",
    "¿Quién se haría amigo del capitán?",
-   "¿Quién pasaría el día en el buffet?"
+   "¿Quién pasaría el día en el buffet?",
+   "¿Quién se marearía todo el viaje?",
+   "¿Quién no saldría de la pileta?",
+   "¿Quién se apuntaría a todas las actividades?",
+   "¿Quién perdería el barco en una parada?",
+   "¿Quién bailaría en todas las fiestas?",
+   "¿Quién se quemaría con el sol?",
+   "¿Quién gastaría todo en el casino?",
+   "¿Quién se quedaría encerrado en el camarote?",
+   "¿Quién se enamoraría en el viaje?",
+   "¿Quién se sacaría foto en la proa como en la película?",
+   "¿Quién se quejaría del tamaño del camarote?",
+   "¿Quién se llevaría toallas del barco?",
+   "¿Quién haría karaoke todas las noches?",
+   "¿Quién se perdería en una excursión?",
+   "¿Quién comería hasta reventar?",
+   "¿Quién tendría miedo de que se hunda?",
+   "¿Quién querría trabajar en el crucero?"
   ]
  },
  {
@@ -294,7 +838,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién sería?",
    "¿Quién se pondría celoso?",
-   "¿Quién aparecería en todos los videos sin querer?"
+   "¿Quién aparecería en todos los videos sin querer?",
+   "¿Quién se volvería insoportable con la fama?",
+   "¿Quién haría videos de cocina que salen mal?",
+   "¿Quién mostraría toda la casa sin permiso?",
+   "¿Quién aceptaría cualquier publicidad?",
+   "¿Quién se pelearía con los que comentan?",
+   "¿Quién se vestiría igual para salir en las fotos?",
+   "¿Quién borraría todo por vergüenza?",
+   "¿Quién se haría su mánager?",
+   "¿Quién contaría secretos familiares para tener vistas?",
+   "¿Quién filmaría hasta la comida de cada día?",
+   "¿Quién bailaría en los videos para ayudar?",
+   "¿Quién se haría famoso por un error?",
+   "¿Quién pediría que lo saquen de los videos?",
+   "¿Quién compraría seguidores?",
+   "¿Quién se haría viral sin buscarlo?",
+   "¿Quién se volvería millonario?",
+   "¿Quién diría que es todo falso?"
   ]
  },
  {
@@ -303,7 +864,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién lo haría dormir?",
    "¿Quién lo perdería de vista?",
-   "¿Quién lloraría más que el bebé?"
+   "¿Quién lloraría más que el bebé?",
+   "¿Quién cambiaría el pañal?",
+   "¿Quién se negaría a cambiar el pañal?",
+   "¿Quién le cantaría canciones?",
+   "¿Quién le daría algo que no debía comer?",
+   "¿Quién se quedaría dormido antes que el bebé?",
+   "¿Quién le enseñaría su primera palabra?",
+   "¿Quién lo vestiría con ropa ridícula?",
+   "¿Quién le sacaría mil fotos?",
+   "¿Quién se asustaría cuando llore?",
+   "¿Quién llamaría a los padres cada cinco minutos?",
+   "¿Quién lo dejaría jugar con algo peligroso?",
+   "¿Quién se haría el que sabe todo?",
+   "¿Quién querría tener un bebé después de esto?",
+   "¿Quién no querría tener uno nunca?",
+   "¿Quién le pondría la ropa al revés?",
+   "¿Quién terminaría cubierto de papilla?",
+   "¿Quién se lo devolvería a los padres antes de tiempo?"
   ]
  },
  {
@@ -312,7 +890,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién elegiría un cocodrilo?",
    "¿Quién se olvidaría de darle de comer?",
-   "¿Quién lo vestiría con ropa?"
+   "¿Quién lo vestiría con ropa?",
+   "¿Quién elegiría el animal más peligroso?",
+   "¿Quién elegiría un pingüino?",
+   "¿Quién se dejaría morder?",
+   "¿Quién lo sacaría a pasear por el barrio para presumir?",
+   "¿Quién lo dejaría dormir en su cama?",
+   "¿Quién elegiría un animal que ni existe?",
+   "¿Quién no se haría cargo de nada?",
+   "¿Quién se volvería veterinario?",
+   "¿Quién tendría el zoológico entero en casa?",
+   "¿Quién elegiría un animal diminuto?",
+   "¿Quién le enseñaría trucos?",
+   "¿Quién se escaparía de su propio animal?",
+   "¿Quién lo subiría a las redes todos los días?",
+   "¿Quién le pondría el nombre más raro?",
+   "¿Quién lo devolvería al día siguiente?",
+   "¿Quién gastaría todo su sueldo en el animal?",
+   "¿Quién se haría famoso por su mascota?"
   ]
  },
  {
@@ -321,7 +916,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién intentaría arreglarlo?",
    "¿Quién salvaría primero su celular?",
-   "¿Quién se pondría a nadar?"
+   "¿Quién se pondría a nadar?",
+   "¿Quién llamaría al plomero gritando?",
+   "¿Quién empeoraría todo tocando un caño?",
+   "¿Quién se subiría a la mesa?",
+   "¿Quién sacaría el agua con un vaso?",
+   "¿Quién se pondría a filmar?",
+   "¿Quién se resbalaría y caería al agua?",
+   "¿Quién culparía a otro?",
+   "¿Quién se iría de la casa diciendo «llámenme cuando esté seco»?",
+   "¿Quién inflaría un salvavidas?",
+   "¿Quién salvaría la comida primero?",
+   "¿Quién se quedaría dormido sin enterarse?",
+   "¿Quién propondría hacer una pileta?",
+   "¿Quién lloraría por sus zapatos?",
+   "¿Quién buscaría un tutorial en internet?",
+   "¿Quién se pondría las botas de lluvia dentro de casa?",
+   "¿Quién pescaría algo en la cocina?",
+   "¿Quién lo tomaría con calma total?"
   ]
  },
  {
@@ -330,7 +942,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién respondería todo?",
    "¿Quién se quedaría en blanco?",
-   "¿Quién saludaría a la cámara todo el tiempo?"
+   "¿Quién saludaría a la cámara todo el tiempo?",
+   "¿Quién apretaría el botón antes de saber la respuesta?",
+   "¿Quién se pelearía con el conductor?",
+   "¿Quién lloraría al ganar?",
+   "¿Quién arriesgaría todo y lo perdería?",
+   "¿Quién se pondría nervioso y diría cualquier cosa?",
+   "¿Quién saludaría a toda su familia por cámara?",
+   "¿Quién sabría la respuesta pero no la diría?",
+   "¿Quién haría trampa?",
+   "¿Quién se haría famoso por una respuesta absurda?",
+   "¿Quién se quedaría con el auto del premio?",
+   "¿Quién bailaría cuando acierte?",
+   "¿Quién pediría ayuda al público siempre?",
+   "¿Quién contaría su vida entera cuando le pregunten de dónde es?",
+   "¿Quién se iría en la primera pregunta?",
+   "¿Quién se haría amigo del conductor?",
+   "¿Quién se pondría la ropa más llamativa?",
+   "¿Quién volvería a participar todas las semanas?"
   ]
  },
  {
@@ -339,7 +968,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién sería el mejor espía?",
    "¿Quién contaría el secreto en un día?",
-   "¿Quién usaría los disfraces más ridículos?"
+   "¿Quién usaría los disfraces más ridículos?",
+   "¿Quién sería un agente doble?",
+   "¿Quién se haría el misterioso todo el tiempo?",
+   "¿Quién perdería los documentos secretos?",
+   "¿Quién usaría los gadgets para cosas tontas?",
+   "¿Quién se escondería en lugares absurdos?",
+   "¿Quién se enamoraría del enemigo?",
+   "¿Quién sería descubierto por estornudar?",
+   "¿Quién hablaría en clave hasta para pedir la sal?",
+   "¿Quién se pondría lentes oscuros de noche?",
+   "¿Quién traicionaría a la agencia por un sándwich?",
+   "¿Quién activaría todas las alarmas?",
+   "¿Quién se haría jefe de la agencia?",
+   "¿Quién espiaría a su propia familia?",
+   "¿Quién confesaría todo al primer interrogatorio?",
+   "¿Quién saltaría de un edificio sin dudar?",
+   "¿Quién llevaría a la abuela de compañera?",
+   "¿Quién se retiraría el primer día?"
   ]
  },
  {
@@ -348,7 +994,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién sería el rey?",
    "¿Quién terminaría en el calabozo?",
-   "¿Quién se casaría con un caballero?"
+   "¿Quién se casaría con un caballero?",
+   "¿Quién sería el bufón de la corte?",
+   "¿Quién se haría caballero y se caería del caballo?",
+   "¿Quién extrañaría la ducha caliente?",
+   "¿Quién sería acusado de brujo?",
+   "¿Quién se haría el sabio del pueblo?",
+   "¿Quién organizaría una revolución?",
+   "¿Quién se pondría a vender inventos modernos?",
+   "¿Quién robaría la corona?",
+   "¿Quién se pelearía con un dragón?",
+   "¿Quién comería con las manos feliz?",
+   "¿Quién se haría juglar y cantaría en la plaza?",
+   "¿Quién se quejaría de la comida?",
+   "¿Quién se perdería en el castillo?",
+   "¿Quién intentaría explicarles internet?",
+   "¿Quién sería el primero en querer volver?",
+   "¿Quién se quedaría a vivir como señor feudal?",
+   "¿Quién lideraría un torneo de justas?"
   ]
  },
  {
@@ -357,7 +1020,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién lo criaría?",
    "¿Quién llamaría a la policía?",
-   "¿Quién querría montarlo cuando crezca?"
+   "¿Quién querría montarlo cuando crezca?",
+   "¿Quién le daría de comer?",
+   "¿Quién le pondría nombre?",
+   "¿Quién lo llevaría al veterinario?",
+   "¿Quién lo escondería de los vecinos?",
+   "¿Quién lo vendería a un museo?",
+   "¿Quién se haría famoso con él?",
+   "¿Quién le tendría miedo aunque sea chiquito?",
+   "¿Quién lo dejaría dormir en su cama?",
+   "¿Quién le enseñaría trucos?",
+   "¿Quién buscaría a la mamá dinosaurio?",
+   "¿Quién lo subiría a las redes?",
+   "¿Quién le haría un corral en el patio?",
+   "¿Quién culparía a otro de haberlo traído?",
+   "¿Quién se dejaría morder?",
+   "¿Quién lo sacaría a pasear con correa?",
+   "¿Quién lo llevaría a la escuela?",
+   "¿Quién se pondría a llorar cuando se lo lleven?"
   ]
  },
  {
@@ -366,7 +1046,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién arruinaría la sorpresa?",
    "¿Quién se encargaría de todo?",
-   "¿Quién llegaría tarde a su propia fiesta?"
+   "¿Quién llegaría tarde a su propia fiesta?",
+   "¿Quién gritaría «¡sorpresa!» antes de tiempo?",
+   "¿Quién se olvidaría de quién es el cumpleaños?",
+   "¿Quién se comería la torta antes de tiempo?",
+   "¿Quién le contaría todo al cumpleañero sin querer?",
+   "¿Quién se escondería tan bien que nadie lo encontraría?",
+   "¿Quién inflaría todos los globos?",
+   "¿Quién llegaría sin regalo?",
+   "¿Quién se emocionaría más que el cumpleañero?",
+   "¿Quién organizaría juegos para todos?",
+   "¿Quién no podría parar de reírse escondido?",
+   "¿Quién se dormiría esperando?",
+   "¿Quién se haría el sorprendido sabiendo todo?",
+   "¿Quién pondría la música?",
+   "¿Quién se olvidaría de apagar las luces?",
+   "¿Quién daría el regalo más raro?",
+   "¿Quién lloraría con la sorpresa?",
+   "¿Quién se iría antes de que llegue el cumpleañero?"
   ]
  },
  {
@@ -375,7 +1072,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién preguntaría «¿falta mucho?» cada cinco minutos?",
    "¿Quién se dormiría antes de salir?",
-   "¿Quién elegiría la peor música?"
+   "¿Quién elegiría la peor música?",
+   "¿Quién pediría parar para ir al baño cada media hora?",
+   "¿Quién se marearía?",
+   "¿Quién se perdería aunque tenga GPS?",
+   "¿Quién se comería todas las provisiones en la primera hora?",
+   "¿Quién se pelearía por el asiento de adelante?",
+   "¿Quién cantaría todo el viaje?",
+   "¿Quién manejaría todo el tiempo sin dejar a nadie?",
+   "¿Quién se olvidaría algo importante en casa?",
+   "¿Quién le daría indicaciones al que maneja?",
+   "¿Quién roncaría más fuerte?",
+   "¿Quién propondría un juego para el viaje?",
+   "¿Quién se quejaría del calor?",
+   "¿Quién se pondría de mal humor?",
+   "¿Quién se sacaría fotos en cada parada?",
+   "¿Quién tomaría un atajo que alarga todo?",
+   "¿Quién se quedaría sin batería en el celular primero?",
+   "¿Quién diría «ya llegamos» y faltarían tres horas?"
   ]
  },
  {
@@ -384,7 +1098,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿De quién sería la culpa?",
    "¿Quién correría por todo el aeropuerto?",
-   "¿Quién se quedaría tranquilo comiendo?"
+   "¿Quién se quedaría tranquilo comiendo?",
+   "¿Quién discutiría con la aerolínea?",
+   "¿Quién se pondría a llorar?",
+   "¿Quién perdería el pasaporte?",
+   "¿Quién llevaría la valija más pesada?",
+   "¿Quién se olvidaría de qué puerta era?",
+   "¿Quién se quedaría dormido en la sala de espera?",
+   "¿Quién lo tomaría como una aventura?",
+   "¿Quién compraría todo en el free shop?",
+   "¿Quién se haría amigo de los pilotos?",
+   "¿Quién culparía al taxi?",
+   "¿Quién buscaría otro vuelo con escala rarísima?",
+   "¿Quién se tomaría el siguiente avión a otro país?",
+   "¿Quién subiría una historia contando el drama?",
+   "¿Quién no se daría cuenta de la hora?",
+   "¿Quién gritaría «¡esperen!» en la pista?",
+   "¿Quién se pondría a organizar a todos?",
+   "¿Quién diría «mejor nos quedamos en casa»?"
   ]
  },
  {
@@ -393,7 +1124,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién se pelearía con las gallinas?",
    "¿Quién vendería todo?",
-   "¿Quién se quedaría a vivir ahí?"
+   "¿Quién se quedaría a vivir ahí?",
+   "¿Quién aprendería a ordeñar una vaca?",
+   "¿Quién le tendría miedo al gallo?",
+   "¿Quién manejaría el tractor?",
+   "¿Quién se levantaría a las 5 de la mañana?",
+   "¿Quién no se levantaría nunca?",
+   "¿Quién le pondría nombre a todos los animales?",
+   "¿Quién se volvería vegetariano?",
+   "¿Quién se caería en el barro?",
+   "¿Quién plantaría una huerta enorme?",
+   "¿Quién se haría amigo de la cabra?",
+   "¿Quién extrañaría la ciudad?",
+   "¿Quién abriría un negocio de quesos?",
+   "¿Quién se escaparía al pueblo cada día?",
+   "¿Quién se dejaría picar por las abejas?",
+   "¿Quién se pondría sombrero de paja enseguida?",
+   "¿Quién dejaría escapar a los cerdos?",
+   "¿Quién haría un video de la vida en la granja?"
   ]
  },
  {
@@ -402,7 +1150,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién lo haría peor?",
    "¿Quién no querría volver a su trabajo?",
-   "¿Quién renunciaría al mediodía?"
+   "¿Quién renunciaría al mediodía?",
+   "¿Quién lo haría mejor que el original?",
+   "¿Quién causaría un desastre?",
+   "¿Quién se haría el jefe en un trabajo ajeno?",
+   "¿Quién se dormiría en el trabajo nuevo?",
+   "¿Quién se quejaría de lo difícil que es?",
+   "¿Quién llamaría al dueño del trabajo cada hora?",
+   "¿Quién sería despedido el primer día?",
+   "¿Quién se haría amigo de todos los compañeros?",
+   "¿Quién valoraría más su propio trabajo después?",
+   "¿Quién pediría un aumento?",
+   "¿Quién no entendería nada y fingiría?",
+   "¿Quién tomaría el trabajo más difícil?",
+   "¿Quién llegaría tarde?",
+   "¿Quién se tomaría el día como vacaciones?",
+   "¿Quién cambiaría todas las reglas?",
+   "¿Quién perdería algo importante?",
+   "¿Quién terminaría ascendido?"
   ]
  },
  {
@@ -411,7 +1176,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién quemaría la cocina?",
    "¿Quién ganaría?",
-   "¿Quién se comería los ingredientes?"
+   "¿Quién se comería los ingredientes?",
+   "¿Quién copiaría la receta de otro?",
+   "¿Quién inventaría un plato rarísimo?",
+   "¿Quién se pondría a llorar por el resultado?",
+   "¿Quién usaría demasiada sal?",
+   "¿Quién le echaría la culpa al horno?",
+   "¿Quién decoraría más que cocinar?",
+   "¿Quién sabotearía a otro concursante?",
+   "¿Quién no sabría ni prender la cocina?",
+   "¿Quién haría postre en lugar de lo pedido?",
+   "¿Quién terminaría último?",
+   "¿Quién se cortaría un dedo?",
+   "¿Quién se ofendería con la crítica del jurado?",
+   "¿Quién pediría comida a escondidas y la presentaría?",
+   "¿Quién se haría famoso por su plato?",
+   "¿Quién ensuciaría toda la cocina?",
+   "¿Quién probaría todo de los otros?",
+   "¿Quién se volvería chef profesional?"
   ]
  },
  {
@@ -420,7 +1202,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién resolvería el acertijo?",
    "¿Quién entraría en pánico?",
-   "¿Quién se pondría a dar órdenes?"
+   "¿Quién se pondría a dar órdenes?",
+   "¿Quién tocaría todo sin pensar?",
+   "¿Quién encontraría la llave escondida?",
+   "¿Quién pediría pistas cada cinco minutos?",
+   "¿Quién se quedaría mirando el reloj?",
+   "¿Quién rompería algo?",
+   "¿Quién diría «ya lo tengo» y estaría mal?",
+   "¿Quién se sentaría a esperar que otros lo resuelvan?",
+   "¿Quién se pelearía con otro por la respuesta?",
+   "¿Quién intentaría salir por la ventilación?",
+   "¿Quién encontraría la pista y no le diría a nadie?",
+   "¿Quién se olvidaría la combinación?",
+   "¿Quién se asustaría con los efectos?",
+   "¿Quién querría hacer otro escape room al salir?",
+   "¿Quién leería todas las instrucciones?",
+   "¿Quién se quejaría de que estaba arreglado?",
+   "¿Quién saldría último?",
+   "¿Quién descubriría el truco final?"
   ]
  },
  {
@@ -429,7 +1228,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién quedaría hipnotizado?",
    "¿Quién haría el ridículo más grande?",
-   "¿Quién fingiría estar hipnotizado?"
+   "¿Quién fingiría estar hipnotizado?",
+   "¿Quién no creería en nada?",
+   "¿Quién se ofrecería de voluntario?",
+   "¿Quién se quedaría hipnotizado al terminar el show?",
+   "¿Quién cacarearía como gallina?",
+   "¿Quién bailaría sin control?",
+   "¿Quién confesaría un secreto hipnotizado?",
+   "¿Quién se dormiría en la primera palabra?",
+   "¿Quién intentaría hipnotizar a otro en casa?",
+   "¿Quién se reiría sin parar?",
+   "¿Quién lo grabaría para chantajear después?",
+   "¿Quién aprendería a hipnotizar?",
+   "¿Quién diría que es todo actuado?",
+   "¿Quién se pondría a cantar ópera?",
+   "¿Quién quedaría convencido de que es un perro?",
+   "¿Quién le pediría que lo hipnotice para dejar un vicio?",
+   "¿Quién se escondería para no subir al escenario?",
+   "¿Quién volvería al show la semana siguiente?"
   ]
  },
  {
@@ -438,7 +1254,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién lo perseguiría?",
    "¿Quién negociaría con el mono?",
-   "¿Quién no podría parar de reír?"
+   "¿Quién no podría parar de reír?",
+   "¿Quién le ofrecería una banana?",
+   "¿Quién se treparía al árbol detrás del mono?",
+   "¿Quién lloraría por lo que había en la mochila?",
+   "¿Quién lo filmaría en lugar de ayudar?",
+   "¿Quién culparía a otro por llevar la mochila?",
+   "¿Quién se haría amigo del mono?",
+   "¿Quién le gritaría como si entendiera?",
+   "¿Quién llamaría al guardaparques?",
+   "¿Quién se resbalaría persiguiéndolo?",
+   "¿Quién perdería también los anteojos?",
+   "¿Quién propondría seguir el paseo sin la mochila?",
+   "¿Quién intentaría imitar al mono?",
+   "¿Quién tendría la comida en la mochila?",
+   "¿Quién se quedaría a vivir con los monos?",
+   "¿Quién lo contaría exagerando por años?",
+   "¿Quién recuperaría la mochila?",
+   "¿Quién le regalaría el celular al mono?"
   ]
  },
  {
@@ -447,7 +1280,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién sería?",
    "¿Quién daría el discurso más largo?",
-   "¿Quién lloraría en el escenario?"
+   "¿Quién lloraría en el escenario?",
+   "¿Quién se olvidaría de agradecer a la familia?",
+   "¿Quién se tropezaría al subir?",
+   "¿Quién se lo mostraría a todos durante años?",
+   "¿Quién ganaría un premio por algo absurdo?",
+   "¿Quién se volvería creído?",
+   "¿Quién pondría el trofeo en el baño?",
+   "¿Quién se pondría la ropa más llamativa para la gala?",
+   "¿Quién se haría el humilde y estaría feliz por dentro?",
+   "¿Quién haría un chiste en el discurso que nadie entiende?",
+   "¿Quién se pondría celoso del ganador?",
+   "¿Quién vendería el premio?",
+   "¿Quién saludaría a todos sus ex en el discurso?",
+   "¿Quién se dormiría en la ceremonia?",
+   "¿Quién se llevaría comida de la gala?",
+   "¿Quién ganaría y no iría a buscarlo?",
+   "¿Quién se sacaría fotos con todos los famosos?",
+   "¿Quién diría «no lo esperaba» con el discurso preparado hace años?"
   ]
  },
  {
@@ -456,7 +1306,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién mantendría la calma?",
    "¿Quién entraría en pánico?",
-   "¿Quién sacaría comida del bolsillo?"
+   "¿Quién sacaría comida del bolsillo?",
+   "¿Quién apretaría todos los botones?",
+   "¿Quién intentaría salir por el techo?",
+   "¿Quién se pondría a contar chistes?",
+   "¿Quién no tendría señal y se desesperaría?",
+   "¿Quién se sentaría a dormir?",
+   "¿Quién llamaría a los bomberos?",
+   "¿Quién haría un video de lo que pasa?",
+   "¿Quién tendría ganas de ir al baño?",
+   "¿Quién se pondría a cantar?",
+   "¿Quién culparía al que apretó el botón?",
+   "¿Quién propondría un juego para pasar el tiempo?",
+   "¿Quién contaría historias de terror?",
+   "¿Quién saltaría para ver si se mueve?",
+   "¿Quién se quejaría del calor?",
+   "¿Quién se haría amigo de un desconocido?",
+   "¿Quién no volvería a usar el ascensor nunca más?",
+   "¿Quién sería el último en salir?"
   ]
  },
  {
@@ -465,7 +1332,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién pediría más deseos?",
    "¿Quién desperdiciaría un deseo?",
-   "¿Quién pediría algo para los demás?"
+   "¿Quién pediría algo para los demás?",
+   "¿Quién pediría ser millonario?",
+   "¿Quién pediría poder volar?",
+   "¿Quién pediría comida infinita?",
+   "¿Quién liberaría al genio?",
+   "¿Quién pediría algo y se arrepentiría?",
+   "¿Quién se tomaría horas para decidir?",
+   "¿Quién pediría que su equipo gane siempre?",
+   "¿Quién pediría ser famoso?",
+   "¿Quién intentaría engañar al genio?",
+   "¿Quién pediría vivir para siempre?",
+   "¿Quién se pelearía con otro por la lámpara?",
+   "¿Quién pediría un animal fantástico?",
+   "¿Quién pediría paz mundial?",
+   "¿Quién se haría amigo del genio?",
+   "¿Quién perdería la lámpara?",
+   "¿Quién pediría volver a ser niño?",
+   "¿Quién gastaría un deseo sin querer diciendo «ojalá»?"
   ]
  },
  {
@@ -474,7 +1358,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién haría bromas?",
    "¿Quién espiaría a todos?",
-   "¿Quién no se animaría a salir de casa?"
+   "¿Quién no se animaría a salir de casa?",
+   "¿Quién entraría gratis al cine?",
+   "¿Quién se comería la comida de los demás?",
+   "¿Quién asustaría a los vecinos?",
+   "¿Quién escucharía lo que dicen de él?",
+   "¿Quién robaría algo y lo devolvería por culpa?",
+   "¿Quién se chocaría con todo?",
+   "¿Quién se olvidaría de que es invisible?",
+   "¿Quién iría a ver a un famoso?",
+   "¿Quién se quedaría en la cama todo el día?",
+   "¿Quién usaría el poder para ganar un juego?",
+   "¿Quién lloraría porque nadie lo nota?",
+   "¿Quién se subiría a un avión sin pasaje?",
+   "¿Quién se pondría ropa para que lo vean?",
+   "¿Quién haría de fantasma en casa?",
+   "¿Quién se metería en un partido de fútbol?",
+   "¿Quién se metería en problemas?",
+   "¿Quién no le contaría a nadie?"
   ]
  },
  {
@@ -483,7 +1384,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién ganaría la medalla de oro?",
    "¿Quién haría trampa?",
-   "¿Quién se lesionaría en el calentamiento?"
+   "¿Quién se lesionaría en el calentamiento?",
+   "¿Quién se tomaría todo demasiado en serio?",
+   "¿Quién se caería en la carrera de bolsas?",
+   "¿Quién haría de juez y sería injusto?",
+   "¿Quién festejaría como si ganara el mundial?",
+   "¿Quién abandonaría en la primera prueba?",
+   "¿Quién inventaría una prueba nueva?",
+   "¿Quién haría de comentarista?",
+   "¿Quién se quejaría del resultado?",
+   "¿Quién entrenaría una semana antes?",
+   "¿Quién ganaría la carrera de huevo y cuchara?",
+   "¿Quién perdería a propósito para que gane un chico?",
+   "¿Quién se haría el lesionado para no perder?",
+   "¿Quién se pondría la ropa deportiva más ridícula?",
+   "¿Quién terminaría último en todo?",
+   "¿Quién pediría revancha?",
+   "¿Quién lloraría al recibir la medalla?",
+   "¿Quién haría el podio con cajones de frutas?"
   ]
  },
  {
@@ -492,7 +1410,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién tendría el mejor disfraz?",
    "¿Quién iría sin disfraz?",
-   "¿Quién no se lo sacaría nunca?"
+   "¿Quién no se lo sacaría nunca?",
+   "¿Quién se disfrazaría de otro de la familia?",
+   "¿Quién tendría el disfraz más incómodo?",
+   "¿Quién no podría ir al baño por el disfraz?",
+   "¿Quién se disfrazaría de algo que nadie entiende?",
+   "¿Quién gastaría una fortuna en el disfraz?",
+   "¿Quién haría su disfraz con cosas de la casa?",
+   "¿Quién se disfrazaría de algo aterrador?",
+   "¿Quién iría con el mismo disfraz que otro?",
+   "¿Quién actuaría como su personaje toda la noche?",
+   "¿Quién se disfrazaría de comida?",
+   "¿Quién se quejaría del calor del disfraz?",
+   "¿Quién ganaría el concurso de disfraces?",
+   "¿Quién se disfrazaría de pareja con otro?",
+   "¿Quién rompería su disfraz bailando?",
+   "¿Quién se disfrazaría de animal?",
+   "¿Quién no reconocería a nadie?",
+   "¿Quién se iría al trabajo al otro día con el disfraz?"
   ]
  },
  {
@@ -501,7 +1436,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién lideraría la búsqueda?",
    "¿Quién se quedaría con todo?",
-   "¿Quién perdería el mapa?"
+   "¿Quién perdería el mapa?",
+   "¿Quién leería el mapa al revés?",
+   "¿Quién cavaría más rápido?",
+   "¿Quién se cansaría a los cinco minutos?",
+   "¿Quién creería que es falso?",
+   "¿Quién traicionaría al grupo por el oro?",
+   "¿Quién caería en una trampa?",
+   "¿Quién gastaría el tesoro antes de encontrarlo?",
+   "¿Quién se pondría a hablar como pirata?",
+   "¿Quién encontraría el cofre por casualidad?",
+   "¿Quién lo donaría a un museo?",
+   "¿Quién no le contaría a nadie que lo encontró?",
+   "¿Quién propondría dividirlo en partes iguales?",
+   "¿Quién se pelearía por la parte más grande?",
+   "¿Quién lo escondería otra vez?",
+   "¿Quién se perdería buscando?",
+   "¿Quién llamaría a la tele?",
+   "¿Quién descifraría las pistas?"
   ]
  },
  {
@@ -510,7 +1462,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién gritaría más?",
    "¿Quién se encerraría en el baño?",
-   "¿Quién intentaría hablar con las abejas?"
+   "¿Quién intentaría hablar con las abejas?",
+   "¿Quién saldría corriendo por la ventana?",
+   "¿Quién intentaría matarlas con un diario?",
+   "¿Quién se quedaría quieto como estatua?",
+   "¿Quién sería picado primero?",
+   "¿Quién querría cosechar la miel?",
+   "¿Quién llamaría a un apicultor?",
+   "¿Quién se pondría a filmar?",
+   "¿Quién se tiraría a la pileta?",
+   "¿Quién culparía a otro por dejar la ventana abierta?",
+   "¿Quién se pondría a bailar para espantarlas?",
+   "¿Quién se haría amigo de la reina?",
+   "¿Quién no se daría cuenta hasta que lo pique una?",
+   "¿Quién se escondería bajo una sábana?",
+   "¿Quién usaría el secador de pelo para echarlas?",
+   "¿Quién se iría a dormir a otra casa?",
+   "¿Quién diría que eran moscas?",
+   "¿Quién las salvaría para que no las maten?"
   ]
  },
  {
@@ -519,7 +1488,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién se metería al agua?",
    "¿Quién lo publicaría en redes?",
-   "¿Quién diría que es un disfraz?"
+   "¿Quién diría que es un disfraz?",
+   "¿Quién se enamoraría de la sirena?",
+   "¿Quién intentaría llevarla a casa en un balde?",
+   "¿Quién le preguntaría por la Atlántida?",
+   "¿Quién le cantaría una canción?",
+   "¿Quién saldría corriendo?",
+   "¿Quién se ahogaría intentando seguirla?",
+   "¿Quién le pediría que le muestre el fondo del mar?",
+   "¿Quién llamaría a los científicos?",
+   "¿Quién le cobraría a los turistas por verla?",
+   "¿Quién no le creería a nadie después?",
+   "¿Quién se haría su mejor amigo?",
+   "¿Quién le preguntaría si conoce a otras sirenas?",
+   "¿Quién se pondría una cola de sirena para encajar?",
+   "¿Quién le daría su sándwich?",
+   "¿Quién se quedaría a vivir en la playa?",
+   "¿Quién la defendería de los curiosos?",
+   "¿Quién se iría con ella al mar?"
   ]
  },
  {
@@ -528,7 +1514,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién sería la estrella?",
    "¿Quién tocaría peor?",
-   "¿Quién abandonaría la banda primero?"
+   "¿Quién abandonaría la banda primero?",
+   "¿Quién tocaría la batería?",
+   "¿Quién escribiría las canciones?",
+   "¿Quién se pelearía por ser el cantante?",
+   "¿Quién se vestiría como estrella de rock?",
+   "¿Quién haría un solo de guitarra eterno?",
+   "¿Quién se tiraría al público?",
+   "¿Quién le pondría el nombre a la banda?",
+   "¿Quién haría de mánager?",
+   "¿Quién rompería un instrumento en el escenario?",
+   "¿Quién se haría famoso y dejaría a los demás?",
+   "¿Quién se olvidaría la letra en el primer show?",
+   "¿Quién vendería las entradas?",
+   "¿Quién tocaría la pandereta sin ritmo?",
+   "¿Quién se quejaría de los ensayos?",
+   "¿Quién haría las coreografías?",
+   "¿Quién se haría un tatuaje con el logo?",
+   "¿Quién haría que los vecinos llamen a la policía?"
   ]
  },
  {
@@ -537,7 +1540,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién sería el rey de la pista?",
    "¿Quién se quedaría sentado toda la noche?",
-   "¿Quién haría el paso más raro?"
+   "¿Quién haría el paso más raro?",
+   "¿Quién se iría primero a casa?",
+   "¿Quién bailaría hasta que prendan las luces?",
+   "¿Quién le pediría temas al DJ todo el tiempo?",
+   "¿Quién perdería un zapato bailando?",
+   "¿Quién se haría amigo de todos?",
+   "¿Quién se quedaría en la barra?",
+   "¿Quién haría un trencito?",
+   "¿Quién se caería en la pista?",
+   "¿Quién bailaría solo con los ojos cerrados?",
+   "¿Quién llegaría con la ropa más llamativa?",
+   "¿Quién haría una competencia de baile?",
+   "¿Quién se perdería y nadie lo encontraría?",
+   "¿Quién se dormiría en un sillón?",
+   "¿Quién bailaría la música lenta con cualquiera?",
+   "¿Quién se subiría a un parlante?",
+   "¿Quién pediría la canción de su juventud?",
+   "¿Quién terminaría comiendo un pancho a la salida?"
   ]
  },
  {
@@ -546,7 +1566,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿A quién le quedaría mejor?",
    "¿Quién se negaría a cumplir?",
-   "¿Quién lo haría por gusto?"
+   "¿Quién lo haría por gusto?",
+   "¿Quién se lo dejaría para siempre?",
+   "¿Quién lloraría al verse al espejo?",
+   "¿Quién se pondría una gorra durante un mes?",
+   "¿Quién se haría famoso por el pelo verde?",
+   "¿Quién haría la apuesta más tonta?",
+   "¿Quién se reiría más del perdedor?",
+   "¿Quién se teñiría también por solidaridad?",
+   "¿Quién iría a trabajar como si nada?",
+   "¿Quién se lo teñiría de otro color peor?",
+   "¿Quién culparía a la peluquera?",
+   "¿Quién se raparía para sacárselo?",
+   "¿Quién subiría fotos con orgullo?",
+   "¿Quién perdería otra apuesta la semana siguiente?",
+   "¿Quién combinaría la ropa con el pelo?",
+   "¿Quién se teñiría las cejas también?",
+   "¿Quién no lo notaría en todo el día?",
+   "¿Quién organizaría la próxima apuesta?"
   ]
  },
  {
@@ -555,7 +1592,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién no ayudaría en nada?",
    "¿Quién rompería algo valioso?",
-   "¿Quién no querría tirar nada?"
+   "¿Quién no querría tirar nada?",
+   "¿Quién organizaría todas las cajas con etiquetas?",
+   "¿Quién se quedaría dormido en una caja?",
+   "¿Quién cargaría lo más pesado?",
+   "¿Quién perdería las llaves de la casa nueva?",
+   "¿Quién se quejaría del dolor de espalda?",
+   "¿Quién encontraría cosas que creía perdidas?",
+   "¿Quién se pondría a ver fotos viejas en lugar de empacar?",
+   "¿Quién se quedaría con la habitación más grande?",
+   "¿Quién dejaría algo importante en la casa vieja?",
+   "¿Quién pediría pizza para todos?",
+   "¿Quién se pelearía con el del flete?",
+   "¿Quién tiraría todo sin mirar?",
+   "¿Quién lloraría al dejar la casa vieja?",
+   "¿Quién desarmaría los muebles y no sabría armarlos?",
+   "¿Quién se haría el que ayuda y no hace nada?",
+   "¿Quién mandaría a todos?",
+   "¿Quién se perdería camino a la casa nueva?"
   ]
  },
  {
@@ -564,7 +1618,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién saldría con una olla?",
    "¿Quién se quedaría con la boca abierta al cielo?",
-   "¿Quién se quejaría del menú?"
+   "¿Quién se quejaría del menú?",
+   "¿Quién juntaría comida para todo el año?",
+   "¿Quién saldría corriendo a la calle feliz?",
+   "¿Quién se quedaría adentro por miedo?",
+   "¿Quién pondría un puesto para vender la comida?",
+   "¿Quién recibiría una pizza en la cabeza?",
+   "¿Quién intentaría cambiar el menú del cielo?",
+   "¿Quién se comería todo sin pensar?",
+   "¿Quién diría que no es higiénico?",
+   "¿Quién juntaría solo los postres?",
+   "¿Quién le daría de comer a todo el barrio?",
+   "¿Quién se pondría un paraguas para no mancharse?",
+   "¿Quién intentaría atrapar fideos con un tenedor?",
+   "¿Quién se empacharía?",
+   "¿Quién llamaría a la tele?",
+   "¿Quién buscaría al responsable del clima?",
+   "¿Quién se haría una casa de comida?",
+   "¿Quién pediría que llueva helado?"
   ]
  },
  {
@@ -573,7 +1644,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién rompería algo?",
    "¿Quién saldría a buscar otra tele?",
-   "¿Quién festejaría que se cortó?"
+   "¿Quién festejaría que se cortó?",
+   "¿Quién lo escucharía por la radio?",
+   "¿Quién se iría a la casa del vecino sin invitación?",
+   "¿Quién llamaría al cable para insultar?",
+   "¿Quién intentaría arreglar la antena subiéndose al techo?",
+   "¿Quién se pondría a llorar?",
+   "¿Quién se enteraría del resultado y lo arruinaría a todos?",
+   "¿Quién seguiría el partido por el celular de otro?",
+   "¿Quién se iría a un bar corriendo en pantuflas?",
+   "¿Quién gritaría un gol que no vio?",
+   "¿Quién culparía a otro de tocar el control?",
+   "¿Quién aprovecharía para cambiar de canal?",
+   "¿Quién se iría a dormir sin saber el resultado?",
+   "¿Quién no sabría ni quién jugaba?",
+   "¿Quién le daría golpes a la tele?",
+   "¿Quién narraría el partido imaginándolo?",
+   "¿Quién apostaría el resultado sin verlo?",
+   "¿Quién se pondría la camiseta para que vuelva la señal?"
   ]
  },
  {
@@ -582,7 +1670,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿De quién sería el gemelo?",
    "¿Quién no notaría la diferencia?",
-   "¿Quién se haría pasar por el otro?"
+   "¿Quién se haría pasar por el otro?",
+   "¿Quién se pondría celoso del gemelo?",
+   "¿Quién lo invitaría a vivir en la casa?",
+   "¿Quién intentaría confundir a todos?",
+   "¿Quién preferiría al gemelo?",
+   "¿Quién le pediría que vaya al trabajo en su lugar?",
+   "¿Quién lo filmaría para la tele?",
+   "¿Quién sospecharía que es un impostor?",
+   "¿Quién se emocionaría hasta llorar?",
+   "¿Quién le contaría todos los secretos de la familia?",
+   "¿Quién le haría un examen para comprobar que es real?",
+   "¿Quién se vestiría igual que su gemelo?",
+   "¿Quién le echaría la culpa de todo al gemelo?",
+   "¿Quién se pelearía con su gemelo?",
+   "¿Quién propondría hacer un programa de tele?",
+   "¿Quién no le dirigiría la palabra?",
+   "¿Quién descubriría que tiene un tercer gemelo?",
+   "¿Quién se enamoraría del gemelo de otro?"
   ]
  },
  {
@@ -591,7 +1696,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién bajaría la ventana?",
    "¿Quién se haría el muerto?",
-   "¿Quién le tiraría su sándwich?"
+   "¿Quién le tiraría su sándwich?",
+   "¿Quién le sacaría la mejor foto?",
+   "¿Quién gritaría y asustaría a todos?",
+   "¿Quién se escondería en el piso del auto?",
+   "¿Quién le hablaría al león como a un gato?",
+   "¿Quién querría bajarse a acariciarlo?",
+   "¿Quién pediría volver al hotel?",
+   "¿Quién se haría el valiente y después lloraría?",
+   "¿Quién culparía al guía?",
+   "¿Quién se perdería en el safari?",
+   "¿Quién le pondría nombre al león?",
+   "¿Quién intentaría imitar el rugido?",
+   "¿Quién se quedaría dormido y se lo perdería?",
+   "¿Quién lo contaría como si hubiera peleado con el león?",
+   "¿Quién se haría guardaparques?",
+   "¿Quién se olvidaría de cerrar la puerta?",
+   "¿Quién se compraría un sombrero de explorador?",
+   "¿Quién querría adoptar una cría?"
   ]
  },
  {
@@ -600,7 +1722,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién se desmayaría?",
    "¿Quién le pediría casamiento?",
-   "¿Quién no lo reconocería?"
+   "¿Quién no lo reconocería?",
+   "¿Quién le pediría una selfie temblando?",
+   "¿Quién le cantaría su propia canción?",
+   "¿Quién se haría el desinteresado?",
+   "¿Quién le contaría su vida entera?",
+   "¿Quién lo perseguiría por la calle?",
+   "¿Quién le pediría trabajo?",
+   "¿Quién lo confundiría con otro famoso?",
+   "¿Quién se quedaría mudo de los nervios?",
+   "¿Quién lo invitaría a comer a casa?",
+   "¿Quién se haría su mejor amigo?",
+   "¿Quién le pediría plata prestada?",
+   "¿Quién lloraría de emoción?",
+   "¿Quién le diría que no le gusta su música?",
+   "¿Quién lo subiría a todas las redes?",
+   "¿Quién le pediría un autógrafo en la frente?",
+   "¿Quién lo contaría durante años?",
+   "¿Quién no le creería a nadie que lo vio?"
   ]
  },
  {
@@ -609,7 +1748,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién contaría el cuento más aterrador?",
    "¿Quién no podría dormir?",
-   "¿Quién se haría el valiente y gritaría?"
+   "¿Quién se haría el valiente y gritaría?",
+   "¿Quién se dormiría primero?",
+   "¿Quién roncaría toda la noche?",
+   "¿Quién haría una broma con la linterna?",
+   "¿Quién se comería todas las golosinas?",
+   "¿Quién se quedaría despierto hasta el amanecer?",
+   "¿Quién llamaría a su casa para que lo busquen?",
+   "¿Quién hablaría dormido?",
+   "¿Quién empezaría la guerra de almohadas?",
+   "¿Quién se pintaría la cara del que se duerma?",
+   "¿Quién contaría todos los secretos?",
+   "¿Quién propondría ver una película de terror?",
+   "¿Quién se escondería en el placard para asustar?",
+   "¿Quién tendría pesadillas?",
+   "¿Quién se iría a dormir a otra habitación?",
+   "¿Quién se haría pis de la risa?",
+   "¿Quién juraría haber visto un fantasma?",
+   "¿Quién organizaría otra pijamada al otro día?"
   ]
  },
  {
@@ -618,7 +1774,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién la devolvería enseguida?",
    "¿Quién dudaría un buen rato?",
-   "¿Quién ya estaría pensando en qué gastarla?"
+   "¿Quién ya estaría pensando en qué gastarla?",
+   "¿Quién buscaría al dueño por todo el barrio?",
+   "¿Quién la llevaría a la policía?",
+   "¿Quién se quedaría con una parte como recompensa?",
+   "¿Quién pensaría que es una trampa?",
+   "¿Quién la publicaría en las redes para encontrar al dueño?",
+   "¿Quién se haría el que no la vio?",
+   "¿Quién invitaría a todos a comer con esa plata?",
+   "¿Quién la escondería para decidir después?",
+   "¿Quién discutiría con otro sobre qué hacer?",
+   "¿Quién la devolvería pero se quejaría de no recibir nada?",
+   "¿Quién compraría lotería con esa plata?",
+   "¿Quién la donaría?",
+   "¿Quién la perdería de nuevo?",
+   "¿Quién se pondría nervioso como si lo estuvieran filmando?",
+   "¿Quién le preguntaría a cada persona que pasa si es suya?",
+   "¿Quién se quedaría solo con las tarjetas de descuento?",
+   "¿Quién se haría el héroe en las noticias?"
   ]
  },
  {
@@ -627,7 +1800,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién saltaría con ella?",
    "¿Quién intentaría convencerla de que no?",
-   "¿Quién lo filmaría todo?"
+   "¿Quién lo filmaría todo?",
+   "¿Quién se desmayaría al verla saltar?",
+   "¿Quién se pondría a llorar de los nervios?",
+   "¿Quién pagaría el salto?",
+   "¿Quién diría que se anota pero se escondería en el avión?",
+   "¿Quién gritaría más fuerte en la caída?",
+   "¿Quién organizaría la fiesta después?",
+   "¿Quién se marearía en el avión?",
+   "¿Quién se iría a esperarla al suelo con una pancarta?",
+   "¿Quién le haría la torta con forma de paracaídas?",
+   "¿Quién llamaría a toda la familia para contarlo?",
+   "¿Quién propondría algo más peligroso para los 101?",
+   "¿Quién se haría el valiente y no se animaría?",
+   "¿Quién le pediría al instructor que tenga cuidado cada dos minutos?",
+   "¿Quién se lo contaría a la tele?",
+   "¿Quién terminaría saltando sin querer?",
+   "¿Quién se quejaría de lo caro?",
+   "¿Quién querría hacer lo mismo a los 100?"
   ]
  },
  {
@@ -636,7 +1826,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿De quién sería la culpa?",
    "¿Quién se haría amigo de todo el vagón?",
-   "¿Quién se bajaría en cualquier estación?"
+   "¿Quién se bajaría en cualquier estación?",
+   "¿Quién no se daría cuenta hasta el final del recorrido?",
+   "¿Quién se pondría a discutir con el guarda?",
+   "¿Quién lo tomaría como vacaciones?",
+   "¿Quién se dormiría y se pasaría tres estaciones?",
+   "¿Quién leería el mapa al revés?",
+   "¿Quién propondría seguir hasta el final para ver dónde termina?",
+   "¿Quién se bajaría corriendo con el tren en movimiento?",
+   "¿Quién compraría comida en cada estación?",
+   "¿Quién llamaría a alguien para que lo busque?",
+   "¿Quién se pelearía por el asiento de la ventana?",
+   "¿Quién se quejaría todo el viaje?",
+   "¿Quién se perdería en la estación?",
+   "¿Quién se sacaría fotos en cada pueblo?",
+   "¿Quién terminaría en otro país?",
+   "¿Quién se haría el que sabía a dónde iba?",
+   "¿Quién dejaría la valija en el tren?",
+   "¿Quién inventaría que era una aventura planeada?"
   ]
  },
  {
@@ -645,7 +1852,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién se pelearía primero?",
    "¿Quién lloraría en la ronda de abrazos?",
-   "¿Quién se escaparía por la ventana?"
+   "¿Quién se escaparía por la ventana?",
+   "¿Quién hablaría de más en la ronda de confesiones?",
+   "¿Quién se negaría a participar en todo?",
+   "¿Quién se haría el mejor alumno del campamento?",
+   "¿Quién se dormiría en las charlas?",
+   "¿Quién se haría amigo del coordinador?",
+   "¿Quién sabotearía las actividades?",
+   "¿Quién se quejaría de la comida del campamento?",
+   "¿Quién terminaría peleado con todos?",
+   "¿Quién organizaría una fogata secreta?",
+   "¿Quién saldría cambiado de verdad?",
+   "¿Quién saldría peor que antes?",
+   "¿Quién se perdería en la caminata?",
+   "¿Quién no soltaría el celular?",
+   "¿Quién contaría los secretos de la familia en la ronda?",
+   "¿Quién se emocionaría con todas las dinámicas?",
+   "¿Quién fingiría que todo está bien?",
+   "¿Quién pediría volver el año que viene?"
   ]
  },
  {
@@ -654,7 +1878,24 @@ window.QH_SITUACIONES = [
   "preguntas": [
    "¿Quién sería el ninja?",
    "¿Quién lo descubriría primero?",
-   "¿Quién se haría su aprendiz?"
+   "¿Quién se haría su aprendiz?",
+   "¿Quién no se daría cuenta durante semanas?",
+   "¿Quién le pondría comida para atraerlo?",
+   "¿Quién gritaría al verlo en el techo?",
+   "¿Quién intentaría atraparlo?",
+   "¿Quién le echaría la culpa de las cosas que desaparecen?",
+   "¿Quién le pediría que le enseñe a pelear?",
+   "¿Quién lo contrataría como guardaespaldas?",
+   "¿Quién llamaría a la policía?",
+   "¿Quién se disfrazaría de ninja para confundirlo?",
+   "¿Quién le preguntaría cuánto tiempo lleva ahí?",
+   "¿Quién se haría amigo del ninja?",
+   "¿Quién no le creería a quien lo vio?",
+   "¿Quién lo usaría para asustar a otro?",
+   "¿Quién se pondría a revisar toda la casa con una linterna?",
+   "¿Quién le ofrecería un cuarto?",
+   "¿Quién se escondería tan bien como el ninja?",
+   "¿Quién lo invitaría a cenar con la familia?"
   ]
  }
 ];

@@ -87,7 +87,7 @@ const active = () => G.players.filter(p => !p.out);
 
 const avatar = (p, cls = "") => `<div class="avatar ${cls} ${p.out ? "out" : ""}">${p.photo ? `<img src="${p.photo}" alt="">` : esc((p.name || "?").trim().charAt(0).toUpperCase())}</div>`;
 const tomatoes = p => `<span class="coals">${Array.from({ length: p.coal }, () => `<img src="img/tomate.webp" alt="tomatazo">`).join("")}</span>`;
-const cardHtml = (t, act, cls = "") => { const c = t === "presentimiento" ? D.presentimiento : t === "reto" ? D.reto : D.trampas[t]; return `<button class="tcard ${cls}" ${act ? `data-act="${act}" data-arg="${t}"` : "disabled"}><img src="img/${c.img}.webp" alt=""><b>${c.nombre}</b><span>${c.texto}</span></button>`; };
+const cardHtml = (t, act, cls = "", owner = "") => { const c = t === "presentimiento" ? D.presentimiento : t === "reto" ? D.reto : D.trampas[t]; return `<button class="tcard ${cls}" ${act ? `data-act="${act}" data-arg="${t}"${owner ? ` data-owner="${owner}"` : ""}` : "disabled"}><img src="img/${c.img}.webp" alt=""><b>${c.nombre}</b><span>${c.texto}</span></button>`; };
 function toast(msg) { const d = document.createElement("div"); d.className = "toast"; d.textContent = msg; document.body.appendChild(d); setTimeout(() => d.remove(), 2600); }
 
 // ---------- inicio ----------
@@ -123,6 +123,7 @@ function rules() {
       <div class="opt"><h3>Prendas de ronda</h3><p class="muted">Algunas prendas duran toda la ronda siguiente y quedan a la vista arriba de la pantalla. Si alguien la rompe, tocan «¡La rompió!» y recibe un tomatazo. Si no cumple una prenda, también recibe un tomatazo.</p></div>
       <div class="opt"><h3>7. Tomatazos</h3><p class="muted">Con ${settings.maxCoal || "muchos"} tomatazos quedas fuera, pero sigues votando. Gana quien termine con menos.</p></div>
       <div class="opt"><h3>Reto a duelo</h3><p class="muted">Cada jugador tiene 1 reto por partida, y a veces la ronda lo regala. Si te toca la prenda, retas a quien quieras: si ganas, la prenda pasa a él; si pierdes, 1 tomatazo seguro y además la prenda.</p></div>
+      <div class="opt"><h3>Cartas</h3><p class="muted">Se ganan en duelos de dos y con el golpe de suerte. Hay cartas para cuando te toca la prenda (Escudo, Bumerán, Papa Caliente, Mano Traviesa, Cómplice, Abogado Defensor, Prenda Light, Ruleta, Doble o Nada), para votar en secreto (Voto Doble, Voto Robado, Anulador, Espejo), para usar en cualquier momento con el botón «Usar carta» (Limpieza, Castigo, Silencio, Intercambio) y Revancha para repetir un duelo perdido.</p></div>
       <div class="opt"><h3>Golpe de suerte</h3><p class="muted">Al final de algunas rondas, alguien que no recibió votos gana una carta trampa, un presentimiento o un reto extra.</p></div>
     </div>
     <button class="btn" data-act="back">Entendido</button>
@@ -229,18 +230,56 @@ function showRound() {
   const S = G.settings, c = G.cur;
   const pen = active().filter(p => p.penalty);
   render(`
-    <div class="topbar"><span class="pill">Ronda ${G.round}${S.rounds ? " de " + S.rounds : ""}</span><button class="btn ghost sm" data-act="menu">Menú</button></div>
+    <div class="topbar"><span class="pill">Ronda ${G.round}${S.rounds ? " de " + S.rounds : ""}</span><div class="row" style="flex-wrap:nowrap">${G.players.some(p => cardsOf(p, "siempre").length) ? `<button class="btn gold sm" data-act="cards">Usar carta</button>` : ""}<button class="btn ghost sm" data-act="menu">Menú</button></div></div>
     <img class="scene pop" src="img/${c.id}.webp" alt="">
     <h2 style="text-align:center">${esc(c.titulo)}</h2>
     <div class="question">${esc(c.pregunta)}</div>
     ${pen.length ? `<p class="small muted" style="text-align:center">Empiezan con +${PENALTY} votos por presentimiento fallido: ${names(pen)}.</p>` : ""}
     <div class="grow"></div>
     <button class="btn" data-act="vote">¡A votar!</button>
-  `, { menu: gameMenu, vote: startVote });
+  `, { menu: gameMenu, vote: startVote, cards: anytimeCards });
+}
+
+// ---------- cartas de «cualquier momento» ----------
+function anytimeCards() {
+  const owners = G.players.filter(p => cardsOf(p, "siempre").length);
+  render(`
+    <div class="topbar"><button class="btn ghost sm" data-act="back">← Volver</button></div>
+    <h2>Usar una carta</h2><p class="muted">Cartas que se pueden usar en cualquier momento.</p>
+    ${owners.map(p => `<div class="owner"><div class="pitem">${avatar(p)}<span class="name">${esc(p.name)}</span>${tomatoes(p)}</div>
+      <div class="cards">${cardsOf(p, "siempre").map(t => cardHtml(t, "use", "", p.id)).join("")}</div></div>`).join("") || `<p class="muted">Nadie tiene cartas de este tipo.</p>`}
+  `, { back: showRound, use: (t, el) => useAnytime(P(el.dataset.owner), t) });
+}
+function pickPlayer(title, list, then, back) {
+  render(`
+    <h2>${title}</h2>
+    <div class="vgrid">${list.map(o => `<button class="vcard" data-act="ch" data-arg="${o.id}">${avatar(o)}<span>${esc(o.name)}</span></button>`).join("")}</div>
+    <div class="grow"></div><button class="btn ghost" data-act="back">Mejor no</button>
+  `, { ch: id => then(P(id)), back });
+}
+function useAnytime(p, t) {
+  const others = G.players.filter(o => o.id !== p.id);
+  const done = msg => { saveGame(); fanfare(); render(`<div class="grow"></div><div class="banner pop">${cardHtml(t, null, "big")}<h2>${msg}</h2></div><div class="grow"></div><button class="btn" data-act="ok">Volver al juego</button>`, { ok: showRound }); };
+  const addActive = (o, txt) => { G.activeP = G.activeP || []; G.activeP.push({ k: uid(), pid: o.id, t: txt, round: G.round }); };
+  if (t === "limpieza") {
+    if (!p.coal) return toast(`${p.name} no tiene tomatazos.`);
+    spend(p, t); p.coal--; if (p.out && (!G.settings.maxCoal || p.coal < G.settings.maxCoal)) p.out = false;
+    return done(`${esc(p.name)} se sacó un tomatazo`);
+  }
+  if (t === "castigo") return pickPlayer(`${esc(p.name)}, ¿a quién castigas?`, others.filter(o => !o.out), o => {
+    const opts = shuffle(D.prendasRonda).slice(0, 4);
+    render(`<h2>¿Qué prenda de ronda le das a ${esc(o.name)}?</h2><div class="plist">${opts.map((x, k) => `<button class="option" data-act="pr" data-arg="${k}"><span>${esc(x.t)}</span></button>`).join("")}</div><div class="grow"></div><button class="btn ghost" data-act="back">Mejor no</button>`, {
+      pr: k => { spend(p, t); addActive(o, opts[k].t); done(`${esc(o.name)} tiene una prenda de ronda`); }, back: anytimeCards
+    });
+  }, anytimeCards);
+  if (t === "silencio") return pickPlayer(`${esc(p.name)}, ¿a quién silencias?`, others.filter(o => !o.out), o => { spend(p, t); addActive(o, "No puede hablar en toda la ronda."); done(`¡Silencio para ${esc(o.name)}!`); }, anytimeCards);
+  if (t === "intercambio") return pickPlayer(`${esc(p.name)}, ¿con quién cambias tus cartas?`, others, o => {
+    spend(p, t); const a = p.cards; p.cards = o.cards; o.cards = a; done(`${esc(p.name)} y ${esc(o.name)} cambiaron sus cartas`);
+  }, anytimeCards);
 }
 function startVote() {
   if (G.settings.vote === "secret") return secretVote(0, shuffle(G.players.map(p => p.id)));
-  if (active().some(p => p.hunch > 0)) return hunchDeclare();
+  if (active().some(p => p.hunch > 0 || p.cards.includes("anulador"))) return hunchDeclare();
   quickVote();
 }
 
@@ -288,36 +327,62 @@ function ballot(voter, done) {
   const cands = active().filter(p => p.id !== voter.id);
   const canHunch = !voter.out && voter.hunch > 0;
   const double = activeNow().some(a => a.pid === voter.id && a.voto2);
-  let sel = null, hunch = false;
+  let sel = null, hunch = false, vcard = null;
+  const vcards = [...new Set(cardsOf(voter, "voto"))];
   render(`
     <p class="eyebrow">${esc(voter.name)} vota</p>
     <div class="question" style="font-size:1.4rem">${esc(G.cur.pregunta)}</div>
     ${double ? `<p class="small" style="color:var(--gold)">Tu voto vale doble. Dilo en voz alta antes de votar.</p>` : ""}
     <div class="vgrid">${cands.map(p => `<button class="vcard" data-act="sel" data-arg="${p.id}" aria-pressed="false">${avatar(p)}<span>${esc(p.name)}</span></button>`).join("")}</div>
+    ${vcards.length ? `<p class="eyebrow">Tus cartas de votación (puedes usar una)</p><div class="chips">${vcards.map(t => `<button class="chip" data-act="vc" data-arg="${t}" aria-pressed="false"><img src="img/${D.trampas[t].img}.webp" alt=""><span><b>${D.trampas[t].nombre}</b>${esc(D.trampas[t].texto.replace(/ Solo en votación secreta\./, ""))}</span></button>`).join("")}</div>` : ""}
     ${canHunch ? `<button class="hunch" data-act="hunch" aria-pressed="false"><img src="img/carta_presentimiento.webp" alt=""><span><b>Usar presentimiento</b>Creo que me van a votar a mí. Te ${voter.hunch > 1 ? `quedan ${voter.hunch}` : "queda 1"}.</span></button>` : ""}
     <div class="grow"></div>
     <button class="btn" id="ok" data-act="ok" disabled>Elige a alguien</button>
   `, {
     sel: (id, el) => { sel = id; document.querySelectorAll(".vcard").forEach(b => b.setAttribute("aria-pressed", b === el)); const ok = document.getElementById("ok"); ok.disabled = false; ok.textContent = "Votar a " + P(id).name; },
     hunch: (_, el) => { hunch = !hunch; el.setAttribute("aria-pressed", hunch); if (hunch) mystic(); },
+    vc: (t, el) => { vcard = vcard === t ? null : t; document.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", b.dataset.arg === vcard)); if (vcard) mystic(); },
     ok: () => {
-      G.cur.votes[sel] = (G.cur.votes[sel] || 0) + (double ? 2 : 1);
+      const w = (double ? 2 : 1) * (vcard === "voto_doble" ? 2 : 1);
+      G.cur.votes[sel] = (G.cur.votes[sel] || 0) + w;
+      (G.cur.ballots = G.cur.ballots || []).push({ from: voter.id, to: sel, w });
       if (hunch) { G.cur.hunch[voter.id] = true; voter.hunch--; }
-      render(`<div class="grow"></div><div class="banner"><h1 class="pop">¡Voto secreto!</h1><p class="muted">${hunch ? "Tu presentimiento quedó guardado. " : ""}Tapa la pantalla y pasa el celular.</p></div><div class="grow"></div><button class="btn" data-act="n">Siguiente</button>`, { n: done });
+      const fin = extra => render(`<div class="grow"></div><div class="banner"><h1 class="pop">¡Voto secreto!</h1><p class="muted">${hunch ? "Tu presentimiento quedó guardado. " : ""}${extra || ""}Tapa la pantalla y pasa el celular.</p></div><div class="grow"></div><button class="btn" data-act="n">Siguiente</button>`, { n: done });
+      if (!vcard) return fin();
+      spend(voter, vcard);
+      const fx = G.cur.fx = G.cur.fx || { steal: [], anul: [], mirror: [] };
+      if (vcard === "voto_doble") return fin("Tu voto cuenta doble. ");
+      if (vcard === "anulador") { fx.anul.push(voter.id); return fin("Anulador activado. "); }
+      if (vcard === "espejo") { fx.mirror.push(voter.id); return fin("Espejo activado. "); }
+      if (vcard === "voto_robado") return render(`
+        <p class="eyebrow">Voto Robado</p><h2>¿De quién robas el voto?</h2><p class="muted">Su voto va a contar para ${esc(P(sel).name)}.</p>
+        <div class="vgrid">${G.players.filter(o => o.id !== voter.id).map(o => `<button class="vcard" data-act="st" data-arg="${o.id}">${avatar(o)}<span>${esc(o.name)}</span></button>`).join("")}</div>
+      `, { st: id => { fx.steal.push({ thief: voter.id, victim: id, to: sel }); fin(`Le robaste el voto a ${esc(P(id).name)}. `); } });
     }
   });
 }
 function hunchDeclare() {
   const cands = active().filter(p => p.hunch > 0);
-  const h = G.cur.hunch;
+  const anulOwners = active().filter(p => p.cards.includes("anulador"));
+  const h = G.cur.hunch, an = {};
   const draw = () => render(`
     <p class="eyebrow">Antes de votar</p>
-    <h2>¿Alguien tiene un presentimiento?</h2>
-    <p class="muted">Quien crea que va a ser el más votado puede usar un presentimiento en voz alta. Si acierta, se salva. Si falla, la próxima ronda empieza con +${PENALTY} votos. Ojo: ahora todos saben que lo usaste.</p>
-    <div class="vgrid">${cands.map(p => `<button class="vcard" data-act="t" data-arg="${p.id}" aria-pressed="${!!h[p.id]}">${avatar(p)}<span>${esc(p.name)}</span><small class="muted">${p.hunch} disp.</small></button>`).join("")}</div>
+    ${anulOwners.length ? `<h2>¿Alguien usa el Anulador?</h2><p class="muted">Si queda como el más votado, sus votos se anulan. Si no, pierde la carta igual.</p>
+    <div class="vgrid">${anulOwners.map(p => `<button class="vcard" data-act="a" data-arg="${p.id}" aria-pressed="${!!an[p.id]}">${avatar(p)}<span>${esc(p.name)}</span><small class="muted">Anulador</small></button>`).join("")}</div>` : ""}
+    ${cands.length ? `<h2>¿Alguien tiene un presentimiento?</h2>` : ""}
+    <p class="muted" ${cands.length ? "" : "hidden"}>Quien crea que va a ser el más votado puede usar un presentimiento en voz alta. Si acierta, se salva. Si falla, la próxima ronda empieza con +${PENALTY} votos. Ojo: ahora todos saben que lo usaste.</p>
+    ${cands.length ? "" : "<!--"}<div class="vgrid">${cands.map(p => `<button class="vcard" data-act="t" data-arg="${p.id}" aria-pressed="${!!h[p.id]}">${avatar(p)}<span>${esc(p.name)}</span><small class="muted">${p.hunch} disp.</small></button>`).join("")}</div>${cands.length ? "" : "-->"}
     <div class="grow"></div>
     <button class="btn" data-act="go">${Object.keys(h).length ? "Listo, a votar" : "Nadie, a votar"}</button>
-  `, { t: id => { h[id] ? delete h[id] : (h[id] = true, mystic()); draw(); }, go: () => { Object.keys(h).forEach(id => P(id).hunch--); saveGame(); quickVote(); } });
+  `, {
+    t: id => { h[id] ? delete h[id] : (h[id] = true, mystic()); draw(); },
+    a: id => { an[id] ? delete an[id] : (an[id] = true, mystic()); draw(); },
+    go: () => {
+      Object.keys(h).forEach(id => P(id).hunch--);
+      const ids = Object.keys(an); if (ids.length) { const fx = G.cur.fx = G.cur.fx || { steal: [], anul: [], mirror: [] }; ids.forEach(id => { spend(P(id), "anulador"); fx.anul.push(id); }); }
+      saveGame(); quickVote();
+    }
+  });
   draw();
 }
 function quickVote() {
@@ -339,15 +404,40 @@ function quickVote() {
 // ---------- resultados ----------
 function results() {
   const v = G.cur.votes, hunch = G.cur.hunch;
-  const list = active().map(p => ({ p, n: (v[p.id] || 0) + p.penalty, pen: p.penalty })).sort((a, b) => b.n - a.n);
+  const fx = G.cur.fx || { steal: [], anul: [], mirror: [] };
+  const notes = [];
+  if (!G.cur.fxDone) {
+    G.cur.fxDone = true;
+    const ballots = G.cur.ballots || [];
+    fx.steal.forEach(s => {
+      const b = ballots.find(x => x.from === s.victim && !x.stolen);
+      if (!b) return notes.push(`${P(s.thief).name} quiso robar el voto de ${P(s.victim).name}, pero no votó.`);
+      v[b.to] -= b.w; v[s.to] = (v[s.to] || 0) + b.w; b.to = s.to; b.stolen = true;
+      notes.push(`Alguien le robó el voto a ${P(s.victim).name}.`);
+    });
+    fx.mirror.forEach(h => {
+      const hits = ballots.filter(b => b.to === h && P(b.from) && !P(b.from).out);
+      hits.forEach(b => v[b.from] = (v[b.from] || 0) + 1);
+      notes.push(`¡Espejo de ${P(h).name}! ${hits.length ? `Sus ${hits.length} votante${hits.length > 1 ? "s" : ""} recibe${hits.length > 1 ? "n" : ""} un voto cada uno.` : "Nadie lo votó."}`);
+    });
+  }
+  let list = active().map(p => ({ p, n: (v[p.id] || 0) + p.penalty, pen: p.penalty })).sort((a, b) => b.n - a.n);
+  const topN = list[0] ? list[0].n : 0;
+  fx.anul.forEach(id => {
+    const x = list.find(y => y.p.id === id); if (!x) return;
+    if (x.n === topN && topN > 0) { x.n = 0; x.anul = true; notes.push(`¡${x.p.name} usó el Anulador y sus votos no cuentan!`); }
+    else notes.push(`${x.p.name} usó el Anulador, pero no era el más votado.`);
+  });
+  fx.anul = [];
+  list.sort((a, b) => b.n - a.n);
   const max = list[0] ? list[0].n : 0;
-  if (!max) {
+  if (!max && !list.some(x => x.anul)) {
     Object.keys(hunch).forEach(id => P(id).hunch++); G.cur.hunch = {};
     toast("Nadie recibió votos. Vamos de nuevo."); return startVote();
   }
   // los votos de castigo se cobran una sola vez
   list.forEach(x => { x.p.votes += v[x.p.id] || 0; x.p.penalty = 0; });
-  const top = list.filter(x => x.n === max).map(x => x.p);
+  const top = max ? list.filter(x => x.n === max).map(x => x.p) : [];
   const saved = top.filter(p => hunch[p.id]);
   const failed = active().filter(p => hunch[p.id] && !top.includes(p));
   saved.forEach(p => p.hunchHits++);
@@ -360,11 +450,11 @@ function results() {
   G.cur.second = second ? second.p.id : null;
   saveGame();
 
-  const shown = list.filter(x => x.n > 0).slice(0, 8);
+  const shown = list.filter(x => x.n > 0 || x.anul).slice(0, 8);
   render(`
     <p class="eyebrow">Resultado</p>
     <h2>${esc(G.cur.pregunta)}</h2>
-    <div class="bars">${shown.map(x => `<div class="bar ${x.n === max ? "top" : ""}">${avatar(x.p)}<div class="track"><div class="fill" data-w="${(x.n / max) * 100}"></div><div class="lbl"><span>${esc(x.p.name)}${hunch[x.p.id] ? ` <img class="mini" src="img/carta_presentimiento.webp" alt="usó presentimiento">` : ""}</span><span>${x.n}${x.pen ? ` <small>(+${x.pen})</small>` : ""}</span></div></div></div>`).join("")}</div>
+    <div class="bars">${shown.map(x => `<div class="bar ${x.n === max ? "top" : ""}">${avatar(x.p)}<div class="track"><div class="fill" data-w="${max ? (x.n / max) * 100 : 0}"></div><div class="lbl"><span>${esc(x.p.name)}${hunch[x.p.id] ? ` <img class="mini" src="img/carta_presentimiento.webp" alt="usó presentimiento">` : ""}</span><span>${x.anul ? "anulado" : x.n}${x.pen ? ` <small>(+${x.pen})</small>` : ""}</span></div></div></div>`).join("")}</div>
     <div class="grow"></div>
     <div id="verdict" class="verdict"></div>
   `, {
@@ -377,6 +467,7 @@ function results() {
   later(() => {
     const el = document.getElementById("verdict");
     let html = "";
+    notes.forEach(t => html += `<div class="note pop"><span>${esc(t)}</span></div>`);
     if (saved.length) { mystic(); html += `<div class="note good pop"><img src="img/carta_presentimiento.webp" alt=""><span><b>¡${names(saved)} lo ${saved.length > 1 ? "vieron" : "vio"} venir!</b> Usó su presentimiento y se salva.</span></div>`; }
     if (failed.length) html += `<div class="note bad pop"><img src="img/carta_presentimiento.webp" alt=""><span><b>${names(failed)} falló el presentimiento.</b> La próxima ronda empieza con +${PENALTY} votos.</span></div>`;
     if (!accusedGroup.length) html += `<div class="banner pop"><h2>¡Nadie paga esta ronda!</h2></div><button class="btn" data-act="skip">Continuar</button>`;
@@ -660,6 +751,19 @@ function tapDuel(ps, ctx) {
 }
 function duelEnd(ps, loserId, ctx) {
   const loser = P(loserId);
+  if (ps.length >= 2 && !ctx.noRev && loser.cards.includes("revancha")) {
+    return render(`
+      <div class="grow"></div>
+      <div class="banner">${avatar(loser, "lg shake")}<h2>${esc(loser.name)} pierde el duelo…</h2><p class="muted">Pero tiene una carta de Revancha.</p></div>
+      ${cardHtml("revancha", null, "big pop")}
+      <div class="grow"></div>
+      <button class="btn gold" data-act="rev">¡Usar Revancha!</button>
+      <button class="btn ghost" data-act="no">Aceptar la derrota</button>
+    `, {
+      rev: () => { spend(loser, "revancha"); saveGame(); fanfare(); duel(ps.map(p => p.id), { ...ctx, noRev: false }); },
+      no: () => duelEnd(ps, loserId, { ...ctx, noRev: true })
+    });
+  }
   const winner = ps.length === 2 ? ps.find(p => p.id !== loserId) : null;
   let card = null;
   if (winner) { winner.duelWins++; if (ctx.giveCard) { card = pick(Object.keys(D.trampas)); winner.cards.push(card); } }
@@ -676,6 +780,7 @@ function duelEnd(ps, loserId, ctx) {
 // ---------- acusado y cartas trampa ----------
 function accused(id) {
   const p = P(id); p.accused++;
+  if (G.cur.accRound !== G.round) { G.prevAccused = G.lastAccused; G.lastAccused = id; G.cur.accRound = G.round; }
   G.cur.freeDuel = Math.random() < 0.25; // a veces el reto a duelo es gratis
   saveGame();
   showAccused(p);
@@ -686,7 +791,7 @@ function showAccused(p) {
   render(`
     <p class="eyebrow" style="text-align:center">Le toca a</p>
     <div class="banner">${avatar(p, "xl shake")}<h1>${esc(p.name)}</h1><p class="muted">${esc(G.cur.pregunta)}</p></div>
-    ${p.cards.length ? `<p class="eyebrow">Cartas trampa de ${esc(p.name)}</p><div class="cards">${p.cards.map(t => cardHtml(t, canUse(t, p) ? "use" : null)).join("")}</div>` : ""}
+    ${cardsOf(p, "prenda").length ? `<p class="eyebrow">Cartas de ${esc(p.name)}</p><div class="cards">${cardsOf(p, "prenda").map(t => cardHtml(t, canUse(t, p) ? "use" : null)).join("")}</div>` : ""}
     <div class="grow"></div>
     <p class="eyebrow">¿Cómo te defiendes?</p>
     <button class="option" data-act="def">
@@ -727,29 +832,30 @@ function chooseRival(p, free) {
     }
   });
 }
-function defense(p) {
+function defense(p, lawyer) {
   let secs = 20;
+  const sp = lawyer || p;
   render(`
-    <p class="eyebrow" style="text-align:center">Defensa</p>
-    <div class="banner">${avatar(p, "lg")}<h2>${esc(p.name)}, convence al grupo</h2><p class="muted">${esc(G.cur.pregunta)}</p></div>
+    <p class="eyebrow" style="text-align:center">${lawyer ? `Abogado defensor de ${esc(p.name)}` : "Defensa"}</p>
+    <div class="banner">${avatar(sp, "lg")}<h2>${esc(sp.name)}, convence al grupo</h2><p class="muted">${esc(G.cur.pregunta)}</p></div>
     <div class="grow"></div>
     <div class="count" id="tm" style="text-align:center">20</div>
     <div class="grow"></div>
     <button class="btn" data-act="end">Terminé</button>
-  `, { end: () => juryVote(p) });
+  `, { end: () => juryVote(p, lawyer) });
   const t = () => {
     const el = document.getElementById("tm"); if (!el) return;
     el.textContent = secs > 0 ? secs : "¡Tiempo!";
     if (secs <= 3 && secs > 0) beep(700);
-    if (secs-- > 0) later(t, 1000); else { beep(300, 0.5, "sawtooth"); later(() => juryVote(p), 900); }
+    if (secs-- > 0) later(t, 1000); else { beep(300, 0.5, "sawtooth"); later(() => juryVote(p, lawyer), 900); }
   };
   t();
 }
-function juryVote(p) {
-  const jury = G.players.length - 1; let n = 0;
+function juryVote(p, lawyer) {
+  const jury = G.players.length - 1 - (lawyer ? 1 : 0); let n = 0;
   const draw = () => render(`
     <p class="eyebrow" style="text-align:center">Veredicto</p>
-    <div class="banner">${avatar(p, "lg")}<h2>¿Los convenció ${esc(p.name)}?</h2>
+    <div class="banner">${avatar(lawyer || p, "lg")}<h2>¿Los convenció ${esc((lawyer || p).name)}?</h2>
     <p class="muted">Levanten la mano los que le creen. Cuenta las manos.</p></div>
     <div class="bigcounter"><button data-act="dn" aria-label="Menos">−</button><b>${n}</b><span>de ${jury}</span><button data-act="up" aria-label="Más">+</button></div>
     <div class="grow"></div>
@@ -759,26 +865,28 @@ function juryVote(p) {
     dn: () => { n = Math.max(0, n - 1); draw(); },
     go: () => {
       if (n * 2 > jury) {
-        p.defWins = (p.defWins || 0) + 1; saveGame(); fanfare();
+        (lawyer || p).defWins = ((lawyer || p).defWins || 0) + 1; saveGame(); fanfare();
         return render(`<div class="grow"></div><div class="banner pop">${avatar(p, "xl")}<h1>¡Absuelto!</h1><p class="muted">${n} de ${jury} le creyeron. ${esc(p.name)} se salva.</p></div><div class="grow"></div><button class="btn" data-act="ok">Continuar</button>`, { ok: afterRound });
       }
       const bad = n * 3 < jury;
       beep(200, 0.5, "sawtooth");
-      render(`<div class="grow"></div><div class="banner pop">${avatar(p, "xl shake")}<h1>${bad ? "¡Defensa desastrosa!" : "No alcanzó"}</h1><p class="muted">Solo ${n} de ${jury} le creyeron. ${bad ? "Un tomatazo seguro y además la prenda." : "Le toca la prenda."}</p></div><div class="grow"></div><button class="btn" data-act="ok">A la prenda</button>`, { ok: () => punish(p.id, bad ? 1 : 0) });
+      if (lawyer && bad) { lawyer.coal++; if (G.settings.maxCoal && lawyer.coal >= G.settings.maxCoal) lawyer.out = true; saveGame(); }
+      render(`<div class="grow"></div><div class="banner pop">${avatar(p, "xl shake")}<h1>${bad ? "¡Defensa desastrosa!" : "No alcanzó"}</h1><p class="muted">Solo ${n} de ${jury} le creyeron. ${bad ? `Un tomatazo seguro y además la prenda.${lawyer ? ` El abogado ${esc(lawyer.name)} también se lleva un tomatazo.` : ""}` : "Le toca la prenda."}</p></div><div class="grow"></div><button class="btn" data-act="ok">A la prenda</button>`, { ok: () => punish(p.id, bad ? 1 : 0) });
     }
   });
   draw();
 }
 function canUse(t, p) {
   if (t === "robo") return G.players.some(o => o.id !== p.id && o.cards.length);
-  if (t === "rebote" || t === "papa") return active().length > 1;
+  if (["rebote", "papa", "complice", "abogado", "doble_nada"].includes(t)) return active().length > 1;
   return true;
 }
 const spend = (p, t) => p.cards.splice(p.cards.indexOf(t), 1);
+const cardsOf = (p, cuando) => p.cards.filter(t => D.trampas[t] && D.trampas[t].cuando === cuando);
 function chooseOther(p, t, filter, then) {
   const list = G.players.filter(o => o.id !== p.id && filter(o));
   render(`
-    <p class="eyebrow">${esc(D.trampas[t].nombre)}</p><h2>${t === "robo" ? "¿A quién le robas?" : "¿A quién le pasas la prenda?"}</h2>
+    <p class="eyebrow">${esc(D.trampas[t].nombre)}</p><h2>${{ robo: "¿A quién le robas?", complice: "¿Quién es tu cómplice?", abogado: "¿Quién te defiende?" }[t] || "¿A quién le pasas la prenda?"}</h2>
     <div class="vgrid">${list.map(o => `<button class="vcard" data-act="ch" data-arg="${o.id}">${avatar(o)}<span>${esc(o.name)}</span></button>`).join("")}</div>
     <div class="grow"></div><button class="btn ghost" data-act="back">Mejor no usarla</button>
   `, { ch: id => then(P(id)), back: () => showAccused(p) });
@@ -792,6 +900,27 @@ function useCard(p, t) {
     spend(p, t); return reveal(`¡Vuela hacia ${esc(target.name)}!`, () => punish(target.id, 0));
   }
   if (t === "papa") return chooseOther(p, t, o => !o.out, v => { spend(p, t); reveal(`${esc(p.name)} se salva y le pasa la papa caliente a ${esc(v.name)}`, () => punish(v.id, 0)); });
+  if (t === "complice") return chooseOther(p, t, o => !o.out, c => { spend(p, t); saveGame(); punish(p.id, 0, { partner: c.id }); });
+  if (t === "abogado") return chooseOther(p, t, o => !o.out, l => { spend(p, t); saveGame(); defense(p, l); });
+  if (t === "light") { spend(p, t); saveGame(); return punish(p.id, 0, { light: true }); }
+  if (t === "ruleta") {
+    spend(p, t); saveGame();
+    const pool = active(), chosen = pick(pool);
+    render(`<div class="grow"></div><div class="banner"><img class="spin" src="img/carta_ruleta.webp" alt="" style="width:140px;border-radius:14px"><p class="eyebrow">La ruleta gira…</p><div id="rl">${avatar(pool[0], "xl")}</div><h1 id="rn"></h1></div><div class="grow"></div><button class="btn" id="rb" data-act="ok" hidden>A la prenda</button>`, { ok: () => punish(chosen.id, 0) });
+    let k = 0; const steps = 16 + rnd(6);
+    const spinStep = () => {
+      const q = k < steps ? pool[k % pool.length] : chosen;
+      document.getElementById("rl").innerHTML = avatar(q, "xl"); document.getElementById("rn").textContent = q.name; beep(500 + (k % 5) * 80, 0.04, "square", 0.05);
+      if (k++ < steps) later(spinStep, 70 + k * 12); else { fanfare(); document.getElementById("rb").hidden = false; }
+    };
+    return spinStep();
+  }
+  if (t === "doble_nada") {
+    const prev = G.prevAccused && P(G.prevAccused);
+    const rival = prev && !prev.out && prev.id !== p.id ? prev : pick(active().filter(o => o.id !== p.id));
+    spend(p, t); saveGame();
+    return reveal(`¡${esc(p.name)} se juega todo contra ${esc(rival.name)}!`, () => duel([p.id, rival.id], { giveCard: false, onLoser: l => l === rival.id ? giveTomato(rival, 2, `Perdió el Doble o Nada contra ${p.name}`) : punish(p.id, 2) }));
+  }
   if (t === "robo") return chooseOther(p, t, o => o.cards.length > 0, v => {
     const s = pick(v.cards); v.cards.splice(v.cards.indexOf(s), 1); spend(p, t); p.cards.push(s); saveGame(); fanfare();
     render(`<div class="grow"></div><div class="banner pop"><p class="eyebrow">${esc(p.name)} le robó a ${esc(v.name)}</p>${cardHtml(s, null, "big")}</div><div class="grow"></div><button class="btn" data-act="ok">Volver</button>`, { ok: () => showAccused(p) });
@@ -801,34 +930,39 @@ function useCard(p, t) {
 // ---------- prendas y tomatazos ----------
 // sure: tomatazos seguros por haber perdido una apuesta (defensa desastrosa o reto perdido).
 // Cumplir la prenda no da tomatazo; no cumplirla, uno más.
-function punish(id, sure = 0) {
-  const p = P(id);
-  const ronda = Math.random() < 0.4;
-  const pr = ronda ? pick(D.prendasRonda) : { t: pick(D.prendas) };
+function punish(id, sure = 0, opt = {}) {
+  const p = P(id), partner = opt.partner && P(opt.partner);
+  const ronda = !opt.light && !partner && Math.random() < 0.4;
+  const pr = opt.light ? { t: pick(D.prendasLight) } : ronda ? pick(D.prendasRonda) : { t: pick(D.prendas) };
   const tom = n => n === 1 ? "1 tomatazo" : `${n} tomatazos`;
   render(`
-    <div class="banner">${avatar(p, "lg")}<h2>${esc(p.name)}, te toca:</h2></div>
+    <div class="banner">${partner ? `<div class="row" style="justify-content:center">${avatar(p, "lg")}${avatar(partner, "lg")}</div><h2>${esc(p.name)} y ${esc(partner.name)}, les toca:</h2>` : `${avatar(p, "lg")}<h2>${esc(p.name)}, te toca:</h2>`}</div>
+    ${opt.light ? `<p class="eyebrow" style="text-align:center">Prenda Light: sin tomatazo pase lo que pase</p>` : ""}
     ${ronda ? `<p class="eyebrow" style="text-align:center">Prenda de ronda: se cumple durante toda la próxima ronda</p>` : ""}
     <div class="prenda pop">${esc(pr.t)}</div>
     <div class="rules-mini">
       ${sure ? `<span>Por perder la apuesta: <b class="ko">${tom(sure)} seguro${sure > 1 ? "s" : ""}</b></span>` : ""}
       <span>${ronda ? "Si la aceptas" : "Si la cumples"}: <b class="ok">${sure ? "nada más" : "te salvas del tomatazo"}</b></span>
-      <span>${ronda ? "Si no la aceptas" : "Si no la cumples"}: <b class="ko">+1 tomatazo</b></span>
+      <span>${ronda ? "Si no la aceptas" : "Si no la cumples"}: <b class="ko">${opt.light ? "tampoco hay tomatazo" : partner ? "+1 tomatazo para quien la hizo peor" : "+1 tomatazo"}</b></span>
       ${ronda ? `<span>Si la rompes durante la ronda: <b class="ko">+1 tomatazo</b></span>` : ""}
     </div>
     <div class="grow"></div>
     <button class="btn gold" data-act="other">Otra prenda</button>
     <div class="row"><button class="btn ghost" data-act="fail">No la ${ronda ? "acepta" : "cumplió"}</button><button class="btn" data-act="done">${ronda ? "¡Acepto!" : "¡Hecho!"}</button></div>
   `, {
-    other: () => punish(id, sure),
-    fail: () => giveTomato(p, sure + 1, `${p.name} no ${ronda ? "aceptó" : "cumplió"} la prenda`),
+    other: () => punish(id, sure, opt),
+    fail: () => {
+      if (opt.light) { toast("Prenda Light: sin tomatazo."); return afterRound(); }
+      if (partner) return pickPlayer("¿Quién la hizo peor? Decide el grupo", [p, partner], w => giveTomato(w, (w === p ? sure : 0) + 1, `${w.name} la hizo peor`), () => punish(id, sure, opt));
+      giveTomato(p, sure + 1, `${p.name} no ${ronda ? "aceptó" : "cumplió"} la prenda`);
+    },
     done: () => {
       p.done = (p.done || 0) + 1;
       if (ronda) { G.activeP = G.activeP || []; G.activeP.push({ k: uid(), pid: p.id, t: pr.t, voto2: !!pr.voto2, round: G.round + 1 }); }
       saveGame();
       if (sure) return giveTomato(p, sure, "Por perder la apuesta");
       fanfare();
-      render(`<div class="grow"></div><div class="banner pop">${avatar(p, "xl")}<h1>¡Cumplió!</h1><p class="muted">${esc(p.name)} ${ronda ? "aceptó la prenda de ronda" : "hizo la prenda"} y se salva del tomatazo.${ronda ? " Ojo: si la rompe, tomatazo." : ""}</p></div><div class="grow"></div><button class="btn" data-act="ok">Siguiente ronda</button>`, { ok: afterRound });
+      render(`<div class="grow"></div><div class="banner pop">${avatar(p, "xl")}<h1>¡Cumplió!</h1><p class="muted">${partner ? `${esc(p.name)} y ${esc(partner.name)} hicieron la prenda y se salvan del tomatazo.` : `${esc(p.name)} ${ronda ? "aceptó la prenda de ronda" : "hizo la prenda"} y se salva del tomatazo.`}${ronda ? " Ojo: si la rompe, tomatazo." : ""}</p></div><div class="grow"></div><button class="btn" data-act="ok">Siguiente ronda</button>`, { ok: afterRound });
     }
   });
 }

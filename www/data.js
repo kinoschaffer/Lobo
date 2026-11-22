@@ -51,12 +51,35 @@ window.QH_DATA = {
     { t: "No puedes mirar a nadie a los ojos." }
   ],
 
+  // Cartas. «cuando»: voto (al votar en secreto), prenda (cuando te toca), siempre (desde «Usar carta»), duelo (al perder un duelo).
   trampas: {
-    escudo: { nombre: "Escudo", img: "carta_escudo", texto: "Te salvas de la prenda." },
-    rebote: { nombre: "Bumerán", img: "carta_rebote", texto: "La prenda vuela al segundo más votado." },
-    papa:   { nombre: "Papa Caliente", img: "carta_papa", texto: "Te salvas y eliges a quién le toca la prenda." },
-    robo:   { nombre: "Mano Traviesa", img: "carta_robo", texto: "Le robas una carta a otro jugador." }
+    escudo:      { cuando: "prenda", nombre: "Escudo", img: "carta_escudo", texto: "Te salvas de la prenda." },
+    rebote:      { cuando: "prenda", nombre: "Bumerán", img: "carta_rebote", texto: "La prenda vuela al segundo más votado." },
+    papa:        { cuando: "prenda", nombre: "Papa Caliente", img: "carta_papa", texto: "Te salvas y eliges a quién le toca la prenda." },
+    robo:        { cuando: "prenda", nombre: "Mano Traviesa", img: "carta_robo", texto: "Le robas una carta a otro jugador." },
+    complice:    { cuando: "prenda", nombre: "Cómplice", img: "carta_complice", texto: "Haces la prenda con alguien que elijas. Si no la cumplen, el grupo decide quién se lleva el tomatazo." },
+    abogado:     { cuando: "prenda", nombre: "Abogado Defensor", img: "carta_abogado", texto: "Otro jugador da el discurso de defensa por ti. Si es un desastre, él también se lleva un tomatazo." },
+    light:       { cuando: "prenda", nombre: "Prenda Light", img: "carta_light", texto: "Cambias tu prenda por una fácil. No hay tomatazo aunque no la cumplas." },
+    ruleta:      { cuando: "prenda", nombre: "Ruleta", img: "carta_ruleta", texto: "La app elige a alguien al azar (puedes ser tú otra vez) y le toca la prenda." },
+    doble_nada:  { cuando: "prenda", nombre: "Doble o Nada", img: "carta_doble_nada", texto: "Duelo contra el acusado de la ronda anterior. Si ganas, te salvas y él recibe 2 tomatazos. Si pierdes, 2 tomatazos seguros y la prenda." },
+    voto_doble:  { cuando: "voto", nombre: "Voto Doble", img: "carta_voto_doble", texto: "Al votar: tu voto cuenta 2. Solo en votación secreta." },
+    voto_robado: { cuando: "voto", nombre: "Voto Robado", img: "carta_voto_robado", texto: "Al votar: eliges a alguien y su voto pasa a quien votaste tú. Solo en votación secreta." },
+    anulador:    { cuando: "voto", nombre: "Anulador", img: "carta_anulador", texto: "Si quedas como el más votado de la ronda, tus votos se anulan. Si no, la pierdes igual." },
+    espejo:      { cuando: "voto", nombre: "Espejo", img: "carta_espejo", texto: "Cada voto que recibas esta ronda también se le suma a quien te votó. Solo en votación secreta." },
+    limpieza:    { cuando: "siempre", nombre: "Limpieza", img: "carta_limpieza", texto: "Te sacas 1 tomatazo de encima." },
+    castigo:     { cuando: "siempre", nombre: "Castigo", img: "carta_castigo", texto: "Le das a otro jugador la prenda de ronda que elijas, para esta ronda." },
+    silencio:    { cuando: "siempre", nombre: "Silencio", img: "carta_silencio", texto: "Eliges a alguien que no puede hablar en esta ronda. Si habla, tomatazo." },
+    intercambio: { cuando: "siempre", nombre: "Intercambio", img: "carta_intercambio", texto: "Cambias todas tus cartas por todas las de otro jugador." },
+    revancha:    { cuando: "duelo", nombre: "Revancha", img: "carta_revancha", texto: "Cuando pierdes un duelo, lo repites." }
   },
+
+  // Prendas fáciles para la carta Prenda Light
+  prendasLight: [
+    "Di tu nombre al revés.", "Aplaude 5 veces.", "Haz la mueca más graciosa que puedas.", "Di «Pepe pecas pica papas» tres veces.",
+    "Saluda como reina o rey durante 5 segundos.", "Imita el sonido de una gallina.", "Di tu comida favorita con voz de bebé.",
+    "Haz una reverencia al grupo.", "Guiña el ojo a alguien del grupo.", "Di «¡Soy inocente!» con voz dramática."
+  ],
+
 
   presentimiento: { nombre: "Presentimiento", img: "carta_presentimiento",
     texto: "Si crees que te van a votar a ti, úsalo al votar. Si aciertas, te salvas. Si fallas, la próxima ronda empiezas con +2 votos." },

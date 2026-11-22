@@ -197,3 +197,16 @@ input[type=text]:focus{outline:none;border-color:var(--gold)}
 .option:active{transform:translateY(2px)}
 .tag{font-style:normal;font-family:var(--body);font-size:.72rem;font-weight:800;background:var(--gold);color:var(--ink);border-radius:99px;padding:.1rem .5rem;vertical-align:3px;margin-left:4px}
 .rules-mini .ok{color:var(--mint)}.rules-mini .ko{color:var(--red)}
+
+/* Cartas nuevas */
+.chips{display:grid;gap:8px}
+.chip{display:flex;gap:10px;align-items:center;text-align:left;width:100%;padding:8px 10px;border-radius:14px;background:var(--pine2);border:2px dashed var(--gold);color:var(--muted);font-size:.85rem;line-height:1.3}
+.chip img{width:42px;height:56px;object-fit:cover;border-radius:6px;flex:none}
+.chip b{display:block;font-family:var(--display);font-weight:400;font-size:1.05rem;color:var(--cream)}
+.chip[aria-pressed=true]{background:#4a3a12;border-style:solid}
+.chip[aria-pressed=true] b::after{content:" ✓";color:var(--gold)}
+.owner{display:grid;gap:8px}
+.spin{animation:spinz 1.2s linear infinite}
+@keyframes spinz{to{transform:rotate(360deg)}}
+.note:not(.good):not(.bad){background:var(--pine2);border:2px solid var(--pine3)}
+.btn.sm{white-space:nowrap}
