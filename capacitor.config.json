@@ -1,0 +1,9 @@
+{
+  "appId": "io.github.kinoschaffer.quienharia",
+  "appName": "¿Quién Haría?",
+  "webDir": "www",
+  "android": {
+    "adjustMarginsForEdgeToEdge": "disable",
+    "backgroundColor": "#18193a"
+  }
+}

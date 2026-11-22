@@ -27,3 +27,17 @@ cd www && python3 -m http.server 8000
 ```
 
 y abrir http://localhost:8000 (mejor en modo celular del navegador).
+
+## APK para Android
+
+La app Android se arma con Capacitor (`android/`). La última APK compilada está en `apk/QuienHaria.apk`.
+
+- Pantalla completa de borde a borde: Android le pasa a la página el tamaño del notch y de las barras del sistema, y el contenido deja ese espacio en cada celular.
+- Orientación vertical, pantalla siempre encendida y botón atrás con doble toque para salir (la partida queda guardada).
+
+Para compilarla hace falta Node, JDK 21 y el SDK de Android (plataforma 35):
+
+```
+npm install
+npm run apk        # copia www/ a la app y compila android/app/build/outputs/apk/debug/app-debug.apk
+```

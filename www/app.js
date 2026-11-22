@@ -16,6 +16,18 @@ const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); retur
 const del = k => { try { localStorage.removeItem(k); } catch {} };
 const names = ps => ps.map(p => esc(p.name)).join(", ").replace(/, ([^,]*)$/, " y $1");
 
+// ---------- APK: zonas seguras (notch y barras) y botón atrás ----------
+window.__setInsets = o => { const st = document.documentElement.style; ["top", "right", "bottom", "left"].forEach(k => st.setProperty("--safe-" + k, (o[k] || 0) + "px")); };
+try { if (window.AndroidInsets) window.__setInsets(JSON.parse(window.AndroidInsets.get())); } catch {}
+let backAt = 0;
+try {
+  const CapApp = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App;
+  if (CapApp) CapApp.addListener("backButton", () => {
+    if (Date.now() - backAt < 2000) return CapApp.exitApp();
+    backAt = Date.now(); toast("Toca atrás otra vez para salir. La partida queda guardada.");
+  });
+} catch {}
+
 let actions = {};
 let timers = [];
 const clearTimers = () => { timers.forEach(clearTimeout); timers = []; };
