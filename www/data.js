@@ -6,7 +6,6 @@ window.QH_DATA = {
   prendas: [
     "Canta el estribillo de una canción con voz de ópera.",
     "Imita a alguien del grupo hasta que adivinen quién es.",
-    "Baila 15 segundos sin música.",
     "Habla como robot hasta la próxima ronda.",
     "Cuenta un chiste. Si nadie se ríe, cuenta otro.",
     "Haz tu mejor risa de villano durante 10 segundos.",
@@ -20,8 +19,6 @@ window.QH_DATA = {
     "Habla con acento extranjero hasta la próxima ronda.",
     "Haz 10 sentadillas mientras cantas la canción que elija el grupo.",
     "Da una vuelta a la mesa caminando como modelo de pasarela.",
-    "Inventa un brindis épico para el grupo.",
-    "Haz tu mejor cara de sorpresa abriendo un regalo imaginario.",
     "Narra los próximos 20 segundos como si fueras locutor de fútbol.",
     "Di un trabalenguas: «Tres tristes tigres tragaban trigo en un trigal».",
     "Deja que la persona a tu izquierda te despeine.",
