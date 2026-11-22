@@ -20,16 +20,23 @@ const URL = process.env.URL || 'http://localhost:8765/';
     await pg.click('.vcard:has-text("Ana") [data-act=up]');
     await pg.click('text=Ver resultado'); await pg.waitForTimeout(1400); await pg.click('#verdict .btn');
     await pg.click('text=Aceptar la prenda');
-    seen.push(await pg.textContent('.prenda'));
+    const kind = async () => (await pg.$('text=Prenda de ronda')) ? 'ronda' : 'normal';
+    seen.push({ t: await pg.textContent('.prenda'), k: await kind() });
     if (!(await pg.$('text=Cambiar prenda'))) changeOk = false;
     await pg.click('text=Cambiar prenda');
-    seen.push(await pg.textContent('.prenda'));
+    seen.push({ t: await pg.textContent('.prenda'), k: await kind() });
     if (await pg.$('text=Cambiar prenda')) changeOk = false;
     await pg.click('[data-act=done]');
     for (let k = 0; k < 6 && !(await pg.$('text=¡A votar!')); k++) { const e = await pg.$('button:has-text("Siguiente ronda")'); if (e) await e.click(); await pg.waitForTimeout(200); }
   }
-  const dup = seen.filter((t, i) => seen.indexOf(t) !== i);
-  console.log(`${dup.length ? 'MAL' : 'OK '} ${seen.length} prendas mostradas, repetidas: ${dup.length}${dup.length ? ' → ' + dup.join(' | ') : ''}`);
+  // Una prenda solo puede repetirse después de que salieron todas las de su tipo (el mazo se vuelve a mezclar).
+  const pool = await pg.evaluate(() => ({ normal: window.QH_DATA.prendas.length, ronda: window.QH_DATA.prendasRonda.length }));
+  const bad = [];
+  for (const k of ['normal', 'ronda']) {
+    const ts = seen.filter(x => x.k === k).map(x => x.t);
+    for (let i = 0; i < ts.length; i += pool[k]) { const chunk = ts.slice(i, i + pool[k]); if (new Set(chunk).size !== chunk.length) bad.push(k); }
+  }
+  console.log(`${bad.length ? 'MAL' : 'OK '} ${seen.length} prendas mostradas: ninguna se repite antes de agotar su mazo (${pool.normal} normales, ${pool.ronda} de ronda)${bad.length ? ' → falla en ' + bad.join(',') : ''}`);
   console.log(`${changeOk ? 'OK ' : 'MAL'} «Cambiar prenda» aparece una sola vez por prenda`);
   console.log('ERRORS', JSON.stringify(errs));
   await b.close();

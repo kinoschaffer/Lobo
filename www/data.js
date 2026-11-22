@@ -23,25 +23,16 @@ window.QH_DATA = {
     "Haz una declaración de amor dramática a una silla.",
     "Cuenta del 10 al 1 en otro idioma (o inventado).",
     "Haz la mímica de una película y que la adivinen.",
-    "Haz 10 saltos de tijera contando en voz alta en otro idioma (o inventado).",
-    "Imita la risa de tres personas del grupo.",
     "Haz de presentador de noticias y anuncia lo que pasó en esta ronda.",
     "Di 5 palabras que rimen con «tomate» en 15 segundos.",
     "Camina hasta la puerta y vuelve en cámara lenta.",
-    "Haz una pose de superhéroe y mantenla 15 segundos.",
-    "Cuenta un cuento de 30 segundos que empiece con «Había una vez un tomate…».",
     "Haz de estatua viviente en la pose que elija el grupo durante 15 segundos.",
     "Recita los meses del año al revés.",
-    "Haz tu mejor imitación de un bebé llorando.",
-    "Habla como pirata durante 30 segundos contando qué desayunaste.",
     "Narra una carrera imaginaria entre dos personas del grupo como locutor.",
     "Inventa una palabra nueva y explica qué significa.",
     "Imita a un mosquito molestando al grupo durante 10 segundos.",
-    "Haz el sonido de 5 animales distintos sin parar.",
     "Mantén un objeto en equilibrio sobre la cabeza durante 15 segundos.",
-    "Explica cómo hacer un sándwich como si fuera una película de acción.",
-    "Deletrea tu nombre completo al revés.",
-    "Entrevista a la persona de tu izquierda como periodista de chimentos."
+    "Deletrea tu nombre completo al revés."
   ],
 
   // Prendas de ronda: se cumplen durante toda la ronda siguiente. Si la rompe, tomatazo.
@@ -90,6 +81,30 @@ window.QH_DATA = {
     intercambio: { cuando: "siempre", nombre: "Intercambio", img: "carta_intercambio", texto: "Cambias todas tus cartas por todas las de otro jugador." },
     revancha:    { cuando: "duelo", nombre: "Revancha", img: "carta_revancha", texto: "Cuando pierdes un duelo, lo repites." }
   },
+
+  // Prendas de equipo (modo por equipos)
+  prendasGrupo: [
+    "Hagan una pirámide humana (o lo más parecido posible).",
+    "Representen una escena de película sin hablar hasta que el resto la adivine.",
+    "Hagan entre todos el sonido de una selva durante 15 segundos.",
+    "Formen con sus cuerpos una letra que elija el resto.",
+    "Inventen un saludo secreto de equipo y muéstrenlo.",
+    "Hagan una publicidad de 30 segundos de un objeto de la mesa.",
+    "Caminen juntos hasta la puerta como si fueran un solo animal.",
+    "Cuenten un chiste entre todos: cada uno dice una frase.",
+    "Uno hace preguntas y los demás responden como si fueran famosos.",
+    "Imiten a otro equipo hasta que adivinen a quiénes imitan.",
+    "Hagan una estatua grupal en la pose que elija el resto durante 20 segundos.",
+    "Inventen el grito de guerra del equipo y grítenlo.",
+    "Narren un partido de fútbol imaginario entre los otros equipos.",
+    "Pónganse en fila y pásense un objeto sin usar las manos.",
+    "Expliquen su estrategia hablando como robots durante 30 segundos.",
+    "Representen una noticia del noticiero sin usar palabras.",
+    "Hagan una carrera de cangrejo hasta la puerta y vuelvan.",
+    "Digan el abecedario alternándose una letra cada uno, sin trabarse.",
+    "Cada uno dice un trabalenguas distinto sin equivocarse.",
+    "Recreen la foto más famosa que se les ocurra."
+  ],
 
   // Prendas fáciles para la carta Prenda Light
   prendasLight: [
