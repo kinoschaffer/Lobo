@@ -143,3 +143,13 @@ input[type=text]:focus{outline:none;border-color:var(--gold)}
 .note.good{background:#3b2f7a;border:2px solid var(--violet)}
 .note.bad{background:#4a2433;border:2px solid var(--red)}
 .toast{position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:9;background:#000c;color:#fff;padding:.7rem 1rem;border-radius:99px;font-size:.9rem;max-width:90vw;text-align:center}
+
+/* Defensa */
+.risk{display:grid;gap:4px;background:var(--pine2);border-radius:14px;padding:12px 14px;font-size:.92rem;color:var(--muted)}
+.risk b{font-family:var(--display);font-weight:400;font-size:1.2rem;color:var(--cream)}
+.risk em{font-style:normal;font-weight:800}
+.risk .ok{color:var(--mint)} .risk .ko{color:var(--red)}
+.bigcounter{display:flex;align-items:center;justify-content:center;gap:16px}
+.bigcounter button{width:64px;height:64px;border-radius:16px;background:var(--pine2);font-size:2rem;font-weight:800}
+.bigcounter b{font-family:var(--display);font-size:4rem;color:var(--gold);min-width:1.4em;text-align:center;font-variant-numeric:tabular-nums}
+.bigcounter span{color:var(--muted);margin-left:-8px}

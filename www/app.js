@@ -87,8 +87,9 @@ function rules() {
       <div class="opt"><h3>2. Todos votan</h3><p class="muted">Votación secreta: el celular pasa de mano en mano. Votación rápida: todos señalan a la vez y el anfitrión anota.</p></div>
       <div class="opt"><h3>3. Presentimiento</h3><p class="muted">Cada jugador tiene ${settings.hunch} presentimientos por partida. Úsalo si crees que te van a votar a ti: si eres el más votado, te salvas y le toca al siguiente. Si fallas, la próxima ronda empiezas con +${PENALTY} votos.</p></div>
       <div class="opt"><h3>4. Empate = duelo</h3><p class="muted">Los empatados se enfrentan en un minijuego. El que pierde es el acusado. Si el duelo es de dos, el ganador se lleva una carta trampa.</p></div>
-      <div class="opt"><h3>5. El acusado</h3><p class="muted">Tiene 20 segundos para defenderse, hace una prenda y recibe un tomatazo. Las cartas trampa pueden salvarlo.</p></div>
-      <div class="opt"><h3>6. Tomatazos</h3><p class="muted">Con ${settings.maxCoal || "muchos"} tomatazos quedas fuera, pero sigues votando. Gana quien termine con menos.</p></div>
+      <div class="opt"><h3>5. El acusado</h3><p class="muted">Puede usar cartas trampa, aceptar la prenda (y un tomatazo) o arriesgarse a defenderse.</p></div>
+      <div class="opt"><h3>6. La defensa</h3><p class="muted">20 segundos para convencer al grupo. Después, levantan la mano los que le creen. Más de la mitad: se salva. Menos de un tercio: prenda y 2 tomatazos. En el medio: prenda y tomatazo.</p></div>
+      <div class="opt"><h3>7. Tomatazos</h3><p class="muted">Con ${settings.maxCoal || "muchos"} tomatazos quedas fuera, pero sigues votando. Gana quien termine con menos.</p></div>
       <div class="opt"><h3>Golpe de suerte</h3><p class="muted">Al final de algunas rondas, alguien que no recibió votos gana una carta trampa o un presentimiento extra.</p></div>
     </div>
     <button class="btn" data-act="back">Entendido</button>
@@ -171,7 +172,7 @@ function setup() {
   });
 }
 
-const newPlayerState = (p, s) => ({ ...p, coal: 0, cards: [], out: false, votes: 0, accused: 0, duelWins: 0, hunch: s.hunch, penalty: 0, hunchHits: 0 });
+const newPlayerState = (p, s) => ({ ...p, coal: 0, cards: [], out: false, votes: 0, accused: 0, duelWins: 0, hunch: s.hunch, penalty: 0, hunchHits: 0, defWins: 0 });
 function newGame() {
   G = { settings: { ...settings }, players: players.map(p => newPlayerState(p, settings)), deck: [], round: 0 };
   keepAwake();
@@ -427,23 +428,64 @@ function accused(id) {
   showAccused(p);
 }
 function showAccused(p) {
-  let secs = 20;
+  const jury = G.players.length - 1;
   render(`
     <p class="eyebrow" style="text-align:center">Le toca a</p>
     <div class="banner">${avatar(p, "xl shake")}<h1>${esc(p.name)}</h1><p class="muted">${esc(G.cur.pregunta)}</p></div>
-    <button class="btn ghost" data-act="def">Defensa: 20 segundos</button>
     ${p.cards.length ? `<p class="eyebrow">Cartas trampa de ${esc(p.name)}</p><div class="cards">${p.cards.map(t => cardHtml(t, canUse(t, p) ? "use" : null)).join("")}</div>` : ""}
     <div class="grow"></div>
+    <div class="risk"><b>¿Te defiendes?</b>Tienes 20 segundos para convencer al grupo de que no lo harías.
+      <span>Si convences a más de la mitad (${Math.floor(jury / 2) + 1} de ${jury}), <em class="ok">te salvas</em>.</span>
+      <span>Si convences a menos de un tercio, <em class="ko">te llevas 2 tomatazos</em>.</span></div>
+    <button class="btn gold" data-act="def">Defenderme</button>
     <button class="btn" data-act="accept">Aceptar la prenda</button>
   `, {
-    def: (_, b) => {
-      b.disabled = true;
-      const t = () => { b.textContent = secs > 0 ? `${secs} s` : "¡Tiempo!"; if (secs <= 3 && secs > 0) beep(700); if (secs-- > 0) later(t, 1000); else beep(300, 0.5, "sawtooth"); };
-      t();
-    },
     use: t => useCard(p, t),
-    accept: () => punish(p.id, true)
+    def: () => defense(p),
+    accept: () => punish(p.id, 1)
   });
+}
+function defense(p) {
+  let secs = 20;
+  render(`
+    <p class="eyebrow" style="text-align:center">Defensa</p>
+    <div class="banner">${avatar(p, "lg")}<h2>${esc(p.name)}, convence al grupo</h2><p class="muted">${esc(G.cur.pregunta)}</p></div>
+    <div class="grow"></div>
+    <div class="count" id="tm" style="text-align:center">20</div>
+    <div class="grow"></div>
+    <button class="btn" data-act="end">Terminé</button>
+  `, { end: () => juryVote(p) });
+  const t = () => {
+    const el = document.getElementById("tm"); if (!el) return;
+    el.textContent = secs > 0 ? secs : "¡Tiempo!";
+    if (secs <= 3 && secs > 0) beep(700);
+    if (secs-- > 0) later(t, 1000); else { beep(300, 0.5, "sawtooth"); later(() => juryVote(p), 900); }
+  };
+  t();
+}
+function juryVote(p) {
+  const jury = G.players.length - 1; let n = 0;
+  const draw = () => render(`
+    <p class="eyebrow" style="text-align:center">Veredicto</p>
+    <div class="banner">${avatar(p, "lg")}<h2>¿Los convenció ${esc(p.name)}?</h2>
+    <p class="muted">Levanten la mano los que le creen. Cuenta las manos.</p></div>
+    <div class="bigcounter"><button data-act="dn" aria-label="Menos">−</button><b>${n}</b><span>de ${jury}</span><button data-act="up" aria-label="Más">+</button></div>
+    <div class="grow"></div>
+    <button class="btn" data-act="go">Ver veredicto</button>
+  `, {
+    up: () => { n = Math.min(jury, n + 1); draw(); },
+    dn: () => { n = Math.max(0, n - 1); draw(); },
+    go: () => {
+      if (n * 2 > jury) {
+        p.defWins = (p.defWins || 0) + 1; saveGame(); fanfare();
+        return render(`<div class="grow"></div><div class="banner pop">${avatar(p, "xl")}<h1>¡Absuelto!</h1><p class="muted">${n} de ${jury} le creyeron. ${esc(p.name)} se salva.</p></div><div class="grow"></div><button class="btn" data-act="ok">Continuar</button>`, { ok: afterRound });
+      }
+      const bad = n * 3 < jury;
+      beep(200, 0.5, "sawtooth");
+      render(`<div class="grow"></div><div class="banner pop">${avatar(p, "xl shake")}<h1>${bad ? "¡Defensa desastrosa!" : "No alcanzó"}</h1><p class="muted">Solo ${n} de ${jury} le creyeron. ${bad ? "Prenda y 2 tomatazos." : "Prenda y tomatazo."}</p></div><div class="grow"></div><button class="btn" data-act="ok">A la prenda</button>`, { ok: () => punish(p.id, bad ? 2 : 1) });
+    }
+  });
+  draw();
 }
 function canUse(t, p) {
   if (t === "robo") return G.players.some(o => o.id !== p.id && o.cards.length);
@@ -465,10 +507,10 @@ function useCard(p, t) {
   if (t === "rebote") {
     const s = G.cur.second && P(G.cur.second);
     const target = s && !s.out && s.id !== p.id ? s : pick(active().filter(o => o.id !== p.id));
-    spend(p, t); return reveal(`¡Vuela hacia ${esc(target.name)}!`, () => punish(target.id, true));
+    spend(p, t); return reveal(`¡Vuela hacia ${esc(target.name)}!`, () => punish(target.id, 1));
   }
-  if (t === "duelo") return chooseOther(p, t, o => !o.out, rival => { spend(p, t); saveGame(); duel([p.id, rival.id], { giveCard: false, onLoser: id => punish(id, true) }); });
-  if (t === "papa") return chooseOther(p, t, o => !o.out, v => { spend(p, t); reveal(`${esc(p.name)} se salva y le pasa la papa caliente a ${esc(v.name)}`, () => punish(v.id, false)); });
+  if (t === "duelo") return chooseOther(p, t, o => !o.out, rival => { spend(p, t); saveGame(); duel([p.id, rival.id], { giveCard: false, onLoser: id => punish(id, 1) }); });
+  if (t === "papa") return chooseOther(p, t, o => !o.out, v => { spend(p, t); reveal(`${esc(p.name)} se salva y le pasa la papa caliente a ${esc(v.name)}`, () => punish(v.id, 0)); });
   if (t === "robo") return chooseOther(p, t, o => o.cards.length > 0, v => {
     const s = pick(v.cards); v.cards.splice(v.cards.indexOf(s), 1); spend(p, t); p.cards.push(s); saveGame(); fanfare();
     render(`<div class="grow"></div><div class="banner pop"><p class="eyebrow">${esc(p.name)} le robó a ${esc(v.name)}</p>${cardHtml(s, null, "big")}</div><div class="grow"></div><button class="btn" data-act="ok">Volver</button>`, { ok: () => showAccused(p) });
@@ -476,19 +518,19 @@ function useCard(p, t) {
 }
 
 // ---------- prendas y tomatazos ----------
-function punish(id, withHit) {
+function punish(id, hits) {
   const p = P(id); const prenda = pick(D.prendas);
   render(`
     <div class="banner">${avatar(p, "lg")}<h2>${esc(p.name)}, te toca:</h2></div>
     <div class="prenda pop">${esc(prenda)}</div>
-    <p class="small muted" style="text-align:center">${withHit ? "Al terminar la prenda recibes un tomatazo." : "Esta prenda no da tomatazo."}</p>
+    <p class="small muted" style="text-align:center">${hits === 2 ? "Al terminar la prenda recibes 2 tomatazos." : hits ? "Al terminar la prenda recibes un tomatazo." : "Esta prenda no da tomatazo."}</p>
     <div class="grow"></div>
     <button class="btn gold" data-act="other">Otra prenda</button>
     <button class="btn" data-act="done">¡Hecho!</button>
-  `, { other: () => punish(id, withHit), done: () => withHit ? giveTomato(p) : afterRound() });
+  `, { other: () => punish(id, hits), done: () => hits ? giveTomato(p, hits) : afterRound() });
 }
-function giveTomato(p) {
-  p.coal++;
+function giveTomato(p, hits = 1) {
+  p.coal += hits;
   const max = G.settings.maxCoal;
   const out = max && p.coal >= max && !p.out;
   if (out) p.out = true;
@@ -496,7 +538,7 @@ function giveTomato(p) {
   render(`
     <div class="grow"></div>
     <div class="banner"><img class="pop splat" src="img/tomate.webp" alt="Tomatazo">
-    <h2>¡Tomatazo para ${esc(p.name)}!</h2>${tomatoes(p)}
+    <h2>¡${hits > 1 ? hits + " tomatazos" : "Tomatazo"} para ${esc(p.name)}!</h2>${tomatoes(p)}
     ${out ? `<p class="prenda">¡${esc(p.name)} queda fuera de la partida! Pero sigue votando.</p>` : max ? `<p class="muted">Con ${max} tomatazos quedas fuera.</p>` : ""}</div>
     <div class="grow"></div>
     <button class="btn" data-act="ok">Siguiente ronda</button>
@@ -526,7 +568,7 @@ function finalScreen() {
   const ps = G.players.slice();
   const top = f => ps.slice().sort((a, b) => f(b) - f(a))[0];
   const best = ps.slice().sort((a, b) => a.out - b.out || a.coal - b.coal || a.votes - b.votes)[0];
-  const hit = top(p => p.coal), sus = top(p => p.votes), duelist = top(p => p.duelWins), seer = top(p => p.hunchHits);
+  const hit = top(p => p.coal), sus = top(p => p.votes), duelist = top(p => p.duelWins), seer = top(p => p.hunchHits), lawyer = top(p => p.defWins || 0);
   const award = (p, t, d) => `<div class="award">${avatar(p)}<div><b>${t}</b><span>${esc(p.name)} · ${d}</span></div></div>`;
   del(KEY_GAME); fanfare();
   render(`
@@ -537,6 +579,7 @@ function finalScreen() {
       ${sus.votes ? award(sus, "El Más Sospechoso", `${sus.votes} votos en total`) : ""}
       ${seer.hunchHits ? award(seer, "El Adivino", `${seer.hunchHits} presentimientos acertados`) : ""}
       ${duelist.duelWins ? award(duelist, "El Duelista", `${duelist.duelWins} duelos ganados`) : ""}
+      ${lawyer.defWins ? award(lawyer, "El Abogado", `${lawyer.defWins} defensas ganadas`) : ""}
     </div>
     <div class="grow"></div>
     <button class="btn" data-act="again">Revancha</button>
