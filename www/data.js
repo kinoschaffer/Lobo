@@ -66,10 +66,18 @@ window.QH_DATA = {
   duelosFisicos: [
     { nombre: "Piedra, papel o tijera", texto: "A la cuenta de tres, todos juegan a la vez. Si hay más de dos, pierde quien quede solo con la jugada que pierde.", cuenta: ["Piedra…", "Papel…", "¡Tijera!"] },
     { nombre: "Duelo de miradas", texto: "Mírense fijo a los ojos. El primero que se ríe o aparta la vista pierde.", cuenta: ["Prepárense…", "Miren…", "¡Ya!"] },
-    { nombre: "Último en tocarse la nariz", texto: "Cuando aparezca «¡Nariz!», tóquense la nariz. El último pierde.", cuenta: ["Atentos…", "…", "¡Nariz!"] },
     { nombre: "Equilibrio", texto: "Párense en un pie con los brazos abiertos. El primero que apoya el otro pie pierde.", cuenta: ["Un pie arriba…", "Brazos abiertos…", "¡Ya!"] },
-    { nombre: "Canción sin reír", texto: "Canten una canción que todos sepan mirándose a los ojos. El primero que se ríe pierde.", cuenta: ["Afinen…", "Respiren…", "¡A cantar!"] },
     { nombre: "Trabalenguas", texto: "Por turnos, digan rápido: «Pablito clavó un clavito en la calva de un calvito». El primero que se traba pierde.", cuenta: ["Lengua lista…", "…", "¡Ya!"] },
-    { nombre: "Palabra prohibida", texto: "Por turnos, digan palabras de una categoría (animales, comidas, países…). Quien repite o tarda más de 3 segundos pierde.", cuenta: ["Piensen…", "Categoría lista…", "¡Ya!"] }
-  ]
+    { nombre: "Palabra prohibida", texto: "Por turnos, digan palabras de una categoría (animales, comidas, países…). Quien repite o tarda más de 3 segundos pierde.", cuenta: ["Piensen…", "Categoría lista…", "¡Ya!"] },
+    { nombre: "Lucha de pulgares", max: 2, texto: "Tómense de la mano con los dedos enganchados. Pierde al que le atrapen el pulgar durante 3 segundos.", cuenta: ["Manos listas…", "Pulgares arriba…", "¡A luchar!"] },
+    { nombre: "Sin parpadear", texto: "Mírense fijo. El primero que parpadea pierde.", cuenta: ["Ojos abiertos…", "Miren…", "¡Ya!"] },
+    { nombre: "Abecedario de nombres", texto: "Por turnos, digan nombres de personas en orden alfabético: Ana, Bruno, Carla… Pierde quien se traba o tarda más de 3 segundos.", cuenta: ["Piensen…", "A…", "¡Ya!"] },
+    { nombre: "Estatua", texto: "Quédense quietos como estatuas. El resto del grupo intenta hacerlos reír sin tocarlos. Pierde el primero que se mueve o se ríe.", cuenta: ["Posición…", "Congelados…", "¡Ya!"] }
+  ],
+
+  // Palabras para la mímica rápida
+  mimica: ["Astronauta", "Pingüino", "Bombero", "Dentista", "Surfista", "Pizza", "Elefante", "Paraguas", "Karaoke", "Boxeador",
+    "Mago", "Cocodrilo", "Malabarista", "Cocinero", "Zombi", "Bailarina", "Pescador", "Fotógrafo", "Gorila", "Helicóptero",
+    "Dormir", "Lavarse los dientes", "Andar en bici", "Pescar", "Escalar", "Tocar la batería", "Ordeñar una vaca", "Patinar",
+    "Pirata", "Robot", "Jardinero", "Cajero", "Mosquito", "Canguro", "Payaso", "Futbolista", "Jirafa", "Ninja", "Mimo", "Vampiro"]
 };

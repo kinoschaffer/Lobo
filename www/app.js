@@ -386,22 +386,237 @@ function results() {
 }
 
 // ---------- duelos ----------
-function duel(ids, ctx) {
+// Duelos en el celular. "dos": pantalla dividida, solo para 2. "turnos" y "bomba": pasando el celular, para 2 o más.
+const DUELOS_CEL = {
+  reflejos: { tipo: "dos", nombre: "Reflejos", texto: "Pongan el celular en la mesa entre los dos. Cuando la franja del medio se ponga verde, toquen su lado. Si tocan antes, pierden." },
+  toques: { tipo: "dos", nombre: "Carrera de toques", texto: "Pongan el celular en la mesa entre los dos. Cuando empiece, toquen su lado lo más rápido posible durante 5 segundos." },
+  tira: { tipo: "dos", nombre: "Tira y afloja", texto: "Celular en la mesa entre los dos. Cada toque tira la cuerda hacia tu lado. Gana quien se quede con toda la pantalla." },
+  colores: { tipo: "dos", nombre: "Colores trampa", texto: "En el medio aparecen nombres de colores pintados de otro color. Toquen su lado solo cuando la palabra y el color coincidan. Si tocas mal, pierdes." },
+  distinto: { tipo: "dos", nombre: "¿Cuál es distinto?", texto: "Cada uno tiene la misma grilla de dibujos. Hay uno distinto: el primero que lo toca gana. Si tocas uno equivocado, pierdes." },
+  memoria: { tipo: "turnos", nombre: "Memoria", texto: "Por turnos, cada uno mira una secuencia de colores y la repite. Cada vez es más larga. Pierde quien recuerde la secuencia más corta." },
+  cronometro: { tipo: "turnos", nombre: "Cronómetro ciego", texto: "Por turnos: toca «Iniciar», cuenta 7 segundos en tu cabeza y toca «Parar». Pierde quien quede más lejos de 7 segundos." },
+  pulso: { tipo: "turnos", nombre: "Pulso firme", texto: "Por turnos: mantén el dedo sobre el círculo mientras se mueve. Si lo sueltas o te sales, termina tu turno. Pierde quien menos aguante." },
+  mimica: { tipo: "turnos", nombre: "Mímica rápida", texto: "Por turnos: el celular te muestra una palabra en secreto y la actúas para el grupo, sin hablar. Pierde quien tarde más en que se la adivinen." },
+  bomba: { tipo: "bomba", nombre: "Bomba de tiempo", texto: "Se pasan el celular. Quien lo tiene toca «Pasar» y se lo da al siguiente. En algún momento explota: pierde quien la tenga en la mano." }
+};
+function duel(ids, ctx, force) {
   const ps = ids.map(P);
-  const phone = ps.length === 2 && Math.random() < 0.5;
-  const kind = phone ? pick(["reflejos", "toques"]) : null;
-  const fis = phone ? null : pick(D.duelosFisicos);
-  const info = kind === "reflejos" ? { nombre: "Reflejos", texto: "Pongan el celular en la mesa entre los dos. Cuando la franja del medio se ponga verde, toquen su lado. Si tocan antes, pierden." }
-    : kind === "toques" ? { nombre: "Carrera de toques", texto: "Pongan el celular en la mesa entre los dos. Cuando empiece, toquen su lado lo más rápido posible durante 5 segundos." } : fis;
+  const two = ps.length === 2;
+  const cel = Object.keys(DUELOS_CEL).filter(k => two || DUELOS_CEL[k].tipo !== "dos");
+  const fisicos = D.duelosFisicos.filter(f => two || !f.max);
+  const useCel = force ? !!DUELOS_CEL[force] : Math.random() < (two ? 0.6 : 0.45);
+  const kind = useCel ? (force || pick(cel)) : null;
+  const info = kind ? DUELOS_CEL[kind] : (force ? D.duelosFisicos.find(f => f.nombre === force) : pick(fisicos));
   render(`
-    <p class="eyebrow">Duelo</p>
+    <p class="eyebrow">Duelo${kind ? " en el celular" : ""}</p>
     <h1>${esc(info.nombre)}</h1>
     <div class="row" style="justify-content:center">${ps.map(p => `<div class="banner">${avatar(p, "lg")}<b>${esc(p.name)}</b></div>`).join("")}</div>
     <p>${esc(info.texto)}</p>
     <div class="grow"></div>
     <button class="btn gold" data-act="go">¡Empezar!</button>
-  `, { go: () => kind === "reflejos" ? reflexDuel(ps, ctx) : kind === "toques" ? tapDuel(ps, ctx) : physicalDuel(ps, fis, ctx) });
+  `, {
+    go: () => {
+      if (!kind) return physicalDuel(ps, info, ctx);
+      ({ reflejos: reflexDuel, toques: tapDuel, tira: ropeDuel, colores: colorDuel, distinto: oddDuel, bomba: bombDuel }[kind] || ((a, c) => turnDuel(a, kind, c)))(ps, ctx);
+    }
+  });
 }
+
+// --- pantalla dividida (2 jugadores) ---
+function ropeDuel(ps, ctx) {
+  duelBoard(ps, "Preparados…");
+  const dz = document.getElementById("dz");
+  let pos = 0, on = false; const WIN = 12;
+  const draw = () => dz.style.gridTemplateRows = `${50 - pos * 3.6}fr auto ${50 + pos * 3.6}fr`;
+  [0, 1].forEach(i => document.getElementById("h" + i).addEventListener("pointerdown", () => {
+    if (!on) return;
+    pos += i === 0 ? -1 : 1; draw(); beep(i ? 520 : 440, 0.03, "square", 0.04);
+    if (Math.abs(pos) >= WIN) { on = false; const loser = pos < 0 ? 1 : 0; document.getElementById("mid").textContent = `¡${ps[1 - loser].name} gana!`; fanfare(); later(() => duelEnd(ps, ps[loser].id, ctx), 1200); }
+  }));
+  ["3", "2", "1"].forEach((t, k) => later(() => { document.getElementById("mid").textContent = t; beep(520); }, k * 800));
+  later(() => { on = true; document.getElementById("mid").textContent = "¡TIREN!"; beep(1100, 0.2); }, 2400);
+}
+function colorDuel(ps, ctx) {
+  const C = [["ROJO", "#ff5a4e"], ["AZUL", "#3d7bff"], ["VERDE", "#3bd16f"], ["AMARILLO", "#e6b800"], ["VIOLETA", "#a066ff"]];
+  duelBoard(ps, "Atentos…");
+  const mid = document.getElementById("mid"); mid.style.background = "#fff"; mid.style.fontSize = "2.4rem";
+  let match = false, done = false, n = 0;
+  const end = (loser, msg) => { if (done) return; done = true; clearTimers(); mid.textContent = msg; later(() => duelEnd(ps, ps[loser].id, ctx), 1300); };
+  [0, 1].forEach(i => document.getElementById("h" + i).addEventListener("pointerdown", () => {
+    if (done || !n) return;
+    if (match) { fanfare(); end(1 - i, `¡${ps[i].name} acertó!`); } else { beep(200, 0.4, "sawtooth"); end(i, `¡${ps[i].name} se equivocó!`); }
+  }));
+  const step = () => {
+    n++;
+    match = n > 3 && Math.random() < 0.3;
+    const w = pick(C); const c = match ? w : pick(C.filter(x => x !== w));
+    mid.textContent = w[0]; mid.style.color = c[1];
+    later(step, Math.max(650, 1100 - n * 25));
+  };
+  later(step, 1200);
+}
+function oddDuel(ps, ctx) {
+  const pairs = [["🐶", "🐱"], ["🍋", "🍌"], ["⭐", "🌟"], ["🚗", "🚕"], ["🌲", "🌵"], ["😎", "🤓"], ["🍎", "🍅"], ["🐸", "🐢"], ["🎈", "🎀"], ["🦊", "🐻"]];
+  const [a, b] = pick(pairs); const N = 20; const odd = rnd(N);
+  const grid = `<div class="odd">${Array.from({ length: N }, (_, k) => `<button data-k="${k}">${k === odd ? b : a}</button>`).join("")}</div>`;
+  render(`<div class="duel" id="dz">
+    <div class="half p1" id="h0"><div><small>${esc(ps[0].name)}</small>${grid}</div></div>
+    <div class="mid" id="mid">¡Busquen el distinto!</div>
+    <div class="half p2" id="h1"><div><small>${esc(ps[1].name)}</small>${grid}</div></div></div>`);
+  let done = false;
+  [0, 1].forEach(i => document.getElementById("h" + i).addEventListener("pointerdown", e => {
+    const t = e.target.closest("[data-k]"); if (!t || done) return; done = true;
+    const ok = +t.dataset.k === odd; t.classList.add(ok ? "hit" : "miss");
+    ok ? fanfare() : beep(200, 0.4, "sawtooth");
+    document.getElementById("mid").textContent = ok ? `¡${ps[i].name} lo encontró!` : `¡${ps[i].name} se equivocó!`;
+    later(() => duelEnd(ps, ps[ok ? 1 - i : i].id, ctx), 1300);
+  }));
+}
+
+// --- bomba (2 o más, pasando el celular) ---
+function bombDuel(ps, ctx) {
+  let i = rnd(ps.length), exploded = false;
+  const fuse = 9000 + rnd(12000), t0 = Date.now();
+  const draw = () => {
+    const cur = ps[i], next = ps[(i + 1) % ps.length];
+    render(`
+      <div class="grow"></div>
+      <div class="banner"><p class="eyebrow">Tiene la bomba</p>${avatar(cur, "xl shake")}<h1>${esc(cur.name)}</h1></div>
+      <div class="bomb pop">💣</div>
+      <div class="grow"></div>
+      <button class="btn" data-act="pass">¡Pasar a ${esc(next.name)}!</button>
+    `, { pass: () => { if (exploded) return; i = (i + 1) % ps.length; draw(); } });
+    tickTock();
+    later(boom, Math.max(0, fuse - (Date.now() - t0)));
+  };
+  const tickTock = () => { const el = Date.now() - t0; beep(el > fuse * 0.7 ? 1000 : 700, 0.05, "square", 0.06); later(tickTock, el > fuse * 0.7 ? 220 : 480); };
+  const boom = () => {
+    exploded = true; clearTimers();
+    [90, 70, 50].forEach((f, k) => setTimeout(() => beep(f, 0.4, "sawtooth", 0.25), k * 120));
+    if (navigator.vibrate) navigator.vibrate([300, 80, 300]);
+    render(`<div class="grow"></div><div class="banner"><div class="bomb boom">💥</div><h1>¡BUM!</h1><p class="muted">Explotó en las manos de ${esc(ps[i].name)}.</p></div><div class="grow"></div><button class="btn" data-act="ok">Continuar</button>`, { ok: () => duelEnd(ps, ps[i].id, ctx) });
+  };
+  draw();
+}
+
+// --- por turnos (2 o más, pasando el celular) ---
+function turnDuel(ps, kind, ctx, orig = ps) {
+  const info = DUELOS_CEL[kind]; const scores = {};
+  const lowerWins = kind === "cronometro" || kind === "mimica";
+  const fmt = v => kind === "memoria" ? `${v} colores` : kind === "pulso" ? `${v.toFixed(1)} s` : kind === "cronometro" ? `${v.toFixed(2)} s de error` : `${v.toFixed(1)} s`;
+  const next = k => {
+    if (k >= ps.length) return finish();
+    const p = ps[k];
+    render(`
+      <p class="eyebrow">${esc(info.nombre)} · turno ${k + 1} de ${ps.length}</p>
+      <div class="grow"></div>
+      <div class="banner"><p class="eyebrow">Pásale el celular a</p>${avatar(p, "xl pop")}<h1>${esc(p.name)}</h1></div>
+      <div class="grow"></div>
+      <button class="btn gold" data-act="go">Soy ${esc(p.name)}, ¡listo!</button>
+    `, { go: () => TURNOS[kind](p, v => { scores[p.id] = v; next(k + 1); }) });
+  };
+  const finish = () => {
+    const vals = ps.map(p => scores[p.id]);
+    const worst = lowerWins ? Math.max(...vals) : Math.min(...vals);
+    const losers = ps.filter(p => scores[p.id] === worst);
+    const sorted = ps.slice().sort((a, b) => lowerWins ? scores[a.id] - scores[b.id] : scores[b.id] - scores[a.id]);
+    render(`
+      <p class="eyebrow">${esc(info.nombre)}</p><h2>Resultados</h2>
+      <div class="plist">${sorted.map(p => `<div class="pitem">${avatar(p)}<span class="name">${esc(p.name)}</span><b>${fmt(scores[p.id])}</b></div>`).join("")}</div>
+      ${losers.length > 1 ? `<p class="muted">Empate en el último lugar: desempatan ${names(losers)}.</p>` : ""}
+      <div class="grow"></div>
+      <button class="btn" data-act="ok">${losers.length > 1 ? "Desempate" : "Continuar"}</button>
+    `, { ok: () => losers.length > 1 ? turnDuel(losers, kind, ctx, orig) : duelEnd(orig, losers[0].id, ctx) });
+  };
+  next(0);
+}
+const TURNOS = {
+  cronometro(p, done) {
+    let t0 = 0;
+    render(`
+      <p class="eyebrow">${esc(p.name)}</p><div class="grow"></div>
+      <h1 style="text-align:center">Cuenta 7 segundos</h1><p class="muted" style="text-align:center">Toca «Iniciar», cuenta en tu cabeza y toca «Parar» cuando creas que pasaron 7 segundos.</p>
+      <div class="grow"></div><button class="btn gold" data-act="go" id="cb">Iniciar</button>
+    `, {
+      go: (_, b) => {
+        if (!t0) { t0 = performance.now(); b.textContent = "Parar"; b.classList.remove("gold"); return; }
+        const t = (performance.now() - t0) / 1000, err = Math.abs(t - 7);
+        render(`<div class="grow"></div><div class="banner pop"><p class="eyebrow">${esc(p.name)}</p><h1>${t.toFixed(2)} s</h1><p class="muted">${err < 0.3 ? "¡Casi perfecto!" : err < 1 ? "Muy cerca." : "Lejos…"} ${err.toFixed(2)} s de diferencia.</p></div><div class="grow"></div><button class="btn" data-act="ok">Siguiente</button>`, { ok: () => done(err) });
+      }
+    });
+  },
+  memoria(p, done) {
+    const cols = ["#ff5a4e", "#3d7bff", "#3bd16f", "#ffcf4a"], tones = [330, 440, 554, 659];
+    const seq = []; let pos = 0, input = false;
+    render(`
+      <p class="eyebrow">${esc(p.name)} · Memoria</p>
+      <h2 id="mm" style="text-align:center">Mira…</h2>
+      <div class="simon">${cols.map((c, k) => `<button data-k="${k}" style="background:${c}" aria-label="Color ${k + 1}"></button>`).join("")}</div>
+      <div class="grow"></div>
+    `);
+    const pads = [...document.querySelectorAll(".simon button")];
+    const flash = k => { pads[k].classList.add("lit"); beep(tones[k], 0.3, "sine", 0.15); setTimeout(() => pads[k].classList.remove("lit"), 320); };
+    const round = () => {
+      seq.push(rnd(4)); pos = 0; input = false;
+      document.getElementById("mm").textContent = `Mira… (${seq.length})`;
+      seq.forEach((k, j) => later(() => flash(k), 700 + j * 600));
+      later(() => { input = true; document.getElementById("mm").textContent = "¡Repite!"; }, 700 + seq.length * 600);
+    };
+    pads.forEach((b, k) => b.addEventListener("pointerdown", () => {
+      if (!input) return; flash(k);
+      if (k !== seq[pos]) {
+        input = false; beep(150, 0.5, "sawtooth"); const score = seq.length - 1;
+        later(() => render(`<div class="grow"></div><div class="banner pop"><p class="eyebrow">${esc(p.name)}</p><h1>${score} colores</h1><p class="muted">Se equivocó en la secuencia de ${seq.length}.</p></div><div class="grow"></div><button class="btn" data-act="ok">Siguiente</button>`, { ok: () => done(score) }), 600);
+        return;
+      }
+      if (++pos === seq.length) { input = false; if (seq.length >= 20) return done(20); later(round, 700); }
+    }));
+    seq.push(rnd(4), rnd(4)); round();
+  },
+  pulso(p, done) {
+    render(`<div class="pulse-area" id="pa"><p class="eyebrow">${esc(p.name)} · Pulso firme</p><p id="pm">Pon el dedo en el círculo</p><div class="dot" id="dot"></div><div class="count" id="pt"></div></div>`);
+    const area = document.getElementById("pa"), dot = document.getElementById("dot");
+    let x = 0.5, y = 0.55, vx = 0, vy = 0, holding = false, t0 = 0, over = false, raf;
+    const place = () => { dot.style.left = (x * 100) + "%"; dot.style.top = (y * 100) + "%"; };
+    place();
+    const R = () => dot.offsetWidth * 0.75;
+    const stop = () => {
+      if (over) return; over = true; cancelAnimationFrame(raf); beep(200, 0.4, "sawtooth");
+      const t = holding ? (performance.now() - t0) / 1000 : 0;
+      render(`<div class="grow"></div><div class="banner pop"><p class="eyebrow">${esc(p.name)}</p><h1>${t.toFixed(1)} s</h1><p class="muted">Aguantó ${t.toFixed(1)} segundos.</p></div><div class="grow"></div><button class="btn" data-act="ok">Siguiente</button>`, { ok: () => done(t) });
+    };
+    const loop = () => {
+      const el = (performance.now() - t0) / 1000, sp = 0.0009 + el * 0.00012;
+      vx += (Math.random() - 0.5) * sp * 2; vy += (Math.random() - 0.5) * sp * 2;
+      vx *= 0.97; vy *= 0.97; x += vx; y += vy;
+      if (x < 0.12 || x > 0.88) vx = -vx, x = Math.min(0.88, Math.max(0.12, x));
+      if (y < 0.2 || y > 0.85) vy = -vy, y = Math.min(0.85, Math.max(0.2, y));
+      place(); document.getElementById("pt").textContent = el.toFixed(1);
+      if (el >= 30) return stop();
+      raf = requestAnimationFrame(loop);
+    };
+    dot.addEventListener("pointerdown", e => { if (holding || over) return; holding = true; t0 = performance.now(); dot.classList.add("held"); document.getElementById("pm").textContent = "¡No lo sueltes!"; try { dot.releasePointerCapture(e.pointerId); } catch {} raf = requestAnimationFrame(loop); });
+    area.addEventListener("pointermove", e => { if (!holding) return; const r = dot.getBoundingClientRect(); if (Math.hypot(e.clientX - (r.left + r.width / 2), e.clientY - (r.top + r.height / 2)) > R()) stop(); });
+    area.addEventListener("pointerup", () => holding && stop());
+    area.addEventListener("pointercancel", () => holding && stop());
+  },
+  mimica(p, done) {
+    const word = pick(D.mimica);
+    render(`<p class="eyebrow">${esc(p.name)} · Mímica</p><div class="grow"></div><h2 style="text-align:center">Que nadie más mire la pantalla</h2><div class="grow"></div><button class="btn gold" data-act="see">Ver mi palabra</button>`, {
+      see: () => render(`<p class="eyebrow">${esc(p.name)}, tu palabra es</p><div class="grow"></div><div class="prenda pop" style="font-size:2rem">${esc(word)}</div><div class="grow"></div><button class="btn" data-act="go">¡Empezar la mímica!</button>`, {
+        go: () => {
+          const t0 = performance.now();
+          render(`<p class="eyebrow">${esc(p.name)} actúa</p><div class="grow"></div><div class="count" id="mt" style="text-align:center">0.0</div><p class="muted" style="text-align:center">Sin hablar. El grupo adivina en voz alta.</p><div class="grow"></div><button class="btn gold" data-act="ok">¡Adivinado!</button><button class="btn ghost" data-act="give">Nadie lo adivina (60 s)</button>`, {
+            ok: () => fin((performance.now() - t0) / 1000), give: () => fin(60)
+          });
+          const tk = () => { const t = (performance.now() - t0) / 1000; const el = document.getElementById("mt"); if (!el) return; el.textContent = t.toFixed(1); if (t >= 60) return fin(60); later(tk, 100); };
+          tk();
+          const fin = t => render(`<div class="grow"></div><div class="banner pop"><p class="eyebrow">${esc(p.name)} · era «${esc(word)}»</p><h1>${t >= 60 ? "Nadie lo adivinó" : t.toFixed(1) + " s"}</h1></div><div class="grow"></div><button class="btn" data-act="ok">Siguiente</button>`, { ok: () => done(Math.min(60, t)) });
+        }
+      })
+    });
+  }
+};
 function physicalDuel(ps, fis, ctx) {
   render(`<div class="grow"></div><div class="count" id="ct"></div><div class="grow"></div>`, { _cls: "center" });
   fis.cuenta.forEach((t, i) => later(() => { document.getElementById("ct").textContent = t; beep(i === 2 ? 990 : 520, i === 2 ? 0.3 : 0.12); }, i * 1000));
@@ -637,6 +852,9 @@ function finalScreen() {
     <button class="btn ghost" data-act="home">Inicio</button>
   `, { again: () => { newGame(); nextRound(); }, home: () => { G = null; home(); } });
 }
+
+// Solo para pruebas automáticas: abrir con #test
+if (location.hash === "#test") window.__qhTest = { duel: (n, kind) => { G = null; players = ["Ana", "Beto", "Caro", "Dani"].slice(0, Math.max(3, n)).map((x, i) => ({ id: "t" + i, name: x, photo: null })); newGame(); G.round = 1; G.cur = drawSituation(); G.cur.votes = {}; G.cur.hunch = {}; duel(G.players.slice(0, n).map(p => p.id), { giveCard: true, onLoser: id => render(`<h1 id="loser">${esc(P(id).name)}</h1>`) }, kind); } };
 
 home();
 })();

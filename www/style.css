@@ -170,3 +170,19 @@ input[type=text]:focus{outline:none;border-color:var(--gold)}
 .rules-mini{display:grid;gap:2px;justify-items:center;font-size:.9rem;color:var(--muted)}
 .rules-mini b{color:var(--cream)}
 #activebar:empty{display:none}
+
+/* Duelos nuevos */
+.odd{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:6px}
+.odd button{font-size:1.7rem;line-height:1;aspect-ratio:1;border-radius:10px;background:rgba(255,255,255,.12)}
+.odd button.hit{background:#3bd16f}.odd button.miss{background:var(--red)}
+.half small{display:block;font-size:1rem;margin-bottom:4px}
+.bomb{font-size:7rem;text-align:center;line-height:1}
+.bomb.pop{animation:pulse .5s ease-in-out infinite alternate}
+@keyframes pulse{to{transform:scale(1.12)}}
+.simon{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:min(100%,340px);margin:0 auto}
+.simon button{aspect-ratio:1;border-radius:24px;opacity:.45;transition:opacity .1s,transform .1s}
+.simon button.lit{opacity:1;transform:scale(1.05);box-shadow:0 0 30px rgba(255,255,255,.5)}
+.pulse-area{position:fixed;inset:0;background:var(--pine);touch-action:none;user-select:none;-webkit-user-select:none;text-align:center;padding:calc(var(--st) + 16px) 16px 16px;display:grid;align-content:start;gap:6px;z-index:5}
+.pulse-area .count{position:absolute;left:0;right:0;bottom:calc(var(--sb) + 20px)}
+.dot{position:absolute;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 8px rgba(255,207,74,.25)}
+.dot.held{background:var(--mint);box-shadow:0 0 0 10px rgba(95,220,175,.3)}
