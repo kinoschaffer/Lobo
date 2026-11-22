@@ -196,3 +196,4 @@ input[type=text]:focus{outline:none;border-color:var(--gold)}
 .option img{width:54px;height:72px;object-fit:cover;border-radius:8px;flex:none}
 .option:active{transform:translateY(2px)}
 .tag{font-style:normal;font-family:var(--body);font-size:.72rem;font-weight:800;background:var(--gold);color:var(--ink);border-radius:99px;padding:.1rem .5rem;vertical-align:3px;margin-left:4px}
+.rules-mini .ok{color:var(--mint)}.rules-mini .ko{color:var(--red)}

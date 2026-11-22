@@ -52,9 +52,9 @@ window.QH_DATA = {
   ],
 
   trampas: {
-    escudo: { nombre: "Escudo", img: "carta_escudo", texto: "Te salvas: ni prenda ni tomatazo." },
-    rebote: { nombre: "Bumerán", img: "carta_rebote", texto: "La prenda y el tomatazo vuelan al segundo más votado." },
-    papa:   { nombre: "Papa Caliente", img: "carta_papa", texto: "Te salvas y eliges a quién le toca la prenda (sin tomatazo)." },
+    escudo: { nombre: "Escudo", img: "carta_escudo", texto: "Te salvas de la prenda." },
+    rebote: { nombre: "Bumerán", img: "carta_rebote", texto: "La prenda vuela al segundo más votado." },
+    papa:   { nombre: "Papa Caliente", img: "carta_papa", texto: "Te salvas y eliges a quién le toca la prenda." },
     robo:   { nombre: "Mano Traviesa", img: "carta_robo", texto: "Le robas una carta a otro jugador." }
   },
 
@@ -62,7 +62,7 @@ window.QH_DATA = {
     texto: "Si crees que te van a votar a ti, úsalo al votar. Si aciertas, te salvas. Si fallas, la próxima ronda empiezas con +2 votos." },
 
   reto: { nombre: "Reto a duelo", img: "carta_reto",
-    texto: "Cuando te toque la prenda, reta a quien quieras. Si ganas, la prenda pasa a él; si pierdes, pagas doble." },
+    texto: "Cuando te toque la prenda, reta a quien quieras. Si ganas, la prenda pasa a él; si pierdes, tomatazo seguro y prenda." },
 
   // Duelos físicos: la app cuenta y el anfitrión marca quién perdió. Sirven para 2 o más.
   duelosFisicos: [
