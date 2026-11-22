@@ -23,7 +23,27 @@ window.QH_DATA = {
     "Imita a un famoso y que adivinen quién es.",
     "Haz una declaración de amor dramática a una silla.",
     "Cuenta del 10 al 1 en otro idioma (o inventado).",
-    "Haz la mímica de una película y que la adivinen."
+    "Haz la mímica de una película y que la adivinen.",
+    "Haz 10 saltos de tijera contando en voz alta en otro idioma (o inventado).",
+    "Canta una canción cambiando todas las vocales por «i».",
+    "Imita la risa de tres personas del grupo.",
+    "Haz de presentador de noticias y anuncia lo que pasó en esta ronda.",
+    "Di 5 palabras que rimen con «tomate» en 15 segundos.",
+    "Camina hasta la puerta y vuelve en cámara lenta.",
+    "Haz una pose de superhéroe y mantenla 15 segundos.",
+    "Cuenta un cuento de 30 segundos que empiece con «Había una vez un tomate…».",
+    "Haz de estatua viviente en la pose que elija el grupo durante 15 segundos.",
+    "Recita los meses del año al revés.",
+    "Haz tu mejor imitación de un bebé llorando.",
+    "Habla como pirata durante 30 segundos contando qué desayunaste.",
+    "Narra una carrera imaginaria entre dos personas del grupo como locutor.",
+    "Inventa una palabra nueva y explica qué significa.",
+    "Imita a un mosquito molestando al grupo durante 10 segundos.",
+    "Haz el sonido de 5 animales distintos sin parar.",
+    "Mantén un objeto en equilibrio sobre la cabeza durante 15 segundos.",
+    "Explica cómo hacer un sándwich como si fuera una película de acción.",
+    "Deletrea tu nombre completo al revés.",
+    "Entrevista a la persona de tu izquierda como periodista de chimentos."
   ],
 
   // Prendas de ronda: se cumplen durante toda la ronda siguiente. Si la rompe, tomatazo.

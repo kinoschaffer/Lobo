@@ -928,12 +928,21 @@ function useCard(p, t) {
 }
 
 // ---------- prendas y tomatazos ----------
+// Mazos de prendas: cada prenda sale una sola vez hasta que se usan todas; recién ahí se vuelve a mezclar.
+function drawPrenda(kind) {
+  const src = kind === "light" ? D.prendasLight.map(t => ({ t })) : kind === "ronda" ? D.prendasRonda : D.prendas.map(t => ({ t }));
+  G.decks = G.decks || {};
+  let deck = G.decks[kind];
+  if (!deck || !deck.length) deck = G.decks[kind] = shuffle(src.map(x => x.t));
+  const t = deck.pop(); saveGame();
+  return src.find(x => x.t === t) || { t };
+}
 // sure: tomatazos seguros por haber perdido una apuesta (defensa desastrosa o reto perdido).
 // Cumplir la prenda no da tomatazo; no cumplirla, uno más.
 function punish(id, sure = 0, opt = {}) {
   const p = P(id), partner = opt.partner && P(opt.partner);
   const ronda = !opt.light && !partner && Math.random() < 0.4;
-  const pr = opt.light ? { t: pick(D.prendasLight) } : ronda ? pick(D.prendasRonda) : { t: pick(D.prendas) };
+  const pr = drawPrenda(opt.light ? "light" : ronda ? "ronda" : "normal");
   const tom = n => n === 1 ? "1 tomatazo" : `${n} tomatazos`;
   render(`
     <div class="banner">${partner ? `<div class="row" style="justify-content:center">${avatar(p, "lg")}${avatar(partner, "lg")}</div><h2>${esc(p.name)} y ${esc(partner.name)}, les toca:</h2>` : `${avatar(p, "lg")}<h2>${esc(p.name)}, te toca:</h2>`}</div>
@@ -947,10 +956,10 @@ function punish(id, sure = 0, opt = {}) {
       ${ronda ? `<span>Si la rompes durante la ronda: <b class="ko">+1 tomatazo</b></span>` : ""}
     </div>
     <div class="grow"></div>
-    <button class="btn gold" data-act="other">Otra prenda</button>
+    ${opt.changed ? `<p class="small muted" style="text-align:center">Ya se cambió la prenda una vez.</p>` : `<button class="btn gold" data-act="other">Cambiar prenda (una sola vez)</button>`}
     <div class="row"><button class="btn ghost" data-act="fail">No la ${ronda ? "acepta" : "cumplió"}</button><button class="btn" data-act="done">${ronda ? "¡Acepto!" : "¡Hecho!"}</button></div>
   `, {
-    other: () => punish(id, sure, opt),
+    other: () => punish(id, sure, { ...opt, changed: true }),
     fail: () => {
       if (opt.light) { toast("Prenda Light: sin tomatazo."); return afterRound(); }
       if (partner) return pickPlayer("¿Quién la hizo peor? Decide el grupo", [p, partner], w => giveTomato(w, (w === p ? sure : 0) + 1, `${w.name} la hizo peor`), () => punish(id, sure, opt));
