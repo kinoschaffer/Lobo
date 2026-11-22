@@ -61,7 +61,8 @@ process.on('unhandledRejection', e => { console.log(res.join('\n')); console.log
   await pg.click('[data-act=tp][data-arg=p0]'); await pg.click('[data-act=tp][data-arg=p1]');
   await pg.click('[data-act=sel][data-arg="1"]'); await pg.click('[data-act=tp][data-arg=p2]'); await pg.click('[data-act=tp][data-arg=p3]'); await pg.click('[data-act=tp][data-arg=p4]');
   await pg.click('[data-act=tp][data-arg=p5]');
-  ok((await pg.textContent('.toast').catch(() => '')).includes('Máximo 3'), 'No deja más de 3 por equipo');
+  ok((await pg.textContent('[data-act=sel][data-arg="1"]')).includes('4 jugadores'), 'Un equipo puede tener más de 3 jugadores');
+  await pg.click('[data-act=tp][data-arg=p5]'); // lo saca para seguir con equipos de 2, 3 y 2
   await pg.click('[data-act=addt]'); await pg.click('[data-act=tp][data-arg=p5]'); await pg.click('[data-act=tp][data-arg=p6]');
   await pg.fill('#tn2', 'Los Cracks'); await pg.press('#tn2', 'Tab');
   await pg.screenshot({ path: S + '3teams.png', fullPage: true });

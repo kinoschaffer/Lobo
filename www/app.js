@@ -133,7 +133,7 @@ function rules() {
       <div class="opt"><h3>7. Tomatazos</h3><p class="muted">Con ${settings.maxCoal || "muchos"} tomatazos quedas fuera, pero sigues votando. Gana quien termine con menos.</p></div>
       <div class="opt"><h3>Reto a duelo</h3><p class="muted">Cada jugador tiene 1 reto por partida, y a veces la ronda lo regala. Si te toca la prenda, retas a quien quieras: si ganas, la prenda pasa a él; si pierdes, 1 tomatazo seguro y además la prenda.</p></div>
       <div class="opt"><h3>Cartas</h3><p class="muted">Se ganan en duelos de dos y con el golpe de suerte. Hay cartas para cuando te toca la prenda (Escudo, Bumerán, Papa Caliente, Mano Traviesa, Cómplice, Abogado Defensor, Prenda Light, Ruleta, Doble o Nada), para votar en secreto (Voto Doble, Voto Robado, Anulador, Espejo), para usar en cualquier momento con el botón «Usar carta» (Limpieza, Castigo, Silencio, Intercambio) y Revancha para repetir un duelo perdido.</p></div>
-      <div class="opt"><h3>Por equipos</h3><p class="muted">En «Nueva partida» elige «Por equipos» y arma de 2 a 5 equipos de 2 o 3 jugadores. Se vota a equipos, el equipo más votado se defiende o hace una prenda de equipo, y gana el equipo con menos tomatazos.</p></div>
+      <div class="opt"><h3>Por equipos</h3><p class="muted">En «Nueva partida» elige «Por equipos» y arma de 2 a 5 equipos con los jugadores que quieras en cada uno. Se vota a equipos, el equipo más votado se defiende o hace una prenda de equipo, y gana el equipo con menos tomatazos.</p></div>
       <div class="opt"><h3>Prendas y preguntas</h3><p class="muted">Desde el inicio puedes activar o desactivar prendas y situaciones, y agregar prendas y preguntas propias.</p></div>
       <div class="opt"><h3>Golpe de suerte</h3><p class="muted">Al final de algunas rondas, alguien que no recibió votos gana una carta trampa, un presentimiento o un reto extra.</p></div>
     </div>
@@ -1146,8 +1146,8 @@ function ensureTeams() {
 function teamsError() {
   ensureTeams();
   if (teams.length < 2) return "Hacen falta al menos 2 equipos.";
-  const bad = teams.find(t => t.members.length < 2 || t.members.length > 3);
-  if (bad) return `«${bad.name}» tiene que tener 2 o 3 jugadores.`;
+  const bad = teams.find(t => t.members.length < 1);
+  if (bad) return `«${bad.name}» no tiene jugadores.`;
   return "";
 }
 function teamSummary() {
@@ -1162,12 +1162,12 @@ function teamsScreen(sel) {
   render(`
     <div class="topbar"><button class="btn ghost sm" data-act="back">← Listo</button><span class="pill">${teams.length} de 5 equipos</span></div>
     <h2>Armar equipos</h2>
-    <p class="muted">Elige un equipo y toca a los jugadores para sumarlos o sacarlos. Cada equipo: 2 o 3 jugadores. Quien no tenga equipo vota, pero no lo pueden votar.</p>
+    <p class="muted">Elige un equipo y toca a los jugadores para sumarlos o sacarlos. Cada equipo puede tener los jugadores que quieras. Quien no tenga equipo vota, pero no lo pueden votar.</p>
     <div class="teams">${teams.map((t, i) => `
       <div class="team ${i === sel ? "sel" : ""}" data-act="sel" data-arg="${i}">
         <div class="tname"><input type="text" id="tn${i}" value="${esc(t.name)}" maxlength="20" aria-label="Nombre del equipo">${teams.length > 2 ? `<button class="x" data-act="rmt" data-arg="${i}" aria-label="Quitar equipo">✕</button>` : ""}</div>
         <div class="tmem">${t.members.map(id => { const p = players.find(x => x.id === id); return p ? `${avatar(p)}` : ""; }).join("") || `<span class="small muted">Sin jugadores</span>`}</div>
-        <span class="small ${t.members.length >= 2 && t.members.length <= 3 ? "muted" : "warn"}">${t.members.length} jugador${t.members.length === 1 ? "" : "es"}</span>
+        <span class="small ${t.members.length ? "muted" : "warn"}">${t.members.length} jugador${t.members.length === 1 ? "" : "es"}</span>
       </div>`).join("")}
       ${teams.length < 5 ? `<button class="team add-team" data-act="addt">+ Agregar equipo</button>` : ""}
     </div>
@@ -1185,7 +1185,7 @@ function teamsScreen(sel) {
     tp: id => {
       const t = teams[sel];
       if (t.members.includes(id)) t.members = t.members.filter(x => x !== id);
-      else { if (t.members.length >= 3) return toast("Máximo 3 jugadores por equipo."); teams.forEach(o => o.members = o.members.filter(x => x !== id)); t.members.push(id); }
+      else { teams.forEach(o => o.members = o.members.filter(x => x !== id)); t.members.push(id); }
       saveTeams(); teamsScreen(sel);
     }
   });
