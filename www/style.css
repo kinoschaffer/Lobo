@@ -186,3 +186,13 @@ input[type=text]:focus{outline:none;border-color:var(--gold)}
 .pulse-area .count{position:absolute;left:0;right:0;bottom:calc(var(--sb) + 20px)}
 .dot{position:absolute;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 8px rgba(255,207,74,.25)}
 .dot.held{background:var(--mint);box-shadow:0 0 0 10px rgba(95,220,175,.3)}
+
+/* Opciones de defensa */
+.option{display:flex;gap:12px;align-items:center;text-align:left;width:100%;padding:12px 14px;border-radius:16px;background:var(--pine2);border:2px solid var(--pine3);color:var(--muted);font-size:.9rem;line-height:1.35}
+.option b{display:block;font-family:var(--display);font-weight:400;font-size:1.2rem;color:var(--cream);margin-bottom:2px}
+.option em{font-style:normal;font-weight:800}
+.option .ok{color:var(--mint)} .option .ko{color:var(--red)}
+.option.reto{border-color:var(--red)}
+.option img{width:54px;height:72px;object-fit:cover;border-radius:8px;flex:none}
+.option:active{transform:translateY(2px)}
+.tag{font-style:normal;font-family:var(--body);font-size:.72rem;font-weight:800;background:var(--gold);color:var(--ink);border-radius:99px;padding:.1rem .5rem;vertical-align:3px;margin-left:4px}

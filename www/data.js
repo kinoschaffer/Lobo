@@ -62,6 +62,9 @@ window.QH_DATA = {
   presentimiento: { nombre: "Presentimiento", img: "carta_presentimiento",
     texto: "Si crees que te van a votar a ti, úsalo al votar. Si aciertas, te salvas. Si fallas, la próxima ronda empiezas con +2 votos." },
 
+  reto: { nombre: "Reto a duelo", img: "carta_reto",
+    texto: "Cuando te toque la prenda, reta a quien quieras. Si ganas, la prenda pasa a él; si pierdes, pagas doble." },
+
   // Duelos físicos: la app cuenta y el anfitrión marca quién perdió. Sirven para 2 o más.
   duelosFisicos: [
     { nombre: "Piedra, papel o tijera", texto: "A la cuenta de tres, todos juegan a la vez. Si hay más de dos, pierde quien quede solo con la jugada que pierde.", cuenta: ["Piedra…", "Papel…", "¡Tijera!"] },

@@ -87,7 +87,7 @@ const active = () => G.players.filter(p => !p.out);
 
 const avatar = (p, cls = "") => `<div class="avatar ${cls} ${p.out ? "out" : ""}">${p.photo ? `<img src="${p.photo}" alt="">` : esc((p.name || "?").trim().charAt(0).toUpperCase())}</div>`;
 const tomatoes = p => `<span class="coals">${Array.from({ length: p.coal }, () => `<img src="img/tomate.webp" alt="tomatazo">`).join("")}</span>`;
-const cardHtml = (t, act, cls = "") => { const c = t === "presentimiento" ? D.presentimiento : D.trampas[t]; return `<button class="tcard ${cls}" ${act ? `data-act="${act}" data-arg="${t}"` : "disabled"}><img src="img/${c.img}.webp" alt=""><b>${c.nombre}</b><span>${c.texto}</span></button>`; };
+const cardHtml = (t, act, cls = "") => { const c = t === "presentimiento" ? D.presentimiento : t === "reto" ? D.reto : D.trampas[t]; return `<button class="tcard ${cls}" ${act ? `data-act="${act}" data-arg="${t}"` : "disabled"}><img src="img/${c.img}.webp" alt=""><b>${c.nombre}</b><span>${c.texto}</span></button>`; };
 function toast(msg) { const d = document.createElement("div"); d.className = "toast"; d.textContent = msg; document.body.appendChild(d); setTimeout(() => d.remove(), 2600); }
 
 // ---------- inicio ----------
@@ -122,7 +122,8 @@ function rules() {
       <div class="opt"><h3>6. La defensa</h3><p class="muted">20 segundos para convencer al grupo. Después, levantan la mano los que le creen. Más de la mitad: se salva. Menos de un tercio: prenda y 2 tomatazos. En el medio: prenda y tomatazo.</p></div>
       <div class="opt"><h3>Prendas de ronda</h3><p class="muted">Algunas prendas duran toda la ronda siguiente y quedan a la vista arriba de la pantalla. Si alguien la rompe, tocan «¡La rompió!» y recibe un tomatazo. Si no cumple una prenda, también recibe un tomatazo.</p></div>
       <div class="opt"><h3>7. Tomatazos</h3><p class="muted">Con ${settings.maxCoal || "muchos"} tomatazos quedas fuera, pero sigues votando. Gana quien termine con menos.</p></div>
-      <div class="opt"><h3>Golpe de suerte</h3><p class="muted">Al final de algunas rondas, alguien que no recibió votos gana una carta trampa o un presentimiento extra.</p></div>
+      <div class="opt"><h3>Reto a duelo</h3><p class="muted">Cada jugador tiene 1 reto por partida, y a veces la ronda lo regala. Si te toca la prenda, retas a quien quieras: si ganas, la prenda y el tomatazo pasan a él; si pierdes, pagas doble.</p></div>
+      <div class="opt"><h3>Golpe de suerte</h3><p class="muted">Al final de algunas rondas, alguien que no recibió votos gana una carta trampa, un presentimiento o un reto extra.</p></div>
     </div>
     <button class="btn" data-act="back">Entendido</button>
   `, { back: home });
@@ -204,7 +205,7 @@ function setup() {
   });
 }
 
-const newPlayerState = (p, s) => ({ ...p, coal: 0, cards: [], out: false, votes: 0, accused: 0, duelWins: 0, hunch: s.hunch, penalty: 0, hunchHits: 0, defWins: 0 });
+const newPlayerState = (p, s) => ({ ...p, coal: 0, cards: [], out: false, votes: 0, accused: 0, duelWins: 0, hunch: s.hunch, penalty: 0, hunchHits: 0, defWins: 0, retos: 1, retoWins: 0 });
 function newGame() {
   G = { settings: { ...settings }, players: players.map(p => newPlayerState(p, settings)), deck: [], round: 0 };
   keepAwake();
@@ -262,7 +263,7 @@ function gameMenu() {
 
 function scoreboard() {
   const list = G.players.slice().sort((a, b) => a.out - b.out || a.coal - b.coal);
-  const cards = p => [...p.cards.map(t => D.trampas[t].nombre), p.hunch ? `${p.hunch} presentimiento${p.hunch > 1 ? "s" : ""}` : ""].filter(Boolean).join(", ") || "Sin cartas";
+  const cards = p => [...p.cards.map(t => D.trampas[t].nombre), p.hunch ? `${p.hunch} presentimiento${p.hunch > 1 ? "s" : ""}` : "", p.retos ? `${p.retos} reto${p.retos > 1 ? "s" : ""}` : ""].filter(Boolean).join(", ") || "Sin cartas";
   render(`
     <div class="topbar"><button class="btn ghost sm" data-act="back">← Volver</button></div>
     <h2>Tomatazos y cartas</h2>
@@ -674,68 +675,57 @@ function duelEnd(ps, loserId, ctx) {
 
 // ---------- acusado y cartas trampa ----------
 function accused(id) {
-  const p = P(id); p.accused++; saveGame();
+  const p = P(id); p.accused++;
+  G.cur.freeDuel = Math.random() < 0.25; // a veces el reto a duelo es gratis
+  saveGame();
   showAccused(p);
 }
 function showAccused(p) {
   const jury = G.players.length - 1;
+  const retoFree = G.cur.freeDuel, canReto = (retoFree || (p.retos || 0) > 0) && active().length > 1;
   render(`
     <p class="eyebrow" style="text-align:center">Le toca a</p>
     <div class="banner">${avatar(p, "xl shake")}<h1>${esc(p.name)}</h1><p class="muted">${esc(G.cur.pregunta)}</p></div>
     ${p.cards.length ? `<p class="eyebrow">Cartas trampa de ${esc(p.name)}</p><div class="cards">${p.cards.map(t => cardHtml(t, canUse(t, p) ? "use" : null)).join("")}</div>` : ""}
     <div class="grow"></div>
-    <div class="risk"><b>¿Te defiendes?</b>Tienes 20 segundos para convencer al grupo de que no lo harías.
-      <span>Si convences a más de la mitad (${Math.floor(jury / 2) + 1} de ${jury}), <em class="ok">te salvas</em>.</span>
-      <span>Si convences a menos de un tercio, <em class="ko">te llevas 2 tomatazos</em>.</span></div>
-    <button class="btn gold" data-act="def">Defenderme</button>
+    <p class="eyebrow">¿Cómo te defiendes?</p>
+    <button class="option" data-act="def">
+      <span><b>Discurso de defensa</b>
+      20 segundos para convencer al grupo. Más de la mitad (${Math.floor(jury / 2) + 1} de ${jury}): <em class="ok">te salvas</em>. Menos de un tercio: <em class="ko">2 tomatazos</em>.</span>
+    </button>
+    ${canReto ? `<button class="option reto" data-act="reto">
+      <img src="img/carta_reto.webp" alt="">
+      <span><b>Retar a duelo ${retoFree ? `<i class="tag">¡Gratis esta ronda!</i>` : `<i class="tag">Te ${p.retos > 1 ? `quedan ${p.retos}` : "queda 1"}</i>`}</b>
+      Eliges a un rival. Si ganas, <em class="ok">la prenda y el tomatazo pasan a él</em>. Si pierdes, <em class="ko">prenda y 2 tomatazos</em>.</span>
+    </button>` : ""}
     <button class="btn" data-act="accept">Aceptar la prenda</button>
   `, {
     use: t => useCard(p, t),
     def: () => defense(p),
+    reto: () => chooseRival(p, retoFree),
     accept: () => punish(p.id, 1)
   });
 }
-function defense(p) {
-  let secs = 20;
+function chooseRival(p, free) {
+  const list = active().filter(o => o.id !== p.id);
   render(`
-    <p class="eyebrow" style="text-align:center">Defensa</p>
-    <div class="banner">${avatar(p, "lg")}<h2>${esc(p.name)}, convence al grupo</h2><p class="muted">${esc(G.cur.pregunta)}</p></div>
-    <div class="grow"></div>
-    <div class="count" id="tm" style="text-align:center">20</div>
-    <div class="grow"></div>
-    <button class="btn" data-act="end">Terminé</button>
-  `, { end: () => juryVote(p) });
-  const t = () => {
-    const el = document.getElementById("tm"); if (!el) return;
-    el.textContent = secs > 0 ? secs : "¡Tiempo!";
-    if (secs <= 3 && secs > 0) beep(700);
-    if (secs-- > 0) later(t, 1000); else { beep(300, 0.5, "sawtooth"); later(() => juryVote(p), 900); }
-  };
-  t();
-}
-function juryVote(p) {
-  const jury = G.players.length - 1; let n = 0;
-  const draw = () => render(`
-    <p class="eyebrow" style="text-align:center">Veredicto</p>
-    <div class="banner">${avatar(p, "lg")}<h2>¿Los convenció ${esc(p.name)}?</h2>
-    <p class="muted">Levanten la mano los que le creen. Cuenta las manos.</p></div>
-    <div class="bigcounter"><button data-act="dn" aria-label="Menos">−</button><b>${n}</b><span>de ${jury}</span><button data-act="up" aria-label="Más">+</button></div>
-    <div class="grow"></div>
-    <button class="btn" data-act="go">Ver veredicto</button>
+    <p class="eyebrow">Reto a duelo</p><h2>${esc(p.name)}, ¿a quién retas?</h2>
+    <div class="vgrid">${list.map(o => `<button class="vcard" data-act="ch" data-arg="${o.id}">${avatar(o)}<span>${esc(o.name)}</span></button>`).join("")}</div>
+    <div class="grow"></div><button class="btn ghost" data-act="back">Mejor no</button>
   `, {
-    up: () => { n = Math.min(jury, n + 1); draw(); },
-    dn: () => { n = Math.max(0, n - 1); draw(); },
-    go: () => {
-      if (n * 2 > jury) {
-        p.defWins = (p.defWins || 0) + 1; saveGame(); fanfare();
-        return render(`<div class="grow"></div><div class="banner pop">${avatar(p, "xl")}<h1>¡Absuelto!</h1><p class="muted">${n} de ${jury} le creyeron. ${esc(p.name)} se salva.</p></div><div class="grow"></div><button class="btn" data-act="ok">Continuar</button>`, { ok: afterRound });
-      }
-      const bad = n * 3 < jury;
-      beep(200, 0.5, "sawtooth");
-      render(`<div class="grow"></div><div class="banner pop">${avatar(p, "xl shake")}<h1>${bad ? "¡Defensa desastrosa!" : "No alcanzó"}</h1><p class="muted">Solo ${n} de ${jury} le creyeron. ${bad ? "Prenda y 2 tomatazos." : "Prenda y tomatazo."}</p></div><div class="grow"></div><button class="btn" data-act="ok">A la prenda</button>`, { ok: () => punish(p.id, bad ? 2 : 1) });
+    back: () => showAccused(p),
+    ch: id => {
+      const r = P(id);
+      if (!free) p.retos--;
+      G.cur.freeDuel = false; saveGame(); fanfare();
+      render(`
+        <div class="grow"></div>
+        <div class="banner pop"><img src="img/carta_reto.webp" alt="" style="width:150px;border-radius:14px"><h1>¡${esc(p.name)} reta a ${esc(r.name)}!</h1>
+        <p class="muted">Si gana ${esc(p.name)}, la prenda es para ${esc(r.name)}. Si gana ${esc(r.name)}, ${esc(p.name)} paga doble.</p></div>
+        <div class="grow"></div><button class="btn gold" data-act="go">¡Al duelo!</button>
+      `, { go: () => duel([p.id, r.id], { giveCard: false, onLoser: l => { if (l !== p.id) p.retoWins = (p.retoWins || 0) + 1; punish(l, l === p.id ? 2 : 1); } }) });
     }
   });
-  draw();
 }
 function canUse(t, p) {
   if (t === "robo") return G.players.some(o => o.id !== p.id && o.cards.length);
@@ -814,15 +804,16 @@ function afterRound() {
   const zero = active().filter(p => !G.cur.votes[p.id]);
   if (Math.random() < 0.35 && active().length) {
     const lucky = pick(zero.length ? zero : active());
-    const isHunch = G.settings.hunch > 0 && Math.random() < 0.3;
-    const t = isHunch ? "presentimiento" : pick(Object.keys(D.trampas));
-    isHunch ? lucky.hunch++ : lucky.cards.push(t);
+    const roll = Math.random();
+    const isHunch = G.settings.hunch > 0 && roll < 0.25, isReto = !isHunch && roll < 0.45;
+    const t = isHunch ? "presentimiento" : isReto ? "reto" : pick(Object.keys(D.trampas));
+    isHunch ? lucky.hunch++ : isReto ? (lucky.retos = (lucky.retos || 0) + 1) : lucky.cards.push(t);
     saveGame(); fanfare();
     return render(`
       <p class="eyebrow" style="text-align:center">Golpe de suerte</p>
-      <div class="banner">${avatar(lucky, "lg pop")}<h2>¡${isHunch ? "Un presentimiento extra" : "Carta trampa"} para ${esc(lucky.name)}!</h2></div>
+      <div class="banner">${avatar(lucky, "lg pop")}<h2>¡${isHunch ? "Un presentimiento extra" : isReto ? "Un reto a duelo" : "Carta trampa"} para ${esc(lucky.name)}!</h2></div>
       ${cardHtml(t, null, "big pop")}
-      <p class="small muted" style="text-align:center">${isHunch ? "Lo puede usar al votar." : "La puede usar cuando le toque la prenda."}</p>
+      <p class="small muted" style="text-align:center">${isHunch ? "Lo puede usar al votar." : isReto ? "Lo puede usar cuando le toque la prenda." : "La puede usar cuando le toque la prenda."}</p>
       <div class="grow"></div><button class="btn" data-act="ok">Siguiente ronda</button>
     `, { ok: nextRound });
   }
@@ -834,7 +825,7 @@ function finalScreen() {
   const ps = G.players.slice();
   const top = f => ps.slice().sort((a, b) => f(b) - f(a))[0];
   const best = ps.slice().sort((a, b) => a.out - b.out || a.coal - b.coal || a.votes - b.votes)[0];
-  const hit = top(p => p.coal), sus = top(p => p.votes), duelist = top(p => p.duelWins), seer = top(p => p.hunchHits), lawyer = top(p => p.defWins || 0);
+  const hit = top(p => p.coal), sus = top(p => p.votes), duelist = top(p => p.duelWins), seer = top(p => p.hunchHits), lawyer = top(p => p.defWins || 0), retador = top(p => p.retoWins || 0);
   const award = (p, t, d) => `<div class="award">${avatar(p)}<div><b>${t}</b><span>${esc(p.name)} · ${d}</span></div></div>`;
   del(KEY_GAME); fanfare();
   render(`
@@ -846,6 +837,7 @@ function finalScreen() {
       ${seer.hunchHits ? award(seer, "El Adivino", `${seer.hunchHits} presentimientos acertados`) : ""}
       ${duelist.duelWins ? award(duelist, "El Duelista", `${duelist.duelWins} duelos ganados`) : ""}
       ${lawyer.defWins ? award(lawyer, "El Abogado", `${lawyer.defWins} defensas ganadas`) : ""}
+      ${retador.retoWins ? award(retador, "El Retador", `${retador.retoWins} retos ganados`) : ""}
     </div>
     <div class="grow"></div>
     <button class="btn" data-act="again">Revancha</button>
